@@ -2,7 +2,9 @@
 開発中
 (OTW5.0)
 ボタンもテキストボックスもみんなウィンドウ
+
 ## Control
+
 |関数|説明|
 |---|---|
 |GetWindowControl()|Windowのコントロールを取得|
@@ -12,6 +14,7 @@
 |DeleteControl(CTL)|コントロールを削除|
 |FindControl(NAME$)|文字列を使ってコントロールを取得|
 |IsControlExtend(CTL,PARENT)|CTLコントロールとPARENTコントロールが継承関係にあるかどうか|
+
 ### Handler
 Handlerの書式
 COMMONは付ける
