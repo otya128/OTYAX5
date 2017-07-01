@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Misc</title>
+</head>
+
+<body>
+<h2 id="findarrayaryv">FindArray(ARY[],V)</h2>
+<p>ARYからVを検索し、場所を返す。
+見つからなかった際は-1</p>
+
+<h2 id="shorttorgbin">ShortToRGB(IN)</h2>
+<p>プチコン物理色をRGB値に変換する。</p>
+
+<h2 id="rgbtoshortin">RGBToShort(IN)</h2>
+<p>RGB値をプチコン物理色に変換する。</p>
+
+<h2 id="splitint-in-out-xy">SplitInt IN OUT X,Y</h2>
+<p>INの上位16bitをYに、下位16bitをXに入れる。</p>
+
+<h2 id="binin">_BIN$(IN)</h2>
+<p>INを二進数文字列にする。</p>
+
+<h2 id="insertstrbaseposins">InsertStr$(BASE$,POS,INS$)</h2>
+<p>BASE$に対してPOSにINS$を挿入する。</p>
+
+<h2 id="insertstrb-baseposin">InsertStrB BASE$,POS,IN$</h2>
+<p>InsertStr$(BASE$,POS,INS$)の破壊的操作版。</p>
+
+<h2 id="removestrthisposlen">RemoveStr$(THIS$,POS,LEN)</h2>
+<p>THIS$に対してPOSからLEN文字削除する。</p>
+
+<h2 id="removestrb-thisposlen">RemoveStrB THIS$,POS,LEN</h2>
+<p>RemoveStr$(THIS$,POS,LEN)の破壊的操作版。</p>
+
+<h2 id="replacestrthisstrto">ReplaceStr$(THIS$,STR$,TO$)</h2>
+<p>THIS$にあるSTR$をTO$に置換する。</p>
+
+<h2 id="getfileextensionfile">GetFileExtension(FILE$)</h2>
+<p>FILE$の拡張子を取得する。
+何も拡張子がない場合空文字を返す。</p>
+
+<h2 id="arrayfill-aryvofflen">ArrayFill ARY[],V,OFF,LEN</h2>
+<p>FILLがないプチコンのバージョンにおいてはFORループより効率的にOFFからLEN文字分ARYをVにする。</p>
+
+<h2 id="splitstrsp">Split(STR$,SP$)</h2>
+<p>STR$をSP$によって分割し配列にして返す。</p>
+
+<h2 id="toupperstr">ToUpper$(STR$)</h2>
+<p>STR$をASCII文字の範囲で大文字にする。</p>
+
+<h2 id="toupper-str">ToUpper STR$</h2>
+<p>ToUpper$(STR$)の破壊的操作版。</p>
+
+<h2 id="tolowerstr">ToLower$(STR$)</h2>
+<p>STR$をASCII文字の範囲で小文字にする。</p>
+
+<h2 id="tolower-str">ToLower STR$</h2>
+<p>ToLower$(STR$)の破壊的操作版。</p>
+
+<h2 id="lastinstrs1s2">LASTINSTR(S1$,S2$)</h2>
+<p>S1$に対してS2$を逆方向から探査する。
+見つからない場合は-1を返す。</p>
+
+</body>
+</html>

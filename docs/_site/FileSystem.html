@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8" />
+  <title>FileSystem</title>
+</head>
+
+<body>
+<p>デフォルトでは”OFS”(階層型ファイルシステム),”SBFS”(プチコンのファイルシステム)が存在し、OFSがルートファイルシステムとなっている。<br />
+mountコマンドを利用してマウントすることができる
+<code class="highlighter-rouge">
+mount filesystem [data] path
+</code>
+<code class="highlighter-rouge">mount SBFS TXT: /TXT</code>とすると/TXTにTXTファイルのみをマウントできる<br />
+初期状態では</p>
+
+<ul>
+  <li>/</li>
+  <li>/TXT</li>
+  <li>/DAT</li>
+  <li>/home
+    <ul>
+      <li>/user</li>
+    </ul>
+  </li>
+</ul>
+
+<p>となっている予定</p>
+
+<h1 id="api">API</h1>
+
+<h2 id="newfilesystem-name-out-fserr">NewFileSystem NAME$ OUT FS,ERR</h2>
+<p>NAME$に紐づけてファイルシステムを作成する
+既にNAME$がある場合FS_ERROR_DUPFS
+メモリ不足の際FS_ERROR_OUTOFMEM</p>
+
+<h2 id="findfilesystemname">FindFileSystem(NAME$)</h2>
+<p>NAME$からFileSystemを検索<br />
+存在しない場合はCALL “FS_INIT_“+NAME$する</p>
+
+<h2 id="fssetfilelisthandlerfsfunc">FSSetFileListHandler(FS,FUNC$)</h2>
+
+<h3 id="section">関数の書式</h3>
+<blockquote>
+  <p>DEF FUNC FS,DATA$,PATH$,FILELIST$[] OUT ERR</p>
+</blockquote>
+
+<p>ファイル一覧が取得される際に呼ばれる
+FILELIST$[]にファイルをPUSHする</p>
+
+<h2 id="section-1">戻り値</h2>
+<p>FSが不正な時FS_ERROR_INVALIDFS
+FUNC$が不正な時FS_ERROR_INVALIDFUNC</p>
+
+<h2 id="fssetopenfilehandlerfsfunc">FSSetOpenFileHandler(FS,FUNC$)</h2>
+
+<h3 id="section-2">書式</h3>
+<blockquote>
+  <p>DEF FUNC FS,DATA$,PATH$,OPTION$ OUT FILE,ERR</p>
+</blockquote>
+
+<p>PATH$のファイルが開かれる際に呼ばれる
+FILEにファイルERRにエラーを格納する</p>
+
+<h2 id="section-3">戻り値</h2>
+<p>FSが不正な時FS_ERROR_INVALIDFS
+FUNC$が不正な時FS_ERROR_INVALIDFUNC</p>
+
+<h2 id="fssetmounthandlerfsfunc">FSSetMountHandler(FS,FUNC$)</h2>
+<p>Mountされる際に呼ばれる</p>
+
+<h3 id="section-4">書式</h3>
+<blockquote>
+  <p>DEF FUNC FS,DATA$,PATH$,MOUNTFS$,MOUNTDATA$ OUT ERR</p>
+</blockquote>
+
+<p>未設定時のデフォルト挙動はERRにFS_ERROR_NOTSUPPORTEDを設定する</p>
+
+<h3 id="section-5">戻り値</h3>
+<p>FSが不正な時FS_ERROR_INVALIDFS
+FUNC$が不正な時FS_ERROR_INVALIDFUNC</p>
+
+<h2 id="fssetgetfilesystemhandlerfsfunc">FSSetGetFileSystemHandler(FS,FUNC$)</h2>
+
+<h3 id="section-6">書式</h3>
+<blockquote>
+  <p>DEF FUNC FS,DATA$,PATH$ OUT OUTFS,OUTDATA$,OUTPATH$,ERR</p>
+</blockquote>
+
+<p>未設定時の挙動はPATH$が存在すればERRを0にし、しなければERRに値を設定する<br />
+OUTFSをFSにしてOUTDATA$をDATA$にしてOUTPATH$をPATH$にする</p>
+
+<h2 id="fssetnewdirhandlerfsfunc">FSSetNewDirHandler(FS,FUNC$)</h2>
+<p>1階層のみのディレクトリ作成のハンドラを設定</p>
+
+<h3 id="section-7">書式</h3>
+<blockquote>
+  <p>DEF FUNC FS,DATA$,PATH$ OUT ERR</p>
+</blockquote>
+
+<h2 id="fssetdeletehandlerfsfunc">FSSetDeleteHandler(FS,FUNC$)</h2>
+<p>ファイル削除のハンドラを設定</p>
+
+<h3 id="section-8">書式</h3>
+<blockquote>
+  <p>DEF FUNC FS,DATA$,PATH$ OUT ERR</p>
+</blockquote>
+
+<h2 id="fssetrenamehandlerfsfunc">FSSetRenameHandler(FS,FUNC$)</h2>
+<p>名前変更ハンドラを設定</p>
+
+<h3 id="section-9">書式</h3>
+<blockquote>
+  <p>DEF FUNC FS,DATA$,PATH$,NEWNAME$ OUT ERR</p>
+</blockquote>
+
+<h2 id="fssetgettypehandlerfsfunc">FSSetGetTypeHandler(FS,FUNC$)</h2>
+<p>ファイルタイプ取得ハンドラを設定</p>
+
+<h3 id="section-10">書式</h3>
+<blockquote>
+  <p>DEF FUNC FS,DATA$,PATH$ OUT TYPE$,ERR</p>
+</blockquote>
+
+<h2 id="fssetgetsbfilehandlerfsfunc">FSSetGetSBFileHandler(FS,FUNC$)</h2>
+<p>プチコンでのファイル名を取得</p>
+
+<h3 id="section-11">書式</h3>
+<blockquote>
+  <p>DEF FUNC FS,DATA$,PATH$ OUT FILE$,ERR</p>
+</blockquote>
+
+<p>FILE$にはプチコンで有効なファイル名(DAT:HOGE.GRP,TXT:HOGE.PRG)</p>
+
+<h2 id="mountpathfilesystemdata">Mount(PATH$,FILESYSTEM$,DATA$)</h2>
+<p>FILESYSTEM$をPATH$にマウント</p>
+
+<h2 id="section-12">戻り値</h2>
+<p>FS_ERROR_NOTFOUND FS_ERROR_NOTSUPPORTED FS_ERROR_ACCESS FS_ERROR_NOSPACE FS_ERROR_CANCEL</p>
+
+<h1 id="section-13">エラー</h1>
+
+<h2 id="fserrornotfound">FS_ERROR_NOTFOUND</h2>
+<p>0x6001</p>
+
+<h2 id="fserrornotsupported">FS_ERROR_NOTSUPPORTED</h2>
+<p>0x6002</p>
+
+<h2 id="fserroraccess">FS_ERROR_ACCESS</h2>
+
+<h2 id="fserrornospace">FS_ERROR_NOSPACE</h2>
+
+<h2 id="fserrorcancel">FS_ERROR_CANCEL</h2>
+
+<h2 id="fserrorinvalidfs">FS_ERROR_INVALIDFS</h2>
+
+<h2 id="fserrordupfs">FS_ERROR_DUPFS</h2>
+
+<h2 id="fserroroutofmem">FS_ERROR_OUTOFMEM</h2>
+
+<h2 id="fserrorinvalidfunc">FS_ERROR_INVALIDFUNC</h2>
+
+
+</body>
+</html>

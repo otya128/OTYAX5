@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8" />
+  <title>File API</title>
+</head>
+
+<body>
+<h1 id="otyax5-file-api">OTYAX5 File API</h1>
+
+<h2 id="loadfile-path-out-resulterr">LoadFile PATH$ OUT RESULT$,ERR</h2>
+<p>PATH$のファイルを開き全文読み込んだものがRESULT$に入る</p>
+
+<h2 id="savefile-patht-out-err">SaveFile PATH$,T$ OUT ERR</h2>
+<p>PATH$のファイルを開きT$を書き込む</p>
+
+<h2 id="renamefile-pathnew-out-err">RenameFile PATH$,NEW$ OUT ERR</h2>
+<p>PATH$のファイルの名前をNEW$にする</p>
+
+<h2 id="getcurrentdir-out-dir">GetCurrentDir$ OUT DIR$</h2>
+<p>カレントディレクトリを取得</p>
+
+<h2 id="setcurrentdir-dir-out-err">SetCurrentDir DIR$ OUT ERR</h2>
+<p>カレントディレクトリを設定</p>
+
+<h2 id="combinepathbasepath">CombinePath$(BASE$,PATH$)</h2>
+<p>BASE$とPATH$を結合する</p>
+
+<h2 id="getabsolutepathpath">GetAbsolutePath$(PATH$)</h2>
+<p>PATH$をカレントディレクトリと結合する</p>
+
+<h2 id="getabsolutedirpath">GetAbsoluteDir$(PATH$)</h2>
+<p>GetAbsolutePath$(PATH$)をして必ず最後に/を付ける</p>
+
+<h2 id="getfiles-dir-out-aryerr">GetFiles DIR$ OUT ARY$,ERR</h2>
+<p>DIR$のファイル一覧を取得(FILES互換)</p>
+
+<h2 id="newdir-dir-out-err">NewDir DIR$ OUT ERR</h2>
+<p>DIR$を作成(一階層のみ)</p>
+
+<h2 id="mount-dirfsdata-out-err">Mount DIR$,FS$,DATA$ OUT ERR</h2>
+<p>DIR$にファイルシステムをマウントする</p>
+
+<h2 id="deletefile-path-out-err">DeleteFile PATH$ OUT ERR</h2>
+<p>PATH$を削除する</p>
+
+<h2 id="renamefile-pathname-out-err">RenameFile PATH$,NAME$ OUT ERR</h2>
+<p>PATH$のファイル名をNAME$に変更する</p>
+
+<h2 id="getfiletype-path-out-typeerr">GetFileType PATH$ OUT TYPE$,ERR</h2>
+<p>ファイルタイプを取得する</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>TYPE$</th>
+      <th>種類</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>” ”</td>
+      <td>DAT</td>
+    </tr>
+    <tr>
+      <td>“*”</td>
+      <td>TXT</td>
+    </tr>
+    <tr>
+      <td>”/”</td>
+      <td>ディレクトリ</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="getsbfile-path-out-fileerr">GetSBFile PATH$ OUT FILE$,ERR</h2>
+<p>PATH$のプチコンでのファイル名を取得(DAT:HOGE.GRP,TXT:HOGE.PRG)</p>
+
+<h2 id="gethomedir">GetHomeDir$()</h2>
+<p>現在のホームディレクトリを取得</p>
+
+<h2 id="fileopen-nameflg-out-fileerr">FileOpen NAME$,FLG OUT FILE,ERR</h2>
+<p>ファイルを開く<br />
+FLGには以下のものを使用できる</p>
+
+<h3 id="filereadflag-1">FileReadFlag() (=1)</h3>
+<p>読み出し</p>
+
+<h3 id="filewriteflag-2">FileWriteFlag() (=2)</h3>
+<p>書き込み</p>
+
+<h3 id="fileappendflag-4">FileAppendFlag() (=4)</h3>
+<p>追記</p>
+
+<h2 id="filewrite-filedat-out-err">FileWrite FILE,DAT$ OUT ERR</h2>
+<p>ファイルにDAT$を書き込む</p>
+
+<h2 id="fileread-filelen-out-daterr">FileRead FILE,LEN OUT DAT$,ERR</h2>
+<p>ファイルからLEN文字分読み込む</p>
+
+<h2 id="fileclose-file-out-err">FileClose FILE OUT ERR</h2>
+<p>ファイルを閉じる</p>
+
+<h2 id="isfileeoffile">IsFileEOF(FILE)</h2>
+<p>ファイルがEOFか確認</p>
+
+<h2 id="dupfilefile">DupFile(FILE)</h2>
+<p>ファイルを複製</p>
+
+<h2 id="checkfilefile">CheckFile(FILE)</h2>
+<p>ファイルが正常ならTRUE</p>
+
+<h2 id="fileseekcur-filelen-out-err">FileSeekCur FILE,LEN OUT ERR</h2>
+<p>ファイルを現在位置を基準にシークする</p>
+
+<h2 id="getfilepos-file-out-poserr">GetFilePos FILE OUT POS,ERR</h2>
+<p>ファイルの現在位置を取得</p>
+
+<h2 id="printconsole-str">PrintConsole STR$</h2>
+<p>標準出力に出力</p>
+
+<h2 id="printconsoleln-str">PrintConsoleln STR$</h2>
+<p>標準出力に改行コードを加えて出力</p>
+
+<h2 id="inkeyconsolelen">InkeyConsole$(LEN)</h2>
+<p>標準入力からLEN文字読み込む</p>
+
+<h1 id="api">ファイルストリーム作成API</h1>
+
+<h2 id="allocfile-out-fileerr">AllocFile OUT FILE,ERR</h2>
+<p>ファイルを割り当て</p>
+
+<h2 id="setwriter-filefunc-out-err">SetWriter FILE,FUNC$ OUT ERR</h2>
+<p>ファイルに書き込む際に実行される関数を設定</p>
+
+<h3 id="section">書式</h3>
+<blockquote>
+  <p>DEF WRITER FILE,DAT$ OUT ERR</p>
+</blockquote>
+
+<h2 id="setfiledata-filedat">SetFileData FILE,DAT</h2>
+<p>ファイルの内部データを設定</p>
+
+<h2 id="getfiledatafile">GetFileData(FILE)</h2>
+<p>ファイルの内部データを取得
+エラーの時-1</p>
+
+<h2 id="setfiledatastr-filedat">SetFileDataStr FILE,DAT$</h2>
+<p>ファイルの内部文字列を設定</p>
+
+<h2 id="getfiledatastrfile">GetFileDataStr$(FILE)</h2>
+<p>ファイルの内部文字列を取得
+エラーの時空文字</p>
+
+<h2 id="setfilename-filedat">SetFileName FILE,DAT$</h2>
+<p>ファイル名を設定</p>
+
+<h2 id="getfilenamefile">GetFileName$(FILE)</h2>
+<p>ファイル名を取得<br />
+エラーの時空文字</p>
+
+<h2 id="setfileeof-fileeof">SetFileEOF FILE,EOF</h2>
+<p>ファイルのEOFフラグを設定</p>
+
+<h2 id="setreader-filefunc-out-err">SetReader FILE,FUNC$ OUT ERR</h2>
+<p>ファイルから読み込む際に呼ばれる関数の設定</p>
+
+<h3 id="section-1">書式</h3>
+<blockquote>
+  <p>DEF READER FILE,LEN OUT DAT$,ERR</p>
+</blockquote>
+
+<h2 id="setreadln-filefunc-out-err">SetReadln FILE,FUNC$ OUT ERR</h2>
+<p>ファイルから1行読み込む際に呼ばれる関数を設定</p>
+
+<h3 id="section-2">書式</h3>
+<blockquote>
+  <p>DEF READLN FILE OUT DAT$,ERR</p>
+</blockquote>
+
+<h2 id="setclose-filefunc-out-err">SetClose FILE,FUNC$ OUT ERR</h2>
+<p>ファイルが閉じられる際に呼ばれる関数を設定</p>
+
+<h3 id="section-3">書式</h3>
+<blockquote>
+  <p>DEF CLOSE FILE</p>
+</blockquote>
+
+</body>
+</html>

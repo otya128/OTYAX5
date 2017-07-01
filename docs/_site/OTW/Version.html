@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8" />
+  <title>OTW version</title>
+</head>
+
+<body>
+<h1 id="otw50-2c">OTW5.0-2C</h1>
+
+<h2 id="section">変更点</h2>
+<ul>
+  <li>高度サウンドユニットを利用した描画の試験実装</li>
+  <li>OTYFILでキー入力したときにエラーが出る場合がある問題を修正</li>
+</ul>
+
+<h1 id="otw50-2b">OTW5.0-2B</h1>
+<p>リッチテキストボックスでテーブルを割と扱えるようにした</p>
+
+<h2 id="section-1">変更点</h2>
+<ul>
+  <li>RTESetHeading WND,LEVELの改善</li>
+  <li>RTEAddTable WND,ROW,COLの追加</li>
+</ul>
+
+<h1 id="otw50-2a">OTW5.0-2A</h1>
+
+<h2 id="section-2">変更点</h2>
+<ul>
+  <li>Image APIの仕様変更</li>
+  <li>NewImage ARRAY,WIDTH,HEIGHT OUT IMG,E</li>
+  <li>LoadImage FILE$,W,H OUT IMG,E</li>
+  <li>Link fileに画像を指定可能にした</li>
+  <li>デスクトップでlink fileに画像が指定されているとき画像を表示するようにした</li>
+  <li>GLOADImage X,Y,IMG,Fを追加</li>
+  <li>GLOADImageWindow WND,X,Y,IMG,Fを追加</li>
+  <li>TextBoxExCut WNDを追加</li>
+  <li>RTEClear WNDを追加</li>
+  <li>RTEIndent WND,INDENTを追加</li>
+  <li>RTESetOrderedList WNDを追加</li>
+  <li>RTESetUnorderedList WNDを追加</li>
+  <li>RTESetHeading WND,LEVELを追加</li>
+  <li>RTECopy WNDを追加</li>
+  <li>RTEPaste WNDを追加</li>
+  <li>RTECut WNDを追加</li>
+  <li>ClipboardSetData$ TYPE$,V$を追加</li>
+  <li>ClipboardGetData$ TYPE$ OUT DATA$,CONTAINSを追加</li>
+  <li>RTESelectAll WNDを追加</li>
+</ul>
+
+<h1 id="otw50-29">OTW5.0-29</h1>
+<p>OTW5.0-28と混ざってる</p>
+
+<h1 id="otw50-28">OTW5.0-28</h1>
+
+<h2 id="section-3">変更点</h2>
+<ul>
+  <li>TextBoxExのバグ修正/未実装部分実装</li>
+  <li>SetWindowProperty WND,PNAME$,VAL</li>
+  <li>SetWindowCursor(WND,X,Y)</li>
+  <li>GetWindowCursor WND OUT X,Y,ERR</li>
+  <li>連文節変換IMEがSetWindowCursorに対応</li>
+  <li>CalcWindowX(BASEWND,WND)</li>
+  <li>CalcWindowY(BASEWND,WND)</li>
+  <li>ボタンイベントのリピート処理がうまくいっていなかったので修正</li>
+  <li>ListBoxがボタンで項目を選択できるようになった</li>
+  <li>RichTextBoxControlの完成度の向上</li>
+  <li>SetControlChildWindowHandler</li>
+  <li>連文節変換IMEの変換精度の向上</li>
+  <li>OTWCLOCK(アナログ時計)を追加</li>
+  <li>FrontWindowでActiveにならなくなった</li>
+  <li>HideWindow/ShowWindowで子ウィンドウがあるとうまくいかない問題を修正</li>
+  <li>NewWindowのバグを修正</li>
+  <li>WindowMinMaxStyle()を追加</li>
+  <li>GetWindowStyle(WND)を追加</li>
+  <li>Windowの最大化/最小化が可能に</li>
+  <li>MaximizeWindow(WND)を追加</li>
+  <li>MinimizeWindow(WND)を追加</li>
+  <li>GetWindowFrameSize WND OUT W1,H1,W2,H2,ERRを追加</li>
+  <li>RTENew RTE</li>
+  <li>RTEOpen RTE,FILE$ OUT ERR</li>
+  <li>RTESave RTE,FILE$ OUT ERR</li>
+</ul>
+
+<h1 id="otw50-27">OTW5.0-27</h1>
+
+<h2 id="section-4">変更点</h2>
+<ul>
+  <li>メニューが画面からはみ出さなくなった</li>
+  <li>AddSubMenuItem MENU,ITEM$,SUBMENU</li>
+  <li>DeleteWindowでウィンドウグループ周りの未実装部分を実装</li>
+  <li>NewWindowでChFocusイベントが発生するようになった</li>
+  <li>連文節変換IME作った</li>
+</ul>
+
+<h1 id="otw50-26">OTW5.0-26</h1>
+
+<h2 id="section-5">変更点</h2>
+<ul>
+  <li>IM APIを実装</li>
+  <li>CheckIM(IM)</li>
+  <li>SetIMKeyHandler(IM,FUNC$)</li>
+  <li>SetIMDeleteHandler(IM,FUNC$)</li>
+  <li>DeleteIM(IM)</li>
+  <li>NewIM OUT IM,ERR</li>
+  <li>ProcessIM(IM)</li>
+  <li>SendIMText(IM,TEXT$)</li>
+  <li>ClearListBox WND</li>
+  <li>GetSelectionColor()</li>
+  <li>GetSelectionTextColor()</li>
+  <li>OTWTERMを追加</li>
+  <li>TSKBARを改善</li>
+  <li>ファイラとファイルダイアログが多階層ファイルシステムに対応</li>
+  <li>ODE(O Desktop Environment)を追加</li>
+  <li>ExecFile(FILE$)</li>
+  <li>AssociateFile(TYP$,EXT$,NAME$)のTYP$引数が”TXT”/”DAT”ではなく” “,”*”,”/”を受け取るようになった</li>
+  <li>GetAssociateProgram$(TYP$,EXT$)のTYP$引数が”TXT”/”DAT”ではなく” “,”*”,”/”を受け取るようになった</li>
+  <li>ファイラでコマンドラインからディレクトリを指定できるようになった</li>
+  <li>MoveResizeWindowで正常に再描画できていなかった問題を修正</li>
+</ul>
+
+<h1 id="otw50-25">OTW5.0-25</h1>
+
+<h2 id="section-6">変更点</h2>
+<ul>
+  <li>OTYMINEを作成</li>
+  <li>メニューを作りアイテムを何も加えないとおかしくなる問題を修正</li>
+  <li>MessageBox APIを実装</li>
+  <li>MessageBoxOK()</li>
+  <li>CalcTextSize TEXT$ OUT W,H</li>
+  <li>MessageBoxNotifID()</li>
+  <li>MessageBoxNotifOK()</li>
+  <li>MessageBoxNotifCancel()</li>
+  <li>MessageBox(WND,TITLE$,TEXT$,FLAG)</li>
+  <li>CREATEOTWのインデント修正</li>
+  <li>PRUNでプログラムの一時中断機能を試験実装</li>
+  <li>OTYMINEを追加</li>
+</ul>
+
+<h1 id="otw50-24">OTW5.0-24</h1>
+
+<h2 id="section-7">変更点</h2>
+<ul>
+  <li>ウィンドウを画面の下に移動させると描画がおかしくなる問題を修正?</li>
+</ul>
+
+<h1 id="otw50-23">OTW5.0-23</h1>
+
+<h2 id="section-8">変更点</h2>
+<ul>
+  <li>GBeginDirect(WND)</li>
+  <li>GEndDirect(WND,X1,Y1,X2,Y2,X3,Y3,MODE)</li>
+  <li>GCopyDirect(WND,X1,Y1,X2,Y2,X3,Y3,MODE)</li>
+  <li>SetControlFrameHandlerを追加</li>
+  <li>IM APIの初期化を実装</li>
+  <li>Image APIをOTYAXの新API AllocSBArrayをベースに変更</li>
+  <li>LoadGRPImage FIL$ OUT IMG,Eを実装</li>
+  <li>必要な部分だけ再描画できるように</li>
+  <li>RepaintFrameWindow(WND)</li>
+  <li>RepaintWindowWithARect(WND,AX,AY,AX2,AY2)</li>
+  <li>ファンクションキー1番でキーボードの無効有効を切り替えられるように</li>
+  <li>TextBoxExでウィンドウが削除されたときにメモリを開放するように</li>
+  <li>OTYFILでキーを入力したときにその文字が先頭にあるファイルにカーソルが移動するように</li>
+  <li>PRUNの状態保存の方式を省メモリな実装に</li>
+  <li>IMGVIEWが実装途中</li>
+</ul>
+
+<h2 id="todo">TODO</h2>
+<ul>
+  <li>[ ] TextBoxExの未実装機能実装</li>
+  <li>[ ] RichTextBoxでとりあえずまともなTextEditorとして機能させたい</li>
+</ul>
+
+<h1 id="otw50-22">OTW5.0-22</h1>
+
+<h2 id="section-9">変更点</h2>
+<ul>
+  <li>OTYFILを作り直した</li>
+  <li>OTYFILのOpen,Delete,Renameを実装</li>
+  <li>ファイル関連付けの実装</li>
+  <li>ファイルをコピー出来るような実装を一応した</li>
+  <li>EditorSelectorの実装</li>
+</ul>
+
+<h2 id="todo-1">TODO</h2>
+<ul>
+  <li>[X] OTYFILの作り直し</li>
+  <li>[X] ファイル関連付けの実装</li>
+</ul>
+
+<h1 id="otw50-21">OTW5.0-21</h1>
+<p>OTW-R5</p>
+
+<h2 id="section-10">変更点</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code> PAINTで遊んだまま未修正
+ MoveWindowで間違えてOTW_DrawMapを二度呼んでいる
+ TextBoxExで選択コピー貼り付け実装
+ ClipBook Viewer追加
+ LauncherでListBoxを使用し、リサイズにも対応
+ ListBoxがリサイズに対応
+</code></pre>
+</div>
+<p>修正</p>
+
+<ul>
+  <li>AddMenuItemSeparator MENU実装</li>
+  <li>メニューで特定条件の時選択されても描画が更新されなかった問題を修正</li>
+  <li>メニューの外見を立体的にした</li>
+  <li>影付きウィンドウを実装(OTW_ENABLE_SHADOW)</li>
+  <li>SetWindowOption(“ENABLE_SHADOW”,TRUE)実装したい</li>
+  <li>CALL “WinOptSet”+”ENABLE_SHADOW”,TRUEのような実装</li>
+  <li>コンテキストメニューの実装</li>
+  <li>スクロールバーで稀に0除算エラーが出る問題をとりあえず修正</li>
+  <li>スクロールバーのサイズを変更するとはみ出た場合は自動で修正されるようになった</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>関数</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ShowContextMenu MENU,WND</td>
+      <td>コンテキストメニューを表示</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-11">マウスイベントの変更点</h2>
+<p>LMouseUPイベントがアクティブウィンドウではなくマウス下にあるウィンドウに対して送られるようになった
+前のようにするにはSetCapture(WND)をする必要がある</p>
+
+<h1 id="otw50-20">OTW5.0-20</h1>
+
+<h2 id="section-12">変更点</h2>
+<p>タスクバー(TSKBAR)をとりあえず見た目だけ作った
+NewMenuでメニューを割り当てられない時にエラーMENU_NOALLOCを出すように</p>
+
+<h3 id="section-13">追加しかけ</h3>
+<ul>
+  <li>DROPDOWNLIST</li>
+</ul>
+
+<h2 id="section-14">追加</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>関数</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ShowWindow(WND)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>HideWindow(WND)</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> OTW5.0-1E
+ TODO:
+ SetWindowVisible WND,FLG
+ GetWindowVisible(WND)
+</code></pre>
+</div>
+
+<p>忘れている</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>関数</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GetBackColor()</td>
+      <td>色コード</td>
+    </tr>
+    <tr>
+      <td>SetButtonAlignLeft WND</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>SetButtonAlignRight WND</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>SetButtonAlignCenter WND</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-15">バグ</h2>
+<p>PAINTで遊んだまま未修正
+MoveWindowで間違えてOTW_DrawMapを二度呼んでいる</p>
+
+<h1 id="otw50-1f">OTW5.0-1F</h1>
+
+<h2 id="section-16">変更点</h2>
+<p>OTYDOCのバグ修正
+斜体描画をさらに高速化,向きを修正
+描画の始点を変更可能にする準備</p>
+
+<h2 id="section-17">追加</h2>
+<p>GCOPYWindow</p>
+
+<h1 id="otw50-1e">OTW5.0-1E</h1>
+<p>放置してたら結構バージョン進んでた</p>
+
+<h2 id="section-18">変更点</h2>
+<p>OTYDOCのバグ修正</p>
+
+<p>OTYDOCがまともに使えるようになった</p>
+
+<p>GetWindowX(WND)</p>
+
+<p>GetWindowY(WND)</p>
+
+<p>が絶対座標を返していた問題を修正</p>
+
+<p>常に非表示のウィンドウが生成可能に</p>
+
+<h2 id="section-19">追加</h2>
+<p>NumUpDownコントロール(spin box,spinner)
+WindowHideFlag()
+WindowHideStyle()
+TODO:
+SetWindowVisible WND,FLG
+GetWindowVisible(WND)</p>
+
+<h1 id="otw50-19">OTW5.0-19</h1>
+
+<h2 id="section-20">追加</h2>
+<ul>
+  <li>メニュー</li>
+  <li>ウィンドウグループ</li>
+  <li>ダイアログ</li>
+  <li>ControlCreateHandler</li>
+</ul>
+
+<h3 id="menu">Menu</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>関数</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>NewMenu OUT MENU,E</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>SetMenuBar WND,MENU</td>
+      <td>未実装</td>
+    </tr>
+    <tr>
+      <td>ShowMenu MENU,WND</td>
+      <td>未実装,引数の順番が定まっていない</td>
+    </tr>
+    <tr>
+      <td>GetWindowMenu(WND)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>AddMenuItem MENU,STR$,IVAR</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>AddMenuItemSeparator MENU</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>CheckMenu(MENU)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>NewTopLevelMenuWindow CTL,NAME$,WIDTH,HEIGHT OUT WND,ERR</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="window-group">Window Group</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>関数</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>JoinWindowGroup(WND,WND2)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>LeaveWindowGroup WND</td>
+      <td>未実装</td>
+    </tr>
+    <tr>
+      <td>GetWindowGroupOwner(WND)</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="dialog">Dialog</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>関数</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>NewDialogBox(CTL,NAME$,WIDTH,HEIGHT,OWNER,FLAG)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>NewModalDialogBox(CTL,NAME$,WIDTH,HEIGHT,OWNER)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>NewModelessDialogBox(CTL,NAME$,WIDTH,HEIGHT,OWNER)</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="event">Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>関数</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SetControlCreateHandler(CTL,HANDLER$)</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-21">修正</h2>
+<p>ウィンドウの座標が-の時にエラーが出るのを不完全に修正(子ウィンドウを所持しているとエラー)</p>
+
+<h1 id="otw50-18">OTW5.0-18</h1>
+
+<h2 id="section-22">追加</h2>
+<p>OTYFILにスクロールバーを追加</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>関数</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GetVScrollBarControl()</td>
+      <td>縦スクロールバーコントロールを取得</td>
+    </tr>
+    <tr>
+      <td>NewVScrollBar PARENT,SIZ OUT WND,E</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>SetScrollBarSize WND,SIZ</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>SetScrollBarPostion WND,POS</td>
+      <td>-&gt;Position</td>
+    </tr>
+    <tr>
+      <td>GetWindowX(WND)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>GetWindowY(WND)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>GetNextWindow(WND)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>GetPrevWindow(WND)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>GetParentWindow(WND)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>GetChildWindow(WND)</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="windowop">WindowOP</h3>
+<p>ウィンドウに対しての操作を効率化する
+子ウィンドウを一々削除していたら再描画リクエストが一々確認されたりして非常に遅い
+それをEndWindowOPでまとめてやる</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>関数</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>BeginWindowOP(WND)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>EndWindowOP(WND)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>MoveWindow2(WND,X,Y)</td>
+      <td>-&gt;MoveWindowOP(WND,X,Y)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="todo-2">ToDo</h2>
+<ul>
+  <li>OTYFILでファイルを開けるように</li>
+  <li>横スクロールバー</li>
+  <li>スクロールバーの移動をボタン以外で出来るように</li>
+  <li>MOUSEMOVEでの移動が範囲外でもクリックしている場合は取得出来るように</li>
+  <li>メニューの実装</li>
+</ul>
+
+</body>
+</html>

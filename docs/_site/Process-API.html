@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Process API</title>
+</head>
+
+<body>
+<h1 id="otyax5-process-api">OTYAX5 Process API</h1>
+
+<h2 id="newprocess-nameargs-out-prcerr">NewProcess NAME$,ARGS$ OUT PRC,ERR</h2>
+<p>プロセスNAME$をARGS$を引数として起動する。</p>
+
+<h2 id="setprocessvar-dat">SetProcessVar DAT</h2>
+<p>プロセスの局所記憶変数を設定する。</p>
+
+<h2 id="getprocessvar">GetProcessVar()</h2>
+<p>プロセスの局所記憶変数を取得する。</p>
+
+<h2 id="checkprocessprc">CheckProcess(PRC)</h2>
+<p>PRCが正常なプロセスかどうか調べる。</p>
+
+<h2 id="getprocessargs">GetProcessArgs$()</h2>
+<p>現在のプロセスの引数を取得する。</p>
+
+<h2 id="getstdin-out-file">GetSTDIN OUT FILE</h2>
+<p>標準入力のファイルを取得する。</p>
+
+<h2 id="getstdout-out-file">GetSTDOUT OUT FILE</h2>
+<p>標準出力のファイルを取得する。</p>
+
+<h2 id="getstderr-out-file">GetSTDERR OUT FILE</h2>
+<p>標準エラー出力のファイルを取得する。</p>
+
+<h2 id="setprocessstdin-prcfile">SetProcessSTDIN PRC,FILE</h2>
+<p>PRCの標準入力のファイルを設定する</p>
+
+<h2 id="setprocessstdout-prcfile">SetProcessSTDOUT PRC,FILE</h2>
+<p>PRCの標準出力のファイルを設定する</p>
+
+<h2 id="setprocessstderr-prcfile">SetProcessSTDERR PRC,FILE</h2>
+<p>PRCの標準エラー出力のファイルを設定する</p>
+
+<h2 id="getprocessstdin-prc-out-file">GetProcessSTDIN PRC OUT FILE</h2>
+<p>PRCの標準入力のファイルを取得する。</p>
+
+<h2 id="getprocessstdout-prc-out-file">GetProcessSTDOUT PRC OUT FILE</h2>
+<p>PRCの標準出力のファイルを取得する。</p>
+
+<h2 id="getprocessstderr-prc-out-file">GetProcessSTDERR PRC OUT FILE</h2>
+<p>PRCの標準エラー出力のファイルを取得する。</p>
+
+<h2 id="getpid">GetPID()</h2>
+<p>現在のPIDを取得する。</p>
+
+<h2 id="exitprocess-result">ExitProcess RESULT</h2>
+<p>現在のプロセスを終了する。</p>
+
+<h2 id="killprocess-prc-out-err">KillProcess PRC OUT ERR</h2>
+<p>PRCを終了させる。</p>
+
+<h2 id="execcommand-line-out-prcerr">ExecCommand LINE$ OUT PRC,ERR</h2>
+<p>コマンドを実行する。
+<code class="highlighter-rouge">
+name args [&gt; filename] [&lt; filename] | ...
+</code></p>
+
+<h2 id="getcommandargswithoutnameargs">GetCommandArgsWithoutName$(ARGS$)</h2>
+<p>ARGS$から第一引数を抜いたものを取得する。</p>
+
+<h2 id="getcommandarg-argsi-out-cmdindex">GetCommandArg ARGS$,I OUT CMD$,INDEX</h2>
+<p>ARGS$からIを起点として引数をCMD$として取得する。
+INDEXには引数が終了した場所が入る。</p>
+
+<h2 id="commandargstoarray-aryexpand-out-len">CommandArgsToArray ARY$[],EXPAND OUT LEN</h2>
+<p>現在のプロセスの引数をARY$に書き込む。
+EXPANDをTRUEにすると配列の要素が足りなかった際に拡張するようになる。
+LENに引数数が入る。</p>
+
+<h2 id="haschildprocessprc">HasChildProcess(PRC)</h2>
+<p>PRCが子プロセスを持っていたらTRUE</p>
+
+<h2 id="getprocesstimeprc">GetProcessTime(PRC)</h2>
+<p>PRCが使った時間(ms)</p>
+
+<h2 id="getprocesselapsedtimeprc">GetProcessElapsedTime(PRC)</h2>
+<p>PRCが起動してからの時間(ms)</p>
+
+</body>
+</html>

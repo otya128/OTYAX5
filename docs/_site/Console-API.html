@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Console API</title>
+</head>
+
+<body>
+<h1 id="console-api">Console API</h1>
+<p>コンソールを叩くAPI。
+初期状態ではプチコンのコンソール画面に出力させるConsoleが設定されている。
+コンソールは子プロセスに引き継がれる。</p>
+
+<h2 id="setconsole-con">SetConsole CON</h2>
+<p>現在のプロセスのコンソールを設定する。</p>
+
+<h2 id="getconsole-con">GetConsole CON</h2>
+<p>現在のプロセスのコンソールを取得する。</p>
+
+<h2 id="putconsole-conbuf-out-err">PutConsole CON,BUF$ OUT ERR</h2>
+<p>コンソールにBUF$を出力</p>
+
+<h2 id="readconsole-conlen-out-buferr">ReadConsole CON,LEN OUT BUF$,ERR</h2>
+<p>コンソールからLEN文字読み取る。LEN文字読み取れない場合は待機せずにそのままRETURNする。</p>
+
+<h2 id="getconsolesize-con-out-wherr">GetConsoleSize CON OUT W,H,ERR</h2>
+<p>コンソールサイズを取得する。</p>
+
+<h2 id="getconsolecursor-con-out-xyerr">GetConsoleCursor CON OUT X,Y,ERR</h2>
+<p>コンソールのカーソル位置を取得する。</p>
+
+<h2 id="setconsolecursor-conxy-out-err">SetConsoleCursor CON,X,Y OUT ERR</h2>
+<p>コンソールのカーソル位置を設定する。</p>
+
+<h2 id="getconsoleforecolor-con-out-cerr">GetConsoleForeColor CON OUT C,ERR</h2>
+<p>コンソール文字前景色を取得する。</p>
+
+<h2 id="setconsoleforecolor-conc-out-err">SetConsoleForeColor CON,C OUT ERR</h2>
+<p>コンソール文字前景色を設定する。</p>
+
+<h2 id="getconsolebackcolor-con-out-cerr">GetConsoleBackColor CON OUT C,ERR</h2>
+<p>コンソール文字背景色を取得する。</p>
+
+<h2 id="setconsolebackcolor-conc-out-err">SetConsoleBackColor CON,C OUT ERR</h2>
+<p>コンソール文字背景色を設定する。</p>
+
+<h2 id="newconsole-out-conerr">NewConsole OUT CON,ERR</h2>
+<p>コンソールを作成する。</p>
+
+<h2 id="dupconsole-con-out-errcon2">DupConsole CON OUT ERR,CON2</h2>
+<p>コンソールを複製する。</p>
+
+<h3 id="err">ERR</h3>
+<p>CONが不正な時CON_ERROR_INVALIDCON、NewConsoleに出るエラーを引き継ぐ</p>
+
+<h2 id="checkconsolecon">CheckConsole(CON)</h2>
+<p>CONが不正な値かどうか確認する。正常ならTRUE、不正ならFALSE。</p>
+
+<h2 id="deleteconsole-con-out-err">DeleteConsole CON OUT ERR</h2>
+<p>コンソールを破棄する。</p>
+
+<h3 id="err-1">ERR</h3>
+<p>CONが不正な時CON_ERROR_INVALIDCON</p>
+
+<h2 id="setgetconsolesizehandlerconfunc">SetGetConsoleSizeHandler(CON,FUNC$)</h2>
+<p>コンソールのサイズを取得するハンドラを設定する。</p>
+
+<h3 id="err-2">ERR</h3>
+<p>FUNC$が不正な時CON_ERROR_INVALIDFUNC<br />
+CONが不正な時CON_ERROR_INVALIDCON</p>
+
+<h2 id="setputconsolehandlerconfunc">SetPutConsoleHandler(CON,FUNC$)</h2>
+<p>コンソールに出力するハンドラを設定する。</p>
+
+<h2 id="setreadconsolehandlerconfunc">SetReadConsoleHandler(CON,FUNC$)</h2>
+<p>コンソールからの入力を取得するハンドラを設定する。</p>
+
+<h2 id="setgetconsolecursorhandlerconfunc">SetGetConsoleCursorHandler(CON,FUNC$)</h2>
+<p>コンソールのカーソル位置を取得するハンドラを設定する。</p>
+
+<h2 id="setsetconsolecursorhandlerconfunc">SetSetConsoleCursorHandler(CON,FUNC$)</h2>
+<p>コンソールのカーソル位置を設定するハンドラを設定する。</p>
+
+<h2 id="setgetconsolebackhandlerconfunc">SetGetConsoleBackHandler(CON,FUNC$)</h2>
+<p>コンソール文字背景色を取得するハンドラを設定する。</p>
+
+<h2 id="setsetconsolebackhandlerconfunc">SetSetConsoleBackHandler(CON,FUNC$)</h2>
+<p>コンソール文字背景色を設定するハンドラを設定する。</p>
+
+<h2 id="setgetconsoleforehandlerconfunc">SetGetConsoleForeHandler(CON,FUNC$)</h2>
+<p>コンソール文字前景色を取得するハンドラを設定する。</p>
+
+<h2 id="setsetconsoleforehandlerconfunc">SetSetConsoleForeHandler(CON,FUNC$)</h2>
+<p>コンソール文字前景色を設定するハンドラを設定する。</p>
+
+<h2 id="setconsolevar-conv-out-err">SetConsoleVar CON,V OUT ERR</h2>
+<p>コンソール変数を設定する。</p>
+
+<h3 id="err-3">ERR</h3>
+<p>CONが不正な時CON_ERROR_INVALIDCON</p>
+
+<h2 id="setconsolevar-conv-out-err-1">SetConsoleVar$ CON,V$ OUT ERR</h2>
+<p>コンソール変数を設定する。</p>
+
+<h3 id="err-4">ERR</h3>
+<p>CONが不正な時CON_ERROR_INVALIDCON</p>
+
+<h2 id="gtconsolevar-con-out-verr">GtConsoleVar CON OUT V,ERR</h2>
+<p>コンソール変数を取得する。</p>
+
+<h3 id="err-5">ERR</h3>
+<p>CONが不正な時CON_ERROR_INVALIDCON</p>
+
+<h2 id="gtconsolevar-con-out-verr-1">GtConsoleVar$ CON OUT V$,ERR</h2>
+<p>コンソール変数を取得する。</p>
+
+<h3 id="err-6">ERR</h3>
+<p>CONが不正な時CON_ERROR_INVALIDCON</p>
+
+<h2 id="setprocessconsole-prccon-out-err">SetProcessConsole PRC,CON OUT ERR</h2>
+<p>コンソールを指定プロセスに設定する。</p>
+
+<h3 id="err-7">ERR</h3>
+<p>PRCが不正な時ERROR_NO_PROC<br />
+CONが不正な時CON_ERROR_INVALIDCON</p>
+
+<h2 id="getprocessconsole-prc-out-conerr">GetProcessConsole PRC OUT CON,ERR</h2>
+<p>指定プロセスのコンソールを取得する。</p>
+
+<h3 id="err-8">ERR</h3>
+<p>PRCが不正な時ERROR_NO_PROC<br />
+CONが不正な時CON_ERROR_INVALIDCON</p>
+
+</body>
+</html>
