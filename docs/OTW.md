@@ -48,13 +48,17 @@ COMMONは付ける
 
 ### ControlChildWindowHandler
 子ウィンドウに何か起こった時に呼ばれる
-#### type:WindowMaximumEvent()
+
+#### type:WindowMaximizeEvent()
 ウィンドウが最大化されようとしたときに送られる  
+
 argに対象ウィンドウ  
 rootウィンドウ
-#### type:WindowMinimumEvent()
+
+#### type:WindowMinimizevent()
 ウィンドウが最小化されようとしたときに送られる  
 argに対象ウィンドウ
+
 #### type:WindowActiveEvent()
 ウィンドウがアクティブになったときに贈られる
 argに対象ウィンドウ
@@ -71,11 +75,12 @@ argに対象ウィンドウ
  IF BTN AND GetControlStateLBtn()THEN ~左クリック
  IF BTN AND GetControlStateRBtn()THEN ~右クリック
 ```
+
 ## Window
 
 |関数|説明|
 |---|---|
-|GetRootWND()|ルートウィンドウを取得->GetRootWindow()にしたい|
+|GetRootWindow()|ルートウィンドウを取得|
 |CheckWindow(WND)|ウィンドウが正常化を確認|
 |WindowBackFlag()|NewWindowで指定するフラグ, ウィンドウを後ろに配置する|
 |WindowFrontFlag()|NewWindowで指定するフラグ, ウィンドウを前に配置する|
@@ -128,7 +133,13 @@ argに対象ウィンドウ
 |CalcWindowX(BASEWND,WND)|BASEWNDに対するWNDの位置を取得|
 |CalcWindowY(BASEWND,WND)|BASEWNDに対するWNDの位置を取得|
 |GetActiveWindow()|現在のアクティブウィンドウを取得|
+|MaximizeWindow(WND)|ウィンドウを最大化|
+|MinimizeWindow(WND)|ウィンドウを最小化|
+|GetWindowStyle(WND)|ウィンドウスタイルを取得|
+|GetWindowFrameSize WND OUT W1,H1,W2,H2,ERR|ウィンドウフレームサイズを取得|
+
 ### Graphic
+
 |関数|説明|
 |---|---|
 |GBeginWindow(WND)|描画開始を明示的に宣言する|
@@ -151,7 +162,10 @@ argに対象ウィンドウ
 |GTRIWindow WND,X,Y,X2,Y2,X3,Y3,COL||
 |GCIRCLEWindow WND,X,Y,R,COL||
 |GCIRCLE2Window WND,X,Y,R,S,E,F,COL||
+|GLOADImageWindow WND,X,Y,IMG,F|画像をウィンドウに描画|
+
 ## 標準GUI部品
+
 |関数|説明|
 |---|---|
 |GetWindowControl()|ウィンドウを表示するコントロール|
@@ -162,6 +176,7 @@ argに対象ウィンドウ
 |SetLabelAlignCenter LABEL|文字を中央|
 |SetLabelAlignLeft LABEL|文字を左寄せ(デフォルト)|
 |SetLabelAlignRight LABEL|文字を右寄せ|
+
 ### Sample
 ```BAS
  VAR TESTOTWCTL,TESTOTWWND
@@ -200,12 +215,15 @@ argに対象ウィンドウ
 文字列は"123"[0]みたいな使い方が可能
 
 ## これから実装したいもの
+
 |関数|
 |---|
 |GetScreenWidth()|
 |GetScreenHeight()|
 |GetWinVer$()|
+
 ### message
+
 ||
 |---|
 |MouseLeave|
@@ -213,18 +231,23 @@ argに対象ウィンドウ
 
 ## 標準コントロール
 これらのコントロールを継承する際は親コントロールのHandlerを呼び出す必要がある
+
 ### Window
+
 |event|説明|
 |---|---|
 |Paint|枠を描画|
 |ChFocus|前面に移動|
+
 ### Button
+
 |event|説明|
 |---|---|
 |Paint|ボタンを描画|
 |LMouseUp|親ウィンドウにNotifを送信|
 
 #### 操作
+
 |関数|説明|
 |---|---|
 |SetButtonAlignLeft WND|ボタンの文字を左寄りにする|
@@ -233,8 +256,11 @@ argに対象ウィンドウ
 |IsCheckedButton(WND)|トグルボタンをチェックされているか|
 |UnCheckButton WND|トグルボタンをチェックさせない|
 |CheckButton WND|トグルボタンがチェックさせる|
+
 ### Label
+
 ### Scroll
+
 |関数|説明|
 |---|---|
 |GetVScrollBarControl()|縦スクロールバーコントロールを取得|
@@ -243,7 +269,9 @@ argに対象ウィンドウ
 |GetScrollBarSize(WND)|縦スクロールバーのサイズを取得|
 |SetScrollBarPosition WND,POS|縦スクロールバーの位置を設定|
 |GetScrollBarPosition(WND)|縦スクロールバーの位置を取得|
+
 ### ListBox
+
 |関数|説明|
 |---|---|
 |GetListBoxControl()|リストボックスのコントロールを取得|
@@ -253,16 +281,25 @@ argに対象ウィンドウ
 |GetListBoxSelectedText$(WND)|リストボックスで選択されているアイテム名を取得|
 |SetChItemListBoxNotif WND,F|選択アイテムが変化すると親ウィンドウにNotif(A1=WND,A2=ListBoxChItem)を送るかどうか|
 |ClearListBox WND|リストボックスの項目を初期化|
+
 ### NumUpDown
+
 ||
 |---|
 |GetNumUpDowCnontrol()|NumUpDownのコントロールを取得|
 |GetNumUpDownValue(WND)|NumUpDownの値を取得|
 |SetNumUpDownRange WND,MIN,MAX|NumUpDownの範囲を設定|
+
 ### DropDownList (DROPDOWNLIST)
-未実装
+
+#### GetDropDownListControl()
+DropDownListのコントロールを取得
+
+#### GetDropDownListBox(WND)
+DropDownListのListBox WNDを取得(これに対して項目を追加する)
 
 ## Menu
+
 |関数|説明|
 |---|---|
 |NewMenu OUT MENU,E|MENUを作成|
@@ -275,13 +312,17 @@ argに対象ウィンドウ
 |NewTopLevelMenuWindow CTL,NAME$,WIDTH,HEIGHT OUT WND,ERR||
 |ShowContextMenu MENU,WND|コンテキストメニューを表示|
 |AddSubMenuItem MENU,STR$,SUBMENU|メニューにサブメニューを追加|
+
 ## Window Group
+
 |関数|説明|
 |---|---|
 |JoinWindowGroup(WND,WND2)||
 |LeaveWindowGroup WND|未実装|
 |GetWindowGroupOwner(WND)||
+
 ## Dialog
+
 |関数|説明|
 |---|---|
 |NewDialogBox(CTL,NAME$,WIDTH,HEIGHT,OWNER,FLAG)||
@@ -289,14 +330,17 @@ argに対象ウィンドウ
 |NewModelessDialogBox(CTL,NAME$,WIDTH,HEIGHT,OWNER)|モーダレスダイアログボックスを作成|
 
 ## File dialog
+
 ### OpenFileDialog(OWNER,TYPE$,ID)
 ファイルを開くダイアログを表示  
 TYPE$にファイル種別(TXT/DAT)  
 選択された場合IDをA1、ファイル名をA2$に入れてStrNotifが呼ばれる
+
 ### SaveFileDialog(OWNER,TYPE$,ID)
 ファイル保存ダイアログを表示  
 TYPE$にファイル種別(TXT/DAT)  
 選択された場合IDをA1、ファイル名をA2$に入れてStrNotifが呼ばれる
+
 ## WindowOP
 ウィンドウに対しての操作を効率化する
 子ウィンドウを一々削除していたら再描画リクエストが一々確認されたりして非常に遅い
@@ -307,8 +351,10 @@ TYPE$にファイル種別(TXT/DAT)
 |BeginWindowOP(WND)||
 |EndWindowOP(WND)||
 |MoveWindow2(WND,X,Y)|->MoveWindowOP(WND,X,Y)|
+
 ## 拡張コントロール群
 標準コントロールの機能拡張版
+
 ### TextBoxEx
 複数行編集、シンタックスハイライトに対応した拡張版
 
@@ -323,6 +369,7 @@ TYPE$にファイル種別(TXT/DAT)
 |TextBoxExCopy WND|クリップボードにコピー|
 |TextBoxExCut WND|クリップボードに切り取り|
 |TextBoxExPaste WND|クリップボードから貼り付け|
+
 ### RICHTEXTEDITOR
 
 |関数|説明|
@@ -331,7 +378,7 @@ TYPE$にファイル種別(TXT/DAT)
 |RichTextItalic()|フラグ|
 |RichTextStrike()|フラグ|
 |RichTextUnderline()|フラグ|
-|RICHTEXTWindow WND,X,Y,C,STYLE,SIZE,COL|RICHTEXTを表示|
+|RICHTEXT X,Y,C,STYLE,SIZE,COL|RICHTEXTを表示|
 
 |関数|説明|
 |---|---|
@@ -344,7 +391,48 @@ TYPE$にファイル種別(TXT/DAT)
 |RTESetAlignCenter WND||
 |RTESetAlignRight WND||
 |RTESetFontSize WND||
+
+#### RTENew RTE
+初期化
+
+#### RTEOpen RTE,FILE$ OUT ERR
+FILE$を開く
+
+#### RTESave RTE,FILE$ OUT ERR
+FILE$に保存する
+
+#### RTEClear WND
+インデントや見出しなどを消す
+
+#### RTEIndent WND,INDENT
+インデントをINDENT px増やす
+
+#### RTESetOrderedList WND
+* こういうリスト
+
+#### RTESetUnorderedList WND
+1. こういうリスト
+
+#### RTESetHeading WND,LEVEL
+LEVEL(1<=LEVEL<=6)見出しを付ける
+
+#### RTECopy WND
+コピー
+
+#### RTEPaste WND
+ペースト
+
+#### RTECut WND
+切り取り
+
+#### RTESelectAll WND
+すべて選択
+
+#### RTEAddTable WND,ROW,COL
+ROW行COL列の表を作成
+
 ## ダイアログ
+
 |関数|説明|
 |---|---|
 |SaveFileDialog(OWNER,TYPE$,ID)|今の所TYPEはTXTまたはDATのみ|
@@ -354,8 +442,8 @@ TYPE$にファイル種別(TXT/DAT)
 |MessageBoxNotifOK()|OKボタンが押されたときにWNDへ送信される|
 |MessageBoxNotifCancel()|キャンセルされたときにWNDへ送信される|
 |MessageBoxNotifID()|MessageBoxが閉じられたときにWNDへ送信されるNotifID|
+
 ## Clipboard
-**不完全実装**
 
 |関数|説明|
 |---|---|
@@ -366,16 +454,25 @@ TYPE$にファイル種別(TXT/DAT)
 |ClipboardContaisFile()|クリップボードにファイルが格納されているか|
 |ClipboardGetFile OUT ISCUT,PATH$)|クリップボードに格納されたファイルを取得(無ければ空文字)ISCUTがTRUEならば切り取り|
 |ClipboardSetFile ISCUT,PATH$|クリップボードにファイルを格納、ISCUTがTRUEならば切り取り|
+|ClipboardSetData$ TYPE$,V$|クリップボードにTYPE$の文字列データを設定|
+|ClipboardGetData$ TYPE$ OUT DATA$,CONTAINS|クリップボードからTYPE$の文字列データを取得、CONTAINSがFALSEなら含まれていない|
+
+### ClipboardData
+### "RichText"
+リッチテキスト文字列が入っている
+
 ## Image
-**不完全実装**
 
 |関数|説明|
 |---|---|
-|NewImage WIDTH,HEIGHT OUT IMG,E|画像を作成|
+|NewImage ARRAY,WIDTH,HEIGHT OUT IMG,E|画像を作成|
+|LoadImage FILE$,W,H OUT IMG,E|画像を二次元配列DATファイルから読み込み|
+|GLOADImage X,Y,IMG,F|現在のグラフィック面にX,YにIMGを描画|
 |CheckImage(IMG)|画像が正常か確認|
 |DeleteImage(IMG)|画像を削除|
 
 ## 関連付け
+
 |関数|説明|
 |---|---|
 |GetAssociatedProgram$(TYP$,EXT$)|TYP$とEXT$に関連付けられたものを取得|
@@ -383,6 +480,7 @@ TYPE$にファイル種別(TXT/DAT)
 |ExecFile(PATH$)|PATH$に関連付けられたプログラムをPATH$を引数に設定して起動|
 
 ## 直接描画
+
 |関数|説明|
 |---|---|
 |GBeginDirect(WND)|直接描画を可能にする(GPSETなどが使える)|
