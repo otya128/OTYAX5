@@ -81,3 +81,29 @@ PRCが使った時間(ms)
 
 ## GetProcessElapsedTime(PRC)
 PRCが起動してからの時間(ms)
+
+## GetProcessPID(PRC)
+PRCのPIDを取得  
+エラー時は0が返る
+
+## GetParentProcess(PRC)
+PRCの親プロセスを取得  
+エラー時は0が返る
+
+## GetProcessName$(PRC)
+PRCの名前を取得  
+エラー時は""が返る
+
+## GetRootProcess()
+ルートプロセスを取得
+
+## GetChildProcesses(PRC,ARY[],R)
+PRCの子プロセスを取得
+
+|引数|説明|
+|---|---|
+|ARY[]|出力される配列 自動的に拡張される|
+|R|TRUEなら再帰的に子プロセスを取得|
+
+### 戻り値
+プロセス数
