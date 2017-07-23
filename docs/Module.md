@@ -17,7 +17,7 @@ loadmodコマンドを使うとモジュールを読み込むことができる�
 FILE$のモジュールを読み込む。
 ENTRYPOINT$にはプロセス名が入る(なければ空文字)
 
-### ExecModule FILE$ OUT PRC,ERR
+### ExecModule FILE$,ARGS$ OUT PRC,ERR
 FILE$のモジュールを読み込み実行する。
 
 ## Module File
