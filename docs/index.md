@@ -10,6 +10,7 @@ title: OTYAX 5 documents
 * [Memory API](Memory-API)
 * [Process API](Process-API)
 * [i18n](i18n)
+* [Module](Module)
 
 ## OTW
 
