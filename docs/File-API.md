@@ -71,6 +71,9 @@ FLGには以下のものを使用できる
 ### FileAppendFlag() (=4)
 追記
 
+### FileCreateFlag() (=8)
+作成
+
 ## FileWrite FILE,DAT$ OUT ERR
 ファイルにDAT$を書き込む
 
