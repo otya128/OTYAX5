@@ -271,11 +271,12 @@ argに対象ウィンドウ
 |関数|説明|
 |---|---|
 |GetVScrollBarControl()|縦スクロールバーコントロールを取得|
-|NewVScrollBar PARENT,SIZ OUT WND,E|縦スクロールバーをPARENTに長さSIZで作成|
-|NewHScrollBar PARENT,SIZ OUT WND,E|横スクロールバーをPARENTに長さSIZで作成|
-|NewHVScrollBar PARENT,SIZH,SIZV OUT WNDH,WNDV,E|縦横スクロールバーを長さSIZV,SIZHで作成|
+|NewVScrollBar PARENT,SIZ OUT WND,E|縦スクロールバーをPARENTに長さSIZで作成(ScrollBarAutoResizeModeは1)|
+|NewHScrollBar PARENT,SIZ OUT WND,E|横スクロールバーをPARENTに長さSIZで作成(ScrollBarAutoResizeModeは1)|
+|NewHVScrollBar PARENT,SIZH,SIZV OUT WNDH,WNDV,E|縦横スクロールバーを長さSIZV,SIZHで作成(ScrollBarAutoResizeModeは2)|
 |SetScrollBarSize WND,SIZ|縦スクロールバーのサイズを設定|
 |GetScrollBarSize(WND)|縦スクロールバーのサイズを取得|
+|IncScrollBarSize WND|スクロールバーのサイズを1増加させる|
 |SetScrollBarPosition WND,POS|縦スクロールバーの位置を設定|
 |GetScrollBarPosition(WND)|縦スクロールバーの位置を取得|
 |SetScrollBarAutoResizeMode WND,MODE|MODEが0なら自動リサイズしない、MODEが1なら画面いっぱいリサイズ、MODEが2なら縦横にスクロールバーがある前提|
