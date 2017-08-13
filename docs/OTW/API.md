@@ -278,6 +278,7 @@ argに対象ウィンドウ
 |GetScrollBarSize(WND)|縦スクロールバーのサイズを取得|
 |SetScrollBarPosition WND,POS|縦スクロールバーの位置を設定|
 |GetScrollBarPosition(WND)|縦スクロールバーの位置を取得|
+|SetScrollBarAutoResizeMode WND,MODE|MODEが0なら自動リサイズしない、MODEが1なら画面いっぱいリサイズ、MODEが2なら縦横にスクロールバーがある前提|
 
 ### ListBox
 
