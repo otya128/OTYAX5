@@ -45,6 +45,7 @@ COMMONは付ける
 |SetControlFrameHandler(CTL,HANDLER$)|ウィンドウフレーム周りのなんか|||
 |SetControlFramePainter(CTL,HANDLER$)|ウィンドウフレームの描画|||
 |SetControlChildWindowHandler(CTL,HANDLER$)|子ウィンドウから送られてくるイベントを受信|type|arg|
+|SetControlParentWindowHandler(CTL,HANDLER$)|親ウィンドウから送られてくるイベントを受信|type|arg|
 
 ### ControlChildWindowHandler
 子ウィンドウに何か起こった時に呼ばれる
@@ -62,6 +63,12 @@ argに対象ウィンドウ
 #### type:WindowActiveEvent()
 ウィンドウがアクティブになったときに贈られる
 argに対象ウィンドウ
+
+### ControlParentWindowHandler
+親ウィンドウに何か起こったときに呼ばれる
+
+#### ParentWindowResizeEvent()
+ウィンドウがリサイズされたときに呼ばれる
 
 ### マウスの状態
 ```
