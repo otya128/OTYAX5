@@ -7,7 +7,7 @@ title: OTW version
 ## 変更点
 * 横スクロールバーを実装
 * NewHScrollBar PARENT,SIZ OUT WND.E
-* NewVHScrollBar PARENT,SIZV,SIZH OUT WND,E
+* NewVHScrollBar PARENT,SIZV,SIZH OUT WNDV,WNDH,E
  
 # OTW5.0-2C
 
