@@ -16,6 +16,13 @@ title: OTW version
 * NewImage ARRAY,WIDTH,HEIGHT OUT IMG,EでWIDTHをHEIGHTを逆に設定していた問題を修正
 * NewScrollBar系のAPIでSetScrollBarAutoResizeModeするように
 * それに従いスクロールバーのリサイズ系のコードを削除
+* メニューでチェック出来るようになった
+* AddCheckMenuItem MENU,STR$,IVAR,CHECKED
+* AddRadioMenuItem MENU,STR$,IVAR,CHECKED
+* GetCheckedRadioMenuItem MENU,IVAR OUT IVAR2
+* IsCheckedMenuItem(MENU,IVAR)
+* GLOADImagePaletteWindow WND,X,Y,IMG,F
+* GLOADImagePalette X,Y,IMG,PAL,F
  
 # OTW5.0-2C
 
@@ -27,13 +34,6 @@ title: OTW version
 * いくつかのアイコン追加
 * リッチテキストエディタでテーブルを正常に保存できるように
 * リッチテキストエディタでドット単位でのスクロールができるようになった
-* メニューでチェック出来るようになった
-* AddCheckMenuItem MENU,STR$,IVAR,CHECKED
-* AddRadioMenuItem MENU,STR$,IVAR,CHECKED
-* GetCheckedRadioMenuItem MENU,IVAR OUT IVAR2
-* IsCheckedMenuItem(MENU,IVAR)
-* GLOADImagePaletteWindow WND,X,Y,IMG,F
-* GLOADImagePalette X,Y,IMG,PAL,F
 
 # OTW5.0-2B
 リッチテキストボックスでテーブルを割と扱えるようにした
