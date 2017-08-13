@@ -9,6 +9,9 @@ title: OTW version
 * NewHScrollBar PARENT,SIZ OUT WND.E
 * NewHVScrollBar PARENT,SIZH,SIZV OUT WNDH,WNDV,E
 * GSAVEImage X,Y,IMG
+* ControlParentWindowHandlerを追加
+* SetControlParentWindowHandler(CTL,HANDLER$)
+* ParentWindowResizeEvent() (=1)
  
 # OTW5.0-2C
 
