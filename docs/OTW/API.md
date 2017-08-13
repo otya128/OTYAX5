@@ -469,7 +469,8 @@ ROW行COL列の表を作成
 |---|---|
 |NewImage ARRAY,WIDTH,HEIGHT OUT IMG,E|画像を作成|
 |LoadImage FILE$,W,H OUT IMG,E|画像を二次元配列DATファイルから読み込み|
-|GLOADImage X,Y,IMG,F|現在のグラフィック面にX,YにIMGを描画|
+|GLOADImage X,Y,IMG,F|現在のグラフィック面にX,YにIMGを描画(FがTRUEの場合透明色も描画)|
+|GSAVEImage X,Y,IMG|現在のグラフィック面のX,YをIMGにコピー|
 |CheckImage(IMG)|画像が正常か確認|
 |DeleteImage(IMG)|画像を削除|
 
