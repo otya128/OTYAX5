@@ -170,6 +170,7 @@ argに対象ウィンドウ
 |GCIRCLEWindow WND,X,Y,R,COL||
 |GCIRCLE2Window WND,X,Y,R,S,E,F,COL||
 |GLOADImageWindow WND,X,Y,IMG,F|画像をウィンドウに描画|
+|GLOADImagePaletteWindow WND,X,Y,IMG,F|画像をパレットPALを用いてウィンドウに描画|
 
 ## 標準GUI部品
 
@@ -311,6 +312,10 @@ DropDownListのListBox WNDを取得(これに対して項目を追加する)
 
 ## Menu
 
+IVARで識別する
+
+ラジオボタンは非ラジオボタンのメニューアイテム(Separatorなど)が区切りとなって認識される
+
 |関数|説明|
 |---|---|
 |NewMenu OUT MENU,E|MENUを作成|
@@ -323,6 +328,10 @@ DropDownListのListBox WNDを取得(これに対して項目を追加する)
 |NewTopLevelMenuWindow CTL,NAME$,WIDTH,HEIGHT OUT WND,ERR||
 |ShowContextMenu MENU,WND|コンテキストメニューを表示|
 |AddSubMenuItem MENU,STR$,SUBMENU|メニューにサブメニューを追加|
+|AddCheckMenuItem MENU,STR$,IVAR,CHECKED|メニューにチェックボックスを追加|
+|AddRadioMenuItem MENU,STR$,IVAR,CHECKED|メニューにラジオボタンを追加|
+|GetCheckedRadioMenuItem MENU,IVAR OUT IVAR2|IVARが属するラジオボタングループでチェックされているIVARを返す|
+|IsCheckedMenuItem(MENU,IVAR)|IVARがチェックされていればTRUE|
 
 ## Window Group
 
@@ -479,6 +488,7 @@ ROW行COL列の表を作成
 |NewImage ARRAY,WIDTH,HEIGHT OUT IMG,E|画像を作成|
 |LoadImage FILE$,W,H OUT IMG,E|画像を二次元配列DATファイルから読み込み|
 |GLOADImage X,Y,IMG,F|現在のグラフィック面にX,YにIMGを描画(FがTRUEの場合透明色も描画)|
+|GLOADImagePalette X,Y,IMG,PAL,F|現在のグラフィック面にX,YにIMGをパレットPALで描画(FがTRUEの場合透明色も描画)|
 |GSAVEImage X,Y,IMG|現在のグラフィック面のX,YをIMGにコピー|
 |CheckImage(IMG)|画像が正常か確認|
 |DeleteImage(IMG)|画像を削除|
