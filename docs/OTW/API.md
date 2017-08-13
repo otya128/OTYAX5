@@ -265,6 +265,8 @@ argに対象ウィンドウ
 |---|---|
 |GetVScrollBarControl()|縦スクロールバーコントロールを取得|
 |NewVScrollBar PARENT,SIZ OUT WND,E|縦スクロールバーをPARENTに長さSIZで作成|
+|NewHScrollBar PARENT,SIZ OUT WND,E|横スクロールバーをPARENTに長さSIZで作成|
+|NewVHScrollBar PARENT,SIZV,SIZH OUT WND,E|縦横スクロールバーを長さSIZV,SIZHで作成|
 |SetScrollBarSize WND,SIZ|縦スクロールバーのサイズを設定|
 |GetScrollBarSize(WND)|縦スクロールバーのサイズを取得|
 |SetScrollBarPosition WND,POS|縦スクロールバーの位置を設定|
