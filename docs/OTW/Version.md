@@ -23,6 +23,7 @@ title: OTW version
 * IsCheckedMenuItem(MENU,IVAR)
 * GLOADImagePaletteWindow WND,X,Y,IMG,F
 * GLOADImagePalette X,Y,IMG,PAL,F
+* メニューで子要素があるアイテムをクリックしてもイベントが発生しないようになった
  
 # OTW5.0-2C
 
