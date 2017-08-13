@@ -12,6 +12,10 @@ title: OTW version
 * ControlParentWindowHandlerを追加
 * SetControlParentWindowHandler(CTL,HANDLER$)
 * ParentWindowResizeEvent() (=1)
+* SetScrollBarAutoResizeMode WND,MODE
+* NewImage ARRAY,WIDTH,HEIGHT OUT IMG,EでWIDTHをHEIGHTを逆に設定していた問題を修正
+* NewScrollBar系のAPIでSetScrollBarAutoResizeModeするように
+* それに従いスクロールバーのリサイズ系のコードを削除
  
 # OTW5.0-2C
 
