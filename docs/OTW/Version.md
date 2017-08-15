@@ -24,6 +24,7 @@ title: OTW version
 * GLOADImagePaletteWindow WND,X,Y,IMG,F
 * GLOADImagePalette X,Y,IMG,PAL,F
 * メニューで子要素があるアイテムをクリックしてもイベントが発生しないようになった
+* MessageBoxError()
  
 # OTW5.0-2C
 
