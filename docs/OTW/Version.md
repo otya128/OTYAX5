@@ -2,6 +2,13 @@
 layout: default
 title: OTW version
 ---
+
+# OTW5.0-2E
+
+## 変更点
+* ツールウィンドウ(常にOwner windowより前のウィンドウ)を実装
+* WindowToolFlag()
+
 # OTW5.0-2D
 
 ## 変更点
