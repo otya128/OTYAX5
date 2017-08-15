@@ -20,7 +20,7 @@ title: OTW version
 * SetControlParentWindowHandler(CTL,HANDLER$)
 * ParentWindowResizeEvent() (=1)
 * SetScrollBarAutoResizeMode WND,MODE
-* NewImage ARRAY,WIDTH,HEIGHT OUT IMG,EでWIDTHをHEIGHTを逆に設定していた問題を修正
+* NewImage ARRAY,WIDTH,HEIGHT OUT IMG,EでWIDTHとHEIGHTを逆に設定していた問題を修正
 * NewScrollBar系のAPIでSetScrollBarAutoResizeModeするように
 * それに従いスクロールバーのリサイズ系のコードを削除
 * メニューでチェック出来るようになった
@@ -31,6 +31,9 @@ title: OTW version
 * GLOADImagePaletteWindow WND,X,Y,IMG,F
 * GLOADImagePalette X,Y,IMG,PAL,F
 * メニューで子要素があるアイテムをクリックしてもイベントが発生しないようになった
+* GetImageWidth(IMG)
+* GetImageHeight(IMG)
+* GetImageArray IMG OUT ARY,ERR
 * MessageBoxError()
  
 # OTW5.0-2C
