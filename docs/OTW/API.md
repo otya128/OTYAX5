@@ -459,6 +459,7 @@ ROW行COL列の表を作成
 |OpenFileDialog(OWNER,TYPE$,ID)|今の所TYPEはTXTまたはDATのみ|
 |MessageBox(WND,TITLE$,TEXT$,FLAG)|メッセージボックスを作成|
 |MessageBoxOK()|OKボタンのフラグ|
+|MessageBoxError()|エラーメッセージボックスのフラグ|
 |MessageBoxNotifOK()|OKボタンが押されたときにWNDへ送信される|
 |MessageBoxNotifCancel()|キャンセルされたときにWNDへ送信される|
 |MessageBoxNotifID()|MessageBoxが閉じられたときにWNDへ送信されるNotifID|
