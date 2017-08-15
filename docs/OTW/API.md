@@ -521,4 +521,4 @@ ROW行COL列の表を作成
 デフォルトフォントでのテキストのサイズを計算
 
 ## IM
-[こちらを参照](https://github.com/otya128/OTYAX5/wiki/OTW-IM)
+[こちらを参照](IM)
