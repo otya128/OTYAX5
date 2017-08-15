@@ -92,6 +92,7 @@ argに対象ウィンドウ
 |WindowBackFlag()|NewWindowで指定するフラグ, ウィンドウを後ろに配置する|
 |WindowFrontFlag()|NewWindowで指定するフラグ, ウィンドウを前に配置する|
 |WindowHideFlag()|NewWindowで指定するフラグ, ウィンドウを非表示にする|
+|WindowToolFlag()|NewWindowで指定するフラグ, ウィンドウを常にOwner windowより前に表示にする|
 |NewWindow CTL,NAME$,X,Y,WIDTH,HEIGHT,PARENT,FLG OUT WND,ERR|コントロールと名前と座標とサイズと親ウィンドウとフラグを使ってウィンドウを作成|
 |NewTopLevelWindow CTL,NAME$,WIDTH,HEIGHT OUT WND,ERR|コントロールと名前とサイズを使ってウィンドウを作成|
 |NewStyleWindowArg CTL,NAME$,X,Y,WIDTH,HEIGHT,PARENT,FLG,STYLE,A1,A2|引数を使ってスタイル指定されたウィンドウ作成|
