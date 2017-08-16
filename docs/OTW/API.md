@@ -102,6 +102,7 @@ argに対象ウィンドウ
 |WindowMenuStyle()|メニュー付きにさせるフラグ|
 |WindowResizableStyle()|リサイズ可能にさせるフラグ|
 |WindowHideStyle()|非表示にさせるフラグ|
+|WindowNarrowStyle()|タイトルバーの幅を小さくさせるフラグ|
 |FrontWindow(WND)|ウィンドウを手前に持ってくる|
 |MoveWindow(WND,X,Y)|ウィンドウを指定座標に持っていく|
 |ResizeWindow(WND,W,H)|ウィンドウをリサイズ|
@@ -525,3 +526,14 @@ ROW行COL列の表を作成
 
 ## IM
 [こちらを参照](IM)
+
+## Mouse
+
+### GetMouseX()
+マウスのX座標を取得
+
+### GetMouseY()
+マウスのY座標を取得
+
+### MoveMouse X,Y
+マウスを(X,Y)に移動
