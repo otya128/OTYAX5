@@ -8,11 +8,14 @@ title: OTW version
 ## 変更点
 * ツールウィンドウ(常にOwner windowより前のウィンドウ)を実装
 * WindowToolFlag()
+* GetScrollBarWidth()
+* GetScrollBarHeight()
 
 # OTW5.0-2D
 
 ## 変更点
 * 横スクロールバーを実装
+* GetHScrollBarControl()
 * NewHScrollBar PARENT,SIZ OUT WND.E
 * NewHVScrollBar PARENT,SIZH,SIZV OUT WNDH,WNDV,E
 * GSAVEImage X,Y,IMG
