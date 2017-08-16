@@ -273,6 +273,7 @@ argに対象ウィンドウ
 |関数|説明|
 |---|---|
 |GetVScrollBarControl()|縦スクロールバーコントロールを取得|
+|GetHScrollBarControl()|横スクロールバーコントロールを取得|
 |NewVScrollBar PARENT,SIZ OUT WND,E|縦スクロールバーをPARENTに長さSIZで作成(ScrollBarAutoResizeModeは1)|
 |NewHScrollBar PARENT,SIZ OUT WND,E|横スクロールバーをPARENTに長さSIZで作成(ScrollBarAutoResizeModeは1)|
 |NewHVScrollBar PARENT,SIZH,SIZV OUT WNDH,WNDV,E|縦横スクロールバーを長さSIZV,SIZHで作成(ScrollBarAutoResizeModeは2)|
@@ -282,6 +283,8 @@ argに対象ウィンドウ
 |SetScrollBarPosition WND,POS|縦スクロールバーの位置を設定|
 |GetScrollBarPosition(WND)|縦スクロールバーの位置を取得|
 |SetScrollBarAutoResizeMode WND,MODE|MODEが0なら自動リサイズしない、MODEが1なら画面いっぱいリサイズ、MODEが2なら縦横にスクロールバーがある前提|
+|GetScrollBarWidth()|スクロールバーのデフォルト幅を取得|
+|GetScrollBarHeight()|スクロールバーのデフォルト高さを取得|
 
 ### ListBox
 
