@@ -535,6 +535,7 @@ ROW行COL列の表を作成
 |---|---|
 |GBeginDirect(WND)|直接描画を可能にする(GPSETなどが使える)|
 |GCopyDirect(WND,X,Y,W,H,X3,Y3,MODE)|直接描画を終了し、GBeginWindow(WND)をして転送|
+|GetDirectGPAGE WND OUT PAGE1,PAGE2,ERR|直接描画に使っている表示ページ、描画ページを取得|
 
 ## フォント
 フォント周りのAPI

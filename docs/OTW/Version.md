@@ -14,6 +14,9 @@ title: OTW version
 * WindowNarrowStyle()
 * MoveMouse X,Y
 * ListBoxでメモリのある限り項目を追加できるようになった
+* File dialogでDATを指定できなかった問題を修正
+* GetDirectGPAGE WND OUT PAGE1,PAGE2,ERR
+* GBeginDirectでエラー時に正常にエラーを返せていなかった問題を修正
 
 # OTW5.0-2D
 
