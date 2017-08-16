@@ -45,6 +45,7 @@ COMMONは付ける
 |SetControlFrameHandler(CTL,HANDLER$)|ウィンドウフレーム周りのなんか|||
 |SetControlFramePainter(CTL,HANDLER$)|ウィンドウフレームの描画|||
 |SetControlChildWindowHandler(CTL,HANDLER$)|子ウィンドウから送られてくるイベントを受信|type|arg|
+|SetControlParentWindowHandler(CTL,HANDLER$)|親ウィンドウから送られてくるイベントを受信|type|arg|
 
 ### ControlChildWindowHandler
 子ウィンドウに何か起こった時に呼ばれる
@@ -62,6 +63,12 @@ argに対象ウィンドウ
 #### type:WindowActiveEvent()
 ウィンドウがアクティブになったときに贈られる
 argに対象ウィンドウ
+
+### ControlParentWindowHandler
+親ウィンドウに何か起こったときに呼ばれる
+
+#### ParentWindowResizeEvent()
+ウィンドウがリサイズされたときに呼ばれる
 
 ### マウスの状態
 ```
@@ -85,6 +92,7 @@ argに対象ウィンドウ
 |WindowBackFlag()|NewWindowで指定するフラグ, ウィンドウを後ろに配置する|
 |WindowFrontFlag()|NewWindowで指定するフラグ, ウィンドウを前に配置する|
 |WindowHideFlag()|NewWindowで指定するフラグ, ウィンドウを非表示にする|
+|WindowToolFlag()|NewWindowで指定するフラグ, ウィンドウを常にOwner windowより前に表示にする|
 |NewWindow CTL,NAME$,X,Y,WIDTH,HEIGHT,PARENT,FLG OUT WND,ERR|コントロールと名前と座標とサイズと親ウィンドウとフラグを使ってウィンドウを作成|
 |NewTopLevelWindow CTL,NAME$,WIDTH,HEIGHT OUT WND,ERR|コントロールと名前とサイズを使ってウィンドウを作成|
 |NewStyleWindowArg CTL,NAME$,X,Y,WIDTH,HEIGHT,PARENT,FLG,STYLE,A1,A2|引数を使ってスタイル指定されたウィンドウ作成|
@@ -163,6 +171,7 @@ argに対象ウィンドウ
 |GCIRCLEWindow WND,X,Y,R,COL||
 |GCIRCLE2Window WND,X,Y,R,S,E,F,COL||
 |GLOADImageWindow WND,X,Y,IMG,F|画像をウィンドウに描画|
+|GLOADImagePaletteWindow WND,X,Y,IMG,F|画像をパレットPALを用いてウィンドウに描画|
 
 ## 標準GUI部品
 
@@ -264,11 +273,18 @@ argに対象ウィンドウ
 |関数|説明|
 |---|---|
 |GetVScrollBarControl()|縦スクロールバーコントロールを取得|
-|NewVScrollBar PARENT,SIZ OUT WND,E|縦スクロールバーをPARENTに長さSIZで作成|
+|GetHScrollBarControl()|横スクロールバーコントロールを取得|
+|NewVScrollBar PARENT,SIZ OUT WND,E|縦スクロールバーをPARENTに長さSIZで作成(ScrollBarAutoResizeModeは1)|
+|NewHScrollBar PARENT,SIZ OUT WND,E|横スクロールバーをPARENTに長さSIZで作成(ScrollBarAutoResizeModeは1)|
+|NewHVScrollBar PARENT,SIZH,SIZV OUT WNDH,WNDV,E|縦横スクロールバーを長さSIZV,SIZHで作成(ScrollBarAutoResizeModeは2)|
 |SetScrollBarSize WND,SIZ|縦スクロールバーのサイズを設定|
 |GetScrollBarSize(WND)|縦スクロールバーのサイズを取得|
+|IncScrollBarSize WND|スクロールバーのサイズを1増加させる|
 |SetScrollBarPosition WND,POS|縦スクロールバーの位置を設定|
 |GetScrollBarPosition(WND)|縦スクロールバーの位置を取得|
+|SetScrollBarAutoResizeMode WND,MODE|MODEが0なら自動リサイズしない、MODEが1なら画面いっぱいリサイズ、MODEが2なら縦横にスクロールバーがある前提|
+|GetScrollBarWidth()|スクロールバーのデフォルト幅を取得|
+|GetScrollBarHeight()|スクロールバーのデフォルト高さを取得|
 
 ### ListBox
 
@@ -300,6 +316,10 @@ DropDownListのListBox WNDを取得(これに対して項目を追加する)
 
 ## Menu
 
+IVARで識別する
+
+ラジオボタンは非ラジオボタンのメニューアイテム(Separatorなど)が区切りとなって認識される
+
 |関数|説明|
 |---|---|
 |NewMenu OUT MENU,E|MENUを作成|
@@ -312,6 +332,10 @@ DropDownListのListBox WNDを取得(これに対して項目を追加する)
 |NewTopLevelMenuWindow CTL,NAME$,WIDTH,HEIGHT OUT WND,ERR||
 |ShowContextMenu MENU,WND|コンテキストメニューを表示|
 |AddSubMenuItem MENU,STR$,SUBMENU|メニューにサブメニューを追加|
+|AddCheckMenuItem MENU,STR$,IVAR,CHECKED|メニューにチェックボックスを追加|
+|AddRadioMenuItem MENU,STR$,IVAR,CHECKED|メニューにラジオボタンを追加|
+|GetCheckedRadioMenuItem MENU,IVAR OUT IVAR2|IVARが属するラジオボタングループでチェックされているIVARを返す|
+|IsCheckedMenuItem(MENU,IVAR)|IVARがチェックされていればTRUE|
 
 ## Window Group
 
@@ -439,6 +463,7 @@ ROW行COL列の表を作成
 |OpenFileDialog(OWNER,TYPE$,ID)|今の所TYPEはTXTまたはDATのみ|
 |MessageBox(WND,TITLE$,TEXT$,FLAG)|メッセージボックスを作成|
 |MessageBoxOK()|OKボタンのフラグ|
+|MessageBoxError()|エラーメッセージボックスのフラグ|
 |MessageBoxNotifOK()|OKボタンが押されたときにWNDへ送信される|
 |MessageBoxNotifCancel()|キャンセルされたときにWNDへ送信される|
 |MessageBoxNotifID()|MessageBoxが閉じられたときにWNDへ送信されるNotifID|
@@ -467,9 +492,14 @@ ROW行COL列の表を作成
 |---|---|
 |NewImage ARRAY,WIDTH,HEIGHT OUT IMG,E|画像を作成|
 |LoadImage FILE$,W,H OUT IMG,E|画像を二次元配列DATファイルから読み込み|
-|GLOADImage X,Y,IMG,F|現在のグラフィック面にX,YにIMGを描画|
+|GLOADImage X,Y,IMG,F|現在のグラフィック面にX,YにIMGを描画(FがTRUEの場合透明色も描画)|
+|GLOADImagePalette X,Y,IMG,PAL,F|現在のグラフィック面にX,YにIMGをパレットPALで描画(FがTRUEの場合透明色も描画)|
+|GSAVEImage X,Y,IMG|現在のグラフィック面のX,YをIMGにコピー|
 |CheckImage(IMG)|画像が正常か確認|
 |DeleteImage(IMG)|画像を削除|
+|GetImageWidth(IMG)|画像の幅を取得、エラーの時0|
+|GetImageHeight(IMG)|画像の幅を取得、エラーの時0|
+|GetImageArray IMG OUT ARY,ERR|画像の生配列を取得|
 
 ## 関連付け
 
@@ -494,4 +524,4 @@ ROW行COL列の表を作成
 デフォルトフォントでのテキストのサイズを計算
 
 ## IM
-[こちらを参照](https://github.com/otya128/OTYAX5/wiki/OTW-IM)
+[こちらを参照](IM)

@@ -2,6 +2,43 @@
 layout: default
 title: OTW version
 ---
+
+# OTW5.0-2E
+
+## 変更点
+* ツールウィンドウ(常にOwner windowより前のウィンドウ)を実装
+* WindowToolFlag()
+* GetScrollBarWidth()
+* GetScrollBarHeight()
+
+# OTW5.0-2D
+
+## 変更点
+* 横スクロールバーを実装
+* GetHScrollBarControl()
+* NewHScrollBar PARENT,SIZ OUT WND.E
+* NewHVScrollBar PARENT,SIZH,SIZV OUT WNDH,WNDV,E
+* GSAVEImage X,Y,IMG
+* ControlParentWindowHandlerを追加
+* SetControlParentWindowHandler(CTL,HANDLER$)
+* ParentWindowResizeEvent() (=1)
+* SetScrollBarAutoResizeMode WND,MODE
+* NewImage ARRAY,WIDTH,HEIGHT OUT IMG,EでWIDTHとHEIGHTを逆に設定していた問題を修正
+* NewScrollBar系のAPIでSetScrollBarAutoResizeModeするように
+* それに従いスクロールバーのリサイズ系のコードを削除
+* メニューでチェック出来るようになった
+* AddCheckMenuItem MENU,STR$,IVAR,CHECKED
+* AddRadioMenuItem MENU,STR$,IVAR,CHECKED
+* GetCheckedRadioMenuItem MENU,IVAR OUT IVAR2
+* IsCheckedMenuItem(MENU,IVAR)
+* GLOADImagePaletteWindow WND,X,Y,IMG,F
+* GLOADImagePalette X,Y,IMG,PAL,F
+* メニューで子要素があるアイテムをクリックしてもイベントが発生しないようになった
+* GetImageWidth(IMG)
+* GetImageHeight(IMG)
+* GetImageArray IMG OUT ARY,ERR
+* MessageBoxError()
+ 
 # OTW5.0-2C
 
 ## 変更点
@@ -9,6 +46,9 @@ title: OTW version
 * OTYFILでキー入力したときにエラーが出る場合がある問題を修正
 * ウィンドウの影の表示タイミングを修正
 * OTWTERMで水平タブを扱えるように
+* いくつかのアイコン追加
+* リッチテキストエディタでテーブルを正常に保存できるように
+* リッチテキストエディタでドット単位でのスクロールができるようになった
 
 # OTW5.0-2B
 リッチテキストボックスでテーブルを割と扱えるようにした
