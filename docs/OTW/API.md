@@ -361,10 +361,29 @@ IVARで識別する
 TYPE$にファイル種別(TXT/DAT)  
 選択された場合IDをA1、ファイル名をA2$に入れてStrNotifが呼ばれる
 
+### OpenFileDialogEx OWNER,TYPE$,ID OUT DROPDOWN,E
+ファイルを開くダイアログを表示(ファイル種別用のドロップダウンリストが返る)
+選択された場合IDをA1、FileDialogInfoをA2に入れてNotifが呼ばれる
+
 ### SaveFileDialog(OWNER,TYPE$,ID)
 ファイル保存ダイアログを表示  
 TYPE$にファイル種別(TXT/DAT)  
 選択された場合IDをA1、ファイル名をA2$に入れてStrNotifが呼ばれる
+
+### SaveFileDialogEx OWNER,TYPE$,ID OUT DROPDOWN,E
+ファイル保存ダイアログを表示(ファイル種別用のドロップダウンリストが返る)
+選択された場合IDをA1、FileDialogInfoをA2に入れてNotifが呼ばれる
+
+## FileDialogInfo
+
+### DeleteFileDialogInfo(FDINFO)
+FileDialogInfoを削除、必ず削除する必要がある
+
+### GetFileDialogInfoFile$(FDINFO)
+ファイル名を取得
+
+### GetFileDialogInfoType$(FDINFO)
+ドロップダウンリストで選択した項目を取得
 
 ## WindowOP
 ウィンドウに対しての操作を効率化する
