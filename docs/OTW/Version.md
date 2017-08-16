@@ -13,6 +13,7 @@ title: OTW version
 * タイトルバーの狭いウィンドウを実装
 * WindowNarrowStyle()
 * MoveMouse X,Y
+* ListBoxでメモリのある限り項目を追加できるようになった
 
 # OTW5.0-2D
 
