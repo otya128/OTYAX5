@@ -12,7 +12,6 @@ title: OTW version
 * GetScrollBarHeight()
 * タイトルバーの狭いウィンドウを実装
 * WindowNarrowStyle()
-* NewWindowStyleArg
 * MoveMouse X,Y
 
 # OTW5.0-2D
