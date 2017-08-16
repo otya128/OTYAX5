@@ -264,8 +264,8 @@ argに対象ウィンドウ
 |SetButtonAlignRight WND|ボタンの文字を右寄りにする|
 |SetButtonAlignCenter WND|ボタンの文字を中央に配置する|
 |IsCheckedButton(WND)|トグルボタンをチェックされているか|
-|UnCheckButton WND|トグルボタンをチェックさせない|
-|CheckButton WND|トグルボタンがチェックさせる|
+|UnCheckButton WND|トグルボタンのチェックを外す|
+|CheckButton WND|トグルボタンをチェックさせる|
 
 ### Label
 
