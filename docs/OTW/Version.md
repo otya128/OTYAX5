@@ -19,6 +19,9 @@ title: OTW version
 * GBeginDirectでエラー時に正常にエラーを返せていなかった問題を修正
 * FindWindowByControl(WND,CTL,EXTEND)
 * GetDropDownListHeight()
+* DropDownListBoxが消えなかったりする不具合を修正
+* GetControlName$(CTL)
+* DeleteWindow(WND)でwindow groupに所属するウィンドウを削除できていなかった問題を修正
 
 ## 破壊的変更
 * NewDialogBox(CTL,NAME$,WIDTH,HEIGHT,OWNER,FLAG)から NewDialogBox CTL,NAME$,WIDTH,HEIGHT,OWNER,FLAG OUT WND,ERRへ

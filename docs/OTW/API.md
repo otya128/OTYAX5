@@ -19,6 +19,7 @@ title: OTYA WINDOW SYSTEM(OTW)
 |DeleteControl(CTL)|コントロールを削除|
 |FindControl(NAME$)|文字列を使ってコントロールを取得|
 |IsControlExtend(CTL,PARENT)|CTLコントロールとPARENTコントロールが継承関係にあるかどうか|
+|GetControlName$(CTL)|コントロールの名前を取得|
 
 ### Handler
 Handlerの書式
@@ -346,12 +347,16 @@ IVARで識別する
 |IsCheckedMenuItem(MENU,IVAR)|IVARがチェックされていればTRUE|
 
 ## Window Group
+ウィンドウグループ、これに入れると親子関係にないウィンドウもまとめて扱うことができるようになる
 
 |関数|説明|
 |---|---|
 |JoinWindowGroup(WND,WND2)||
 |LeaveWindowGroup WND|未実装|
 |GetWindowGroupOwner(WND)||
+|GetWindowGroupMember(WND)|WNDが持っているウィンドウグループのウィンドウを取得|
+|GetNextWindowGroupMember(WND)|WNDの次のウィンドウグループのウィンドウを取得|
+|GetPrevWindowGroupMember(WND)|WNDの前のウィンドウグループのウィンドウを取得|
 
 ## Dialog
 
