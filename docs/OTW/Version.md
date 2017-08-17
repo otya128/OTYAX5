@@ -17,6 +17,11 @@ title: OTW version
 * File dialogでDATを指定できなかった問題を修正
 * GetDirectGPAGE WND OUT PAGE1,PAGE2,ERR
 * GBeginDirectでエラー時に正常にエラーを返せていなかった問題を修正
+* FindWindowByControl(WND,CTL,EXTEND)
+* GetDropDownListHeight()
+
+## 破壊的変更
+* NewDialogBox(CTL,NAME$,WIDTH,HEIGHT,OWNER,FLAG)から NewDialogBox CTL,NAME$,WIDTH,HEIGHT,OWNER,FLAG OUT WND,ERRへ
 
 # OTW5.0-2D
 

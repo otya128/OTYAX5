@@ -6,6 +6,7 @@ title: OTYA WINDOW SYSTEM(OTW)
 開発中
 (OTW5.0)
 ボタンもテキストボックスもみんなウィンドウ
+定数は基本的に関数を使って取得する
 
 ## Control
 
@@ -49,6 +50,7 @@ COMMONは付ける
 
 ### ControlChildWindowHandler
 子ウィンドウに何か起こった時に呼ばれる
+A1がtype
 
 #### type:WindowMaximizeEvent()
 ウィンドウが最大化されようとしたときに送られる  
@@ -66,8 +68,9 @@ argに対象ウィンドウ
 
 ### ControlParentWindowHandler
 親ウィンドウに何か起こったときに呼ばれる
+A1がtype
 
-#### ParentWindowResizeEvent()
+#### type:ParentWindowResizeEvent()
 ウィンドウがリサイズされたときに呼ばれる
 
 ### マウスの状態
@@ -146,6 +149,7 @@ argに対象ウィンドウ
 |MinimizeWindow(WND)|ウィンドウを最小化|
 |GetWindowStyle(WND)|ウィンドウスタイルを取得|
 |GetWindowFrameSize WND OUT W1,H1,W2,H2,ERR|ウィンドウフレームサイズを取得|
+|FindWindowByControl(WND,CTL,EXTEND)|WNDの子ウィンドウからCTLコントロールに一致するウィンドウを取得、EXTEND=TRUEの時IsControlExtendで判定|
 
 ### Graphic
 
@@ -315,6 +319,9 @@ DropDownListのコントロールを取得
 #### GetDropDownListBox(WND)
 DropDownListのListBox WNDを取得(これに対して項目を追加する)
 
+#### GetDropDownListHeight()
+DropDownListのデフォルト高さを取得
+
 ## Menu
 
 IVARで識別する
@@ -350,7 +357,7 @@ IVARで識別する
 
 |関数|説明|
 |---|---|
-|NewDialogBox(CTL,NAME$,WIDTH,HEIGHT,OWNER,FLAG)||
+|NewDialogBox CTL,NAME$,WIDTH,HEIGHT,OWNER,FLAG OUT WND,ERR||
 |NewModalDialogBox(CTL,NAME$,WIDTH,HEIGHT,OWNER)|モーダルダイアログボックスを作成|
 |NewModelessDialogBox(CTL,NAME$,WIDTH,HEIGHT,OWNER)|モーダレスダイアログボックスを作成|
 
