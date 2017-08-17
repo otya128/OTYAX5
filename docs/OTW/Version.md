@@ -22,6 +22,7 @@ title: OTW version
 * DropDownListBoxが消えなかったりする不具合を修正
 * GetControlName$(CTL)
 * DeleteWindow(WND)でwindow groupに所属するウィンドウを削除できていなかった問題を修正
+* SelectListBoxItem WND,INDEX
 
 ## 破壊的変更
 * NewDialogBox(CTL,NAME$,WIDTH,HEIGHT,OWNER,FLAG)から NewDialogBox CTL,NAME$,WIDTH,HEIGHT,OWNER,FLAG OUT WND,ERRへ

@@ -303,6 +303,7 @@ A1がtype
 |GetListBoxSelectedText$(WND)|リストボックスで選択されているアイテム名を取得|
 |SetChItemListBoxNotif WND,F|選択アイテムが変化すると親ウィンドウにNotif(A1=WND,A2=ListBoxChItem)を送るかどうか|
 |ClearListBox WND|リストボックスの項目を初期化|
+|SelectListBoxItem WND,INDEX|INDEXのリストボックスの項目を選択|
 
 ### NumUpDown
 
