@@ -151,6 +151,25 @@ A1がtype
 |GetWindowStyle(WND)|ウィンドウスタイルを取得|
 |GetWindowFrameSize WND OUT W1,H1,W2,H2,ERR|ウィンドウフレームサイズを取得|
 |FindWindowByControl(WND,CTL,EXTEND)|WNDの子ウィンドウからCTLコントロールに一致するウィンドウを取得、EXTEND=TRUEの時IsControlExtendで判定|
+|GetWindowMouseX(WND)|WNDからのマウスの相対座標を取得|
+|GetWindowMouseY(WND)|WNDからのマウスの相対座標を取得|
+
+## Timer
+
+### SetTimer WND,TIMEOUT,ARG,FUNC$ OUT TIMER,ERR
+WNDに対してTIMEOUT ms後に実行するFUNC$を設定する
+
+#### FUNC$
+```
+COMMON DEF TIMERFUNC WND,TIMER,ARG
+END
+```
+
+### DeleteTimer(TIMER)
+TIMERを削除する
+
+### CheckTimer(TIMER)
+TIMERが正常ならTRUE
 
 ### Graphic
 

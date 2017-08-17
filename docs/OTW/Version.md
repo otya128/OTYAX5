@@ -23,6 +23,11 @@ title: OTW version
 * GetControlName$(CTL)
 * DeleteWindow(WND)でwindow groupに所属するウィンドウを削除できていなかった問題を修正
 * SelectListBoxItem WND,INDEX
+* GetWindowMouseX(WND)
+* GetWindowMouseY(WND)
+* SetTimer WND,TIMEOUT,ARG,FUNC$ OUT TIMER,ERR
+* DeleteTimer(TIMER)
+* CheckTimer(TIMER)
 
 ## 破壊的変更
 * NewDialogBox(CTL,NAME$,WIDTH,HEIGHT,OWNER,FLAG)から NewDialogBox CTL,NAME$,WIDTH,HEIGHT,OWNER,FLAG OUT WND,ERRへ
