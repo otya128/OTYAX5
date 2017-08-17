@@ -268,7 +268,7 @@ A1がtype
 |SetButtonAlignLeft WND|ボタンの文字を左寄りにする|
 |SetButtonAlignRight WND|ボタンの文字を右寄りにする|
 |SetButtonAlignCenter WND|ボタンの文字を中央に配置する|
-|IsCheckedButton(WND)|トグルボタンをチェックされているか|
+|IsCheckedButton(WND)|トグルボタンがチェックされているか|
 |UnCheckButton WND|トグルボタンのチェックを外す|
 |CheckButton WND|トグルボタンをチェックさせる|
 
