@@ -254,7 +254,6 @@ TIMERが正常ならTRUE
 |---|
 |GetScreenWidth()|
 |GetScreenHeight()|
-|GetWinVer$()|
 
 ### message
 
@@ -393,8 +392,9 @@ IVARで識別する
 TYPE$にファイル種別(TXT/DAT)  
 選択された場合IDをA1、ファイル名をA2$に入れてStrNotifが呼ばれる
 
-### OpenFileDialogEx OWNER,TYPE$,ID OUT DROPDOWN,E
-ファイルを開くダイアログを表示(ファイル種別用のドロップダウンリストが返る)
+### OpenFileDialogEx OWNER,TYPE$,ID,LIST$[] OUT E
+ファイルを開くダイアログを表示
+LIST$[]にはファイル種別配列を入れる
 選択された場合IDをA1、FileDialogInfoをA2に入れてNotifが呼ばれる
 
 ### SaveFileDialog(OWNER,TYPE$,ID)
@@ -402,8 +402,9 @@ TYPE$にファイル種別(TXT/DAT)
 TYPE$にファイル種別(TXT/DAT)  
 選択された場合IDをA1、ファイル名をA2$に入れてStrNotifが呼ばれる
 
-### SaveFileDialogEx OWNER,TYPE$,ID OUT DROPDOWN,E
-ファイル保存ダイアログを表示(ファイル種別用のドロップダウンリストが返る)
+### SaveFileDialogEx OWNER,TYPE$,ID,LIST$[] OUT E
+ファイル保存ダイアログを表示
+LIST$[]にはファイル種別配列を入れる
 選択された場合IDをA1、FileDialogInfoをA2に入れてNotifが呼ばれる
 
 ## FileDialogInfo
@@ -589,3 +590,7 @@ ROW行COL列の表を作成
 
 ### MoveMouse X,Y
 マウスを(X,Y)に移動
+
+### SetMouseMode MODE
+MODEがTRUEなら絶対座標でのマウス移動
+

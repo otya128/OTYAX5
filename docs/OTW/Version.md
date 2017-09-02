@@ -2,10 +2,30 @@
 layout: default
 title: OTW version
 ---
-# OTW5.0-2F
+# OTW5.0-30
 
 ## 変更点
 
+# OTW5.0-2F
+
+## 変更点
+* tool windowを持つウィンドウでのFrontWindow(WND)を最適化処理を実装
+* SetScrollBarPosition WND,POSの範囲確認処理を修正
+* 左クリックをしてもCaptureが解放されなくなった
+* ODEで起動メッセージ出すようにした
+* RichTextEditorでプレーンテキストを挿入させたときに書式がおかしくなることがある問題を修正
+* DeleteWindow(WND)で特定で条件下でウィンドウ構造が破壊される問題を修正
+* OTWFREEMEMを追加
+* WINLISTを追加
+* EYESを追加
+* ListBoxでボタンを使って項目を選択した場合にイベントが発生しない問題を修正
+* ListBoxで何もないところをダブルクリックしてもイベントが発生しなくなった
+* GetWinVer$()がやっと実装された "5.0 rev47"などが返る
+* OpenFileDialogEx OWNER,TYPE$,ID,LIST$[] OUT E
+* SaveFileDialogEx OWNER,TYPE$,ID,LIST$[] OUT E
+* DeleteFileDialogInfo(FDINFO)
+* GetFileDialogInfoFile$(FDINFO)
+* GetFileDialogInfoType$(FDINFO)
 
 # OTW5.0-2E
 
@@ -32,6 +52,7 @@ title: OTW version
 * SetTimer WND,TIMEOUT,ARG,FUNC$ OUT TIMER,ERR
 * DeleteTimer(TIMER)
 * CheckTimer(TIMER)
+* Paintイベントをまとめる最適化処理を実装
 
 ## 破壊的変更
 * NewDialogBox(CTL,NAME$,WIDTH,HEIGHT,OWNER,FLAG)から NewDialogBox CTL,NAME$,WIDTH,HEIGHT,OWNER,FLAG OUT WND,ERRへ
@@ -41,7 +62,7 @@ title: OTW version
 ## 変更点
 * 横スクロールバーを実装
 * GetHScrollBarControl()
-* NewHScrollBar PARENT,SIZ OUT WND.E
+* NewHScrollBar PARENT,SIZ OUT WND,E
 * NewHVScrollBar PARENT,SIZH,SIZV OUT WNDH,WNDV,E
 * GSAVEImage X,Y,IMG
 * ControlParentWindowHandlerを追加
