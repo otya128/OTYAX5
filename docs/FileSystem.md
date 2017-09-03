@@ -106,6 +106,12 @@ OUTFSをFSにしてOUTDATA$をDATA$にしてOUTPATH$をPATH$にする
 
 FILE$にはプチコンで有効なファイル名(DAT:HOGE.GRP,TXT:HOGE.PRG)
 
+## FSSetSaveDATAFileHandler(FS,FUNC$)
+DATAファイルを保存するハンドラを設定
+
+### 書式
+> DEF FUNC FS,DATA$,PATH$,ARRAY OUT ERR
+
 ## Mount(PATH$,FILESYSTEM$,DATA$)
 FILESYSTEM$をPATH$にマウント
 

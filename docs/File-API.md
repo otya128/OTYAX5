@@ -55,6 +55,9 @@ PATH$のファイル名をNAME$に変更する
 ## GetSBFile PATH$ OUT FILE$,ERR
 PATH$のプチコンでのファイル名を取得(DAT:HOGE.GRP,TXT:HOGE.PRG)
 
+## SaveDATAFile PATH$,ARRAY OUT ERR
+PATH$にARRAYを保存
+
 ## GetHomeDir$()
 現在のホームディレクトリを取得
 
