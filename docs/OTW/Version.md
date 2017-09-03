@@ -28,6 +28,7 @@ title: OTW version
 * DeleteFileDialogInfo(FDINFO)
 * GetFileDialogInfoFile$(FDINFO)
 * GetFileDialogInfoType$(FDINFO)
+* SaveImage(IMG,PATH$)
 
 # OTW5.0-2E
 

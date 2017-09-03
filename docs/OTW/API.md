@@ -552,6 +552,7 @@ ROW行COL列の表を作成
 |GetImageWidth(IMG)|画像の幅を取得、エラーの時0|
 |GetImageHeight(IMG)|画像の幅を取得、エラーの時0|
 |GetImageArray IMG OUT ARY,ERR|画像の生配列を取得|
+|SaveImage(IMG,PATH$)|IMGをGRP形式でPATH$に保存|
 
 ## 関連付け
 
