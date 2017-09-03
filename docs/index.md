@@ -11,6 +11,7 @@ title: OTYAX 5 documents
 * [Process API](Process-API)
 * [i18n](i18n)
 * [Module](Module)
+* [Directory structure](Directory-structure)
 
 ## OTW
 
