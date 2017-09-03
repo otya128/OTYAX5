@@ -5,6 +5,8 @@ title: OTW version
 # OTW5.0-30
 
 ## 変更点
+* ListBoxのwindow var周りをリファクタリング
+* SetChItemListBoxNotifが機能してなかったので廃止、常にListBoxChItemイベントが送られる
 
 # OTW5.0-2F
 

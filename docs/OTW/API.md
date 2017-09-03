@@ -153,6 +153,7 @@ A1がtype
 |FindWindowByControl(WND,CTL,EXTEND)|WNDの子ウィンドウからCTLコントロールに一致するウィンドウを取得、EXTEND=TRUEの時IsControlExtendで判定|
 |GetWindowMouseX(WND)|WNDからのマウスの相対座標を取得|
 |GetWindowMouseY(WND)|WNDからのマウスの相対座標を取得|
+|GetOwnerWindow(WND)|WindowGroupOwnerがあればそれを、無ければParentWindowを返す|
 
 ## Timer
 
@@ -319,7 +320,6 @@ TIMERが正常ならTRUE
 |AddArrayListBoxItem WND,ITEM$|リストボックスに配列ITEM$を追加|
 |ListBoxChItem()|選択アイテムが変化すると親ウィンドウにNotif(A1=WND,A2=ListBoxChItem)を送る|
 |GetListBoxSelectedText$(WND)|リストボックスで選択されているアイテム名を取得|
-|SetChItemListBoxNotif WND,F|選択アイテムが変化すると親ウィンドウにNotif(A1=WND,A2=ListBoxChItem)を送るかどうか|
 |ClearListBox WND|リストボックスの項目を初期化|
 |SelectListBoxItem WND,INDEX|INDEXのリストボックスの項目を選択|
 
@@ -381,7 +381,8 @@ IVARで識別する
 
 |関数|説明|
 |---|---|
-|NewDialogBox CTL,NAME$,WIDTH,HEIGHT,OWNER,FLAG OUT WND,ERR||
+|NewDialogBoxWithArg CTL,NAME$,WIDTH,HEIGHT,OWNER,FLAG,A1,A2 OUT WND,ERR|FLAG=1のときModeless, FLAG=0のときModal|
+|NewDialogBox CTL,NAME$,WIDTH,HEIGHT,OWNER,FLAG OUT WND,ERR|FLAG=1のときModeless, FLAG=0のときModal|
 |NewModalDialogBox(CTL,NAME$,WIDTH,HEIGHT,OWNER)|モーダルダイアログボックスを作成|
 |NewModelessDialogBox(CTL,NAME$,WIDTH,HEIGHT,OWNER)|モーダレスダイアログボックスを作成|
 
@@ -512,8 +513,6 @@ ROW行COL列の表を作成
 
 |関数|説明|
 |---|---|
-|SaveFileDialog(OWNER,TYPE$,ID)|今の所TYPEはTXTまたはDATのみ|
-|OpenFileDialog(OWNER,TYPE$,ID)|今の所TYPEはTXTまたはDATのみ|
 |MessageBox(WND,TITLE$,TEXT$,FLAG)|メッセージボックスを作成|
 |MessageBoxOK()|OKボタンのフラグ|
 |MessageBoxError()|エラーメッセージボックスのフラグ|
