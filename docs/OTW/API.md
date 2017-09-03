@@ -154,6 +154,8 @@ A1がtype
 |GetWindowMouseX(WND)|WNDからのマウスの相対座標を取得|
 |GetWindowMouseY(WND)|WNDからのマウスの相対座標を取得|
 |GetOwnerWindow(WND)|WindowGroupOwnerがあればそれを、無ければParentWindowを返す|
+|DisableWindowClipping(WND)|ウィンドウをクリッピングしない、ウィンドウが重ならない時にこれを指定すると効率化する|
+|EnableWindowClipping(WND)|ウィンドウをクリッピングさせる|
 
 ## Timer
 

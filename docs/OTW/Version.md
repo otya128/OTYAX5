@@ -29,6 +29,8 @@ title: OTW version
 * GetFileDialogInfoFile$(FDINFO)
 * GetFileDialogInfoType$(FDINFO)
 * SaveImage(IMG,PATH$)
+* DisableWindowClipping(WND)
+* EnableWindowClipping(WND)
 
 # OTW5.0-2E
 
