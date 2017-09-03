@@ -7,6 +7,9 @@ title: OTW version
 ## 変更点
 * ListBoxのwindow var周りをリファクタリング
 * SetChItemListBoxNotifが機能してなかったので廃止、常にListBoxChItemイベントが送られる
+* SaveImage(IMG,PATH$)
+* DisableWindowClipping(WND)
+* EnableWindowClipping(WND)
 
 # OTW5.0-2F
 
@@ -28,9 +31,6 @@ title: OTW version
 * DeleteFileDialogInfo(FDINFO)
 * GetFileDialogInfoFile$(FDINFO)
 * GetFileDialogInfoType$(FDINFO)
-* SaveImage(IMG,PATH$)
-* DisableWindowClipping(WND)
-* EnableWindowClipping(WND)
 
 # OTW5.0-2E
 
