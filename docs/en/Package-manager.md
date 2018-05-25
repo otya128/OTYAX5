@@ -3,39 +3,39 @@ layout: default
 title: OTYAX package manager
 ---
 # OTYAX Package manager
-名称未定
+Name TBD
 
 * teabag nanasi
 * teapack tosuke
 * teabucket nanasi
 * Qse citringo
 
-とりあえずpmというコマンドであると仮定
+Assuming the command is called "pm" for now
 
 ```
 pm install packagename
-インストール
+=Installation
 pm uninstall packagename
-アンインストール
+=Uninstalling
 pm uninstall -f packagename
-構成するファイルを削除する
-remove(ななし案)
+=Delete the files in configuration
+remove(nanasi proposal)
 pm upgrade
-更新する
-pm creare -description hogehoge -depend OTW * -file DAT:XXXX.GRP -program TXT:HOGE
-パッケージの生成
+=Updating
+pm create -description hogehoge -depend OTW * -file DAT:XXXX.GRP -program TXT:HOGE
+=Generate package
 ```
 
-# ファイル構造
-プログラムとパッケージ情報を分ける場合
-`pkgname.PKGS`に
+# File Structure
+When separating the program and package information
+`pkgname.PKGS`
 
-|名前|値|
+|Name|Value|
 |---|---|
-|description|説明|
-|depends|依存関係たち|
-|files|構成するファイル|
-|programs|構成するプログラム|
+|description|description|
+|depends|dependencies|
+|files|configured files|
+|programs|constituent programs|
 
 ``` json
 {

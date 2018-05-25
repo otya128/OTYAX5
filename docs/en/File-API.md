@@ -97,7 +97,7 @@ Duplicate the file
 TRUE if the file is normal
 
 ## FileSeekCur FILE,LEN OUT ERR
-Seel file based on current position
+Seek relative to current position in file
 
 ## GetFilePos FILE OUT POS,ERR
 Get current file position

@@ -5,105 +5,105 @@ title: Process API
 # OTYAX5 Process API
 
 ## NewProcess NAME$,ARGS$ OUT PRC,ERR
-プロセスNAME$をARGS$を引数として起動する。
+Start process NAME$ with ARGS$ as an argument.
 
 ## SetProcessVar DAT
-プロセスの局所記憶変数を設定する。
+Set local memory variables of the process.
 
 ## GetProcessVar()
-プロセスの局所記憶変数を取得する。
+Get the local memory variable of the process.
 
 ## CheckProcess(PRC)
-PRCが正常なプロセスかどうか調べる。
+Determine if PRC is a normal process.
 
 ## GetProcessArgs$()
-現在のプロセスの引数を取得する。
+Get the argument of the current process.
 
 ##  GetSTDIN OUT FILE
-標準入力のファイルを取得する。
+Obtain standard input file.
 
 ##  GetSTDOUT OUT FILE
-標準出力のファイルを取得する。
+Get the file for standard output.
 
 ##  GetSTDERR OUT FILE
-標準エラー出力のファイルを取得する。
+Get the standard error output file
 
 ## SetProcessSTDIN PRC,FILE
-PRCの標準入力のファイルを設定する
+Set the standard input file of PRC
 
 ## SetProcessSTDOUT PRC,FILE
-PRCの標準出力のファイルを設定する
+Set the standard output file of PRC
 
 ## SetProcessSTDERR PRC,FILE
-PRCの標準エラー出力のファイルを設定する
+Set the standard error output file of PRC
 
 ##  GetProcessSTDIN PRC OUT FILE
-PRCの標準入力のファイルを取得する。
+Get the standard input file of PRC.
 
 ##  GetProcessSTDOUT PRC OUT FILE
-PRCの標準出力のファイルを取得する。
+Get the standard output file of PRC.
 
 ##  GetProcessSTDERR PRC OUT FILE
-PRCの標準エラー出力のファイルを取得する。
+Get the standard error output file of PRC.
 
 ## GetPID()
-現在のPIDを取得する。
+Get the current PID.
 
 ## ExitProcess RESULT
-現在のプロセスを終了する。
+Terminate the current process.
 
 ## KillProcess PRC OUT ERR
-PRCを終了させる。
+Kill PRC.
 
 ## ExecCommand LINE$ OUT PRC,ERR
-コマンドを実行する。
+Execute a command
 ```
 name args [> filename] [< filename] | ...
 ```
 
 ## GetCommandArgsWithoutName$(ARGS$)
-ARGS$から第一引数を抜いたものを取得する。
+Get ARGS$ without first argument.
 
 ## GetCommandArg ARGS$,I OUT CMD$,INDEX
-ARGS$からIを起点として引数をCMD$として取得する。
-INDEXには引数が終了した場所が入る。
+Get argument as CMD$ with I as starting point from ARGS$.\
+INDEX contains the position where the argument ended.
 
 ## CommandArgsToArray ARY$[],EXPAND OUT LEN
-現在のプロセスの引数をARY$に書き込む。
-EXPANDをTRUEにすると配列の要素が足りなかった際に拡張するようになる。
-LENに引数数が入る。
+Write the arguments of the current process to ARY$.\
+If EXPAND is set to TRUE, it expands when the elements of the array are not enough.\
+LEN contains the number of arguments.
 
 ## HasChildProcess(PRC)
-PRCが子プロセスを持っていたらTRUE
+TRUE if PRC has a child process
 
 ## GetProcessTime(PRC)
-PRCが使った時間(ms)
+Time spent by PRC (ms)
 
 ## GetProcessElapsedTime(PRC)
-PRCが起動してからの時間(ms)
+Time since PRC started (ms)
 
 ## GetProcessPID(PRC)
-PRCのPIDを取得  
-エラー時は0が返る
+Get PID of PRC\
+On error, 0 is returned
 
 ## GetParentProcess(PRC)
-PRCの親プロセスを取得  
-エラー時は0が返る
+Get parent process of PRC\
+On error, 0 is returned
 
 ## GetProcessName$(PRC)
-PRCの名前を取得  
-エラー時は""が返る
+Get name of PRC\
+"" Is returned when an error occurs
 
 ## GetRootProcess()
-ルートプロセスを取得
+Get root process
 
 ## GetChildProcesses(PRC,ARY[],R)
-PRCの子プロセスを取得
+Get child process of PRC
 
-|引数|説明|
+|argument|description|
 |---|---|
-|ARY[]|出力される配列 自動的に拡張される|
-|R|TRUEなら再帰的に子プロセスを取得|
+|ARY[]|output array (automatically expanded)|
+|R|TRUE to get child process recursively|
 
 ### 戻り値
-プロセス数
+Number of process

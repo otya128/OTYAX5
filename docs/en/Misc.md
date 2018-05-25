@@ -3,14 +3,14 @@ layout: default
 title: Misc
 ---
 ## FindArray(ARY[],V)
-Search V from ARY and return the place.
+Search V from ARY and return the position.\
 If not found, -1
 
 ## ShortToRGB(IN)
-Convert Petit-con physical color to RGB value.
+Convert PetitCom physical color to RGB value.
 
 ## RGBToShort(IN)
-Converts the RGB value to the pettico physical color.
+Converts the RGB value to the PetitCom physical color.
 
 ## SplitInt IN OUT X,Y
 Insert the upper 16 bits of IN in Y and the lower 16 bits in X.
@@ -34,11 +34,11 @@ Destructive operation version of RemoveStr$(THIS$,POS,LEN).
 Replace STR$ in TOIS$ with TO$.
 
 ## GetFileExtension(FILE$)
-Get the extension of FILE$.
+Get the extension of FILE$.\
 If there is no extension, it returns an empty string.
 
 ## ArrayFill ARY[],V,OFF,LEN
-In the version of Petit-Com without FILL, turn OFF from LEN character ARY to V more efficiently than FOR loop.
+In the version of PetitCom without FILL, turn OFF from LEN character ARY to V more efficiently than FOR loop.
 
 ## Split(STR$,SP$)
 Split STR$ by SP$ and return it as an array.
@@ -56,5 +56,5 @@ Make STR$ lowercase in the range of ASCII characters.
 A destructive operation version of ToLower$(STR$).
 
 ## LASTINSTR(S1$,S2$)
-Search S2$ against S1$ from the reverse direction.
+Search S2$ against S1$ from the reverse direction.\
 If not found, it returns -1.

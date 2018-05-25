@@ -3,8 +3,8 @@ layout: default
 title: Console API
 ---
 # Console API
-API to hit the console.
-In the initial state Console to be outputted on the console screen of PetitCon is set.
+API to call the console.
+In the initial state, the console to be output to is set to the PetitCom console.
 The console is inherited by the child process.
 
 ## SetConsole CON
@@ -62,8 +62,8 @@ CON is invalid CON_ERROR_INVALIDCON
 Set handler to get console size.
 
 ### ERR
-When FUNC$ is invalid CON_ERROR_INVALIDFUNC
-CON is invalid CON_ERROR_INVALIDCON
+When FUNC$ is invalid: CON_ERROR_INVALIDFUNC
+If CON is invalid: CON_ERROR_INVALIDCON
 
 ## SetPutConsoleHandler(CON,FUNC$)
 Set the handler to be output to the console.
@@ -84,45 +84,45 @@ Set handler to acquire console character background color.
 Set handler to set console character background color.
 
 ## SetGetConsoleForeHandler(CON,FUNC$)
-Console character Sets the handler that acquires the foreground color.
+Sets the handler that acquires the console character foreground color.
 
 ## SetSetConsoleForeHandler(CON,FUNC$)
-Console character Sets the handler to set the foreground color.
+Sets the handler to set the console character foreground color.
 
 ## SetConsoleVar CON,V OUT ERR
 Set console variables.
 
 ### ERR
-CON is invalid CON_ERROR_INVALIDCON
+CON is invalid: CON_ERROR_INVALIDCON
 
 ## SetConsoleVar$ CON,V$ OUT ERR
 Set console variables.
 
 ### ERR
-CON is invalid CON_ERROR_INVALIDCON
+CON is invalid: CON_ERROR_INVALIDCON
 
 ## GtConsoleVar CON OUT V,ERR
 Get the console variable.
 
 ### ERR
-CON is invalid CON_ERROR_INVALIDCON
+CON is invalid: CON_ERROR_INVALIDCON
 
 ## GtConsoleVar$ CON OUT V$,ERR
 Get the console variable.
 
 ### ERR
-CON is invalid CON_ERROR_INVALIDCON
+CON is invalid: CON_ERROR_INVALIDCON
 
 ## SetProcessConsole PRC,CON OUT ERR
 Set the console to the specified process.
 
 ### ERR
-When PRC is invalid ERROR_NO_PROC
-CON is invalid CON_ERROR_INVALIDCON
+When PRC is invalid: ERROR_NO_PROC
+CON is invalid: CON_ERROR_INVALIDCON
 
 ## GetProcessConsole PRC OUT CON,ERR
 Get the console of the specified process.
 
 ### ERR
-When PRC is invalid ERROR_NO_PROC
-CON is invalid CON_ERROR_INVALIDCON
+When PRC is invalid: ERROR_NO_PROC
+CON is invalid: CON_ERROR_INVALIDCON
