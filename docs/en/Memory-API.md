@@ -5,57 +5,57 @@ title: Memory API
 # Memory API
 
 ## NewArray[234]?[#$%]?
-配列を作成する。
-型を省略した際は整数型となる。
+Create an array.
+When type is omitted, it becomes integer type.
 
 ## malloc SIZE OUT PTR
-SIZE分メモリを割り当てる。
-扱いにくいので効率を求めないのであればSBArrayを利用したほうが良い。
+Allocate memory for SIZE.
+It is better to use SBArray if you do not ask for efficiency as it is cumbersome.
 
 ## free PTR
-PTRを開放する。
-もしPTRが0の場合何もしない。
+Release PTR.
+If PTR is 0, do not do anything.
 
 ## GetRawMemory()
-mallocに利用する配列を取得する。
-PTRが添え字に相当する。
+Get the sequence to use for malloc.
+PTR corresponds to subscript.
 
 ## ReadArray PTR,ARRAY[],POS,LEN
-PTRをLEN分POSを起点としてARRAYにコピーする。
+Copy PTR to ARRAY starting from LEN minus POS.
 
 ## WriteArray PTR,ARRAY[],POS,LEN
-PTRにLEN分POSを起点としてARRAYを書き込む。
+Write ARRAY with LEN minus POS as the starting point in PTR.
 
 ## WriteInt PTR,VALUE
-PTRをVALUEを書き込む。
+Write PTR to VALUE.
 
 ## ReadInt(PTR)
-PTRから整数を読み込む。
+Read integers from PTR.
 
 # String
 
 ## AllocString STR$ OUT PTR
-STR$を割り当てる。
+Assign STR$.
 
 ## SetString PTR,STR$
-PTRにSTR$を割り当てる。
+Assign STR$ to PTR.
 
 ## GetString$(PTR)
-PTRに割り当てわれているSTR$を取得。
+Get STR$ assigned to PTR.
 
 ## FreeString PTR
-PTRを開放する。
+Release PTR.
 
 # Array
 
 ## AllocSBArray OUT PTR
-プチコン配列を確保する。
+Allocate Petit-com array.
 
 ## FreeSBArray PTR
-PTRを開放する。
+Release Petit-com array.
 
 ## GetSBArray[](PTR)
-PTRに割り当てられている配列変数を取得する。
+Get array variable assigned to PTR.
 
 ## SetSBArray PTR,ARY[]
-PTRに配列変数を割り当てる。
+Assign array variables to PTR.
