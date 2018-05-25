@@ -3,24 +3,24 @@ layout: default
 title: Directory structure
 ---
 ## Directory structure
-基本的なディレクトリ構造(draft)
+Basic directory structure (draft)
 
-* `/TXT` 現在プロジェクトのTXTファイル
-* `/DAT` 現在プロジェクトのDATファイル
+* `/TXT` Current project TXT file
+* `/DAT` Current project DAT file
 * `/home`
-  * `/user` ユーザー用
-    * `/desktop` ODEのデスクトップ
-    * `/programs` メニュー用のリンク置き場
-* `/SYS` SYSプロジェクト、書き込めない
-  * `/TXT` SYSプロジェクトのTXTファイル
-  * `/DAT` SYSプロジェクトのDATファイル
-* `/etc` 設定ファイルなどのディレクトリ
+  * `/user` For users
+    * `/desktop` ODE's desktop
+    * `/programs` Link place for menu
+* `/SYS` SYS project, I can not write
+  * `/TXT` TXT file of SYS project
+  * `/DAT` DAT file of SYS project
+* `/etc` Directory such as setting file
 * `/usr`
-  * `/share` リソースなどを置くディレクトリ
-* `/PROJECTS` プロジェクト一覧、プチコンの制限によりファイルを開くことはできない
+  * `/share` Directory where resources etc. are placed
+* `/PROJECTS` It is impossible to open a file due to limitation of petit computer, project list
   * `/[DEFAULT]`
-    * `/TXT` TXTファイル
-    * `/DAT` DATファイル
+    * `/TXT` TXT file
+    * `/DAT` DAT file
 * `/dev`
   * `/null`
   * `/zero`
