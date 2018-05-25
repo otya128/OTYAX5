@@ -4,24 +4,24 @@ title: Module
 ---
 
 ## Module system
-loadmodコマンドを使うとモジュールを読み込むことができる。
+You can load modules using the `loadmod` command.
 
 
-`loadmod -e path`で実行と読み込み
+`loadmod -e path` load and execute
 
-`loadmod path`で読み込みのみ
+`loadmod path` load only
 
 ## API
 
 ### LoadModule FILE$ OUT ENTRYPOINT$,ERR
-FILE$のモジュールを読み込む。
-ENTRYPOINT$にはプロセス名が入る(なければ空文字)
+Load the module from FILE$\
+ENTRYPOINT$ contains the process name (otherwise empty string)
 
 ### ExecModule FILE$,ARGS$ OUT PRC,ERR
-FILE$のモジュールを読み込み実行する。
+Read and execute the module from FILE$.
 
 ## Module File
-SMILEBASICで実行できる内容。
-最初にあるI_HOGEがENTRYPOINTになる。
-プチコンのエラー防止のため配列は一回初期化されるので注意。
-パースコスト軽減のため、変数宣言/関数宣言は行頭に置かないと認識されないのでほかにモジュールを読み込んだ時に変数が初期化されるので注意。
+What you can do with SmileBASIC.\
+The first I_HOGE is the ENTRYPOINT.\
+Note that to prevent PetitCom errors the array is initialized once.\
+Note that variable and function declarations are not recognized unless they are placed at the beginning of the line (in order to reduce the parsing cost)
