@@ -5,160 +5,161 @@ title: File API
 # OTYAX5 File API
 
 ## LoadFile PATH$ OUT RESULT$,ERR
-PATH$のファイルを開き全文読み込んだものがRESULT$に入る
+Open the file of PATH$ and read the full text into RESULT$
 
 ## SaveFile PATH$,T$ OUT ERR
-PATH$のファイルを開きT$を書き込む
+Open the file PATH$ and write T$
 
 ## RenameFile PATH$,NEW$ OUT ERR
-PATH$のファイルの名前をNEW$にする
+Make the file name of PATH$ NEW$
 
 ## GetCurrentDir$ OUT DIR$
-カレントディレクトリを取得
+Get current directory
 
 ## SetCurrentDir DIR$ OUT ERR
-カレントディレクトリを設定
+Set the current directory
 
 ## CombinePath$(BASE$,PATH$)
-BASE$とPATH$を結合する
+Combine BASE$ and PATH$
 
 ## GetAbsolutePath$(PATH$)
-PATH$をカレントディレクトリと結合する
+Combine PATH$ with the current directory
 
 ## GetAbsoluteDir$(PATH$)
-GetAbsolutePath$(PATH$)をして必ず最後に/を付ける
+Make GetAbsolutePath$(PATH$) and always add / at the end
 
 ## GetFiles DIR$ OUT ARY$,ERR
-DIR$のファイル一覧を取得(FILES互換)
+Get the file list of DIR$ (FILES compatible)
 
 ## NewDir DIR$ OUT ERR
-DIR$を作成(一階層のみ)
+Create DIR$ (one level only)
 
 ## Mount DIR$,FS$,DATA$ OUT ERR
-DIR$にファイルシステムをマウントする
+Mount the file system to DIR$
 
 ## DeleteFile PATH$ OUT ERR
-PATH$を削除する
+Delete PATH$
 
 ## RenameFile PATH$,NAME$ OUT ERR
-PATH$のファイル名をNAME$に変更する
+Change the file name of PATH$ to NAME$
 
 ## GetFileType PATH$ OUT TYPE$,ERR
-ファイルタイプを取得する
+Get file type
 
-|TYPE$|種類|
+|TYPE$|Type|
 |---|---|
 |" "|DAT|
 |"*"|TXT|
-|"/"|ディレクトリ|
+|"/"|Directory|
 
 ## GetSBFile PATH$ OUT FILE$,ERR
-PATH$のプチコンでのファイル名を取得(DAT:HOGE.GRP,TXT:HOGE.PRG)
+Acquire the filename of PATH$ in PATH$
+(DAT:HOGE.GRP,TXT:HOGE.PRG)
 
 ## SaveDATAFile PATH$,ARRAY OUT ERR
-PATH$にARRAYを保存
+Save ARRAY in PATH$
 
 ## GetHomeDir$()
-現在のホームディレクトリを取得
+Get the current home directory
 
 ## FileOpen NAME$,FLG OUT FILE,ERR
-ファイルを開く  
-FLGには以下のものを使用できる
+Open the file  
+The following can be used for FLG
 
 ### FileReadFlag() (=1)
-読み出し
+reading
 
 ### FileWriteFlag() (=2)
-書き込み
+writing
 
 ### FileAppendFlag() (=4)
-追記
+appending
 
 ### FileCreateFlag() (=8)
-作成
+creating
 
 ## FileWrite FILE,DAT$ OUT ERR
-ファイルにDAT$を書き込む
+Write DAT$ to the file
 
 ## FileRead FILE,LEN OUT DAT$,ERR
-ファイルからLEN文字分読み込む
+Read LEN characters from file
 
 ## FileClose FILE OUT ERR
-ファイルを閉じる
+Close the file
 
 ## IsFileEOF(FILE)
-ファイルがEOFか確認
+Check if the file is EOF
 
 ## DupFile(FILE)
-ファイルを複製
+Duplicate the file
 
 ## CheckFile(FILE)
-ファイルが正常ならTRUE
+TRUE if the file is normal
 
 ## FileSeekCur FILE,LEN OUT ERR
-ファイルを現在位置を基準にシークする
+Seel file based on current position
 
 ## GetFilePos FILE OUT POS,ERR
-ファイルの現在位置を取得
+Get current file position
 
 ## PrintConsole STR$
-標準出力に出力
+Output to standard output
 
 ## PrintConsoleln STR$
-標準出力に改行コードを加えて出力
+Output by adding a line feed code to standard output
 
 ## InkeyConsole$(LEN)
-標準入力からLEN文字読み込む
+Read LEN characters from standard input
 
-# ファイルストリーム作成API
+# File stream creation API
 
 ## AllocFile OUT FILE,ERR
-ファイルを割り当て
+Allocate files
 
 ## SetWriter FILE,FUNC$ OUT ERR
-ファイルに書き込む際に実行される関数を設定
+Set function to be executed when writing to file
 
-### 書式
+### Format
 > DEF WRITER FILE,DAT$ OUT ERR
 
 ## SetFileData FILE,DAT
-ファイルの内部データを設定
+Set internal data of file
 
 ## GetFileData(FILE)
-ファイルの内部データを取得
-エラーの時-1
+Retrieve internal data of file
+On error -1
 
 ## SetFileDataStr FILE,DAT$
-ファイルの内部文字列を設定
+Set internal string of file
 
 ## GetFileDataStr$(FILE)
-ファイルの内部文字列を取得
-エラーの時空文字
+Get internal string of file
+Space-time character of error
 
 ## SetFileName FILE,DAT$
-ファイル名を設定
+Set file name
 
 ## GetFileName$(FILE)
-ファイル名を取得  
-エラーの時空文字
+Get file name
+Space-time character of error
 
 ## SetFileEOF FILE,EOF
-ファイルのEOFフラグを設定
+Set EOF flag of file
 
 ## SetReader FILE,FUNC$ OUT ERR
-ファイルから読み込む際に呼ばれる関数の設定
+Setting function called when reading from file
 
-### 書式
+### Format
 > DEF READER FILE,LEN OUT DAT$,ERR
 
 ## SetReadln FILE,FUNC$ OUT ERR
-ファイルから1行読み込む際に呼ばれる関数を設定
+Set function called when reading one line from file
 
-### 書式
+### Format
 > DEF READLN FILE OUT DAT$,ERR
 
 ## SetClose FILE,FUNC$ OUT ERR
-ファイルが閉じられる際に呼ばれる関数を設定
+Set function called when file is closed
 
-### 書式
+### Format
 > DEF CLOSE FILE
