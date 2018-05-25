@@ -22,12 +22,12 @@ It is scheduled to be
 # API
 
 ## NewFileSystem NAME$ OUT FS,ERR
-Create a file system based on NAME$
-If NAME$ already exists FS_ERROR_DUPFS
+Create a file system based on NAME$\
+If NAME$ already exists: FS_ERROR_DUPFS\
 When memory is insufficient FS_ERROR_OUTOFMEM
 
 ## FindFileSystem(NAME$)
-Search FileSystem for NAME$
+Search FileSystem for NAME$\
 If it does not exist, CALL "FS_INIT_"+NAME$
 
 ## FSSetFileListHandler(FS,FUNC$)
@@ -35,27 +35,27 @@ If it does not exist, CALL "FS_INIT_"+NAME$
 ### Function format
 >  DEF FUNC FS,DATA$,PATH$,FILELIST$[] OUT ERR
 
-Called when file list is acquired
+Called when file list is acquired\
 PUSH the file to FILELIST$[]
 
 ## Return value
-When FS is invalid FS_ERROR_INVALIDFS
-When FUNC$ is invalid FS_ERROR_INVALIDFUNC
+When FS is invalid: FS_ERROR_INVALIDFS\
+When FUNC$ is invalid: FS_ERROR_INVALIDFUNC
 
 ## FSSetOpenFileHandler(FS,FUNC$)
 
 ### Format
 > DEF FUNC FS,DATA$,PATH$,OPTION$ OUT FILE,ERR
 
-Called when a PATH$ file is opened
-Store error in file ERR in FILE
+Called when a PATH$ file is opened\
+Store error in file FILE in ERR
 
 ## Return value
-When FS is invalid FS_ERROR_INVALIDFS
-When FUNC $ is invalid FS_ERROR_INVALIDFUNC
+When FS is invalid: FS_ERROR_INVALIDFS\
+When FUNC$ is invalid: FS_ERROR_INVALIDFUNC
 
 ## FSSetMountHandler(FS,FUNC$)
-Called to be Mount
+Function to call when mounting
 
 ### Format
 > DEF FUNC FS,DATA$,PATH$,MOUNTFS$,MOUNTDATA$ OUT ERR
@@ -63,7 +63,7 @@ Called to be Mount
 Default behavior when not set is FS_ERROR_NOTSUPPORTED in ERR
 
 ### Return value
-When FS is invalid FS_ERROR_INVALIDFS
+When FS is invalid FS_ERROR_INVALIDFS\
 When FUNC $ is invalid FS_ERROR_INVALIDFUNC
 
 ## FSSetGetFileSystemHandler(FS,FUNC$)
@@ -71,7 +71,7 @@ When FUNC $ is invalid FS_ERROR_INVALIDFUNC
 ### Format
 > DEF FUNC FS,DATA$,PATH$ OUT OUTFS,OUTDATA$,OUTPATH$,ERR
 
-Behavior at the time of unsetting sets ERR to 0 if PATH$ exists, and sets a value in ERR if not
+Behavior at the time of unsetting sets ERR to 0 if PATH$ exists, and sets a value in ERR if not\
 Let OUTFS be FS and set OUTDATA$ to DATA$ and set OUTPATH$ to PATH$
 
 ## FSSetNewDirHandler(FS,FUNC$)
@@ -99,7 +99,7 @@ Set file type acquisition handler
 > DEF FUNC FS,DATA$,PATH$ OUT TYPE$,ERR
 
 ## FSSetGetSBFileHandler(FS,FUNC$)
-Get filename in PetitCon
+Get filename in PetitCom
 
 ### Format
 > DEF FUNC FS,DATA$,PATH$ OUT FILE$,ERR
