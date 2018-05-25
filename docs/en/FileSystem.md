@@ -3,13 +3,13 @@ layout: default
 title: FileSystem
 ---
 
-デフォルトでは"OFS"(階層型ファイルシステム),"SBFS"(プチコンのファイルシステム)が存在し、OFSがルートファイルシステムとなっている。  
-mountコマンドを利用してマウントすることができる
+By default, "OFS" (hierarchical file system), "SBFS" (Petit computer file system) exist, OFS is the root file system.
+You can mount using the mount command
 ```
 mount filesystem [data] path
 ```
-`mount SBFS TXT: /TXT`とすると/TXTにTXTファイルのみをマウントできる  
-初期状態では
+`mount SBFS TXT: / TXT` allows you to mount only TXT files in / TXT
+In the initial state
 
 * /
  * /TXT
@@ -17,108 +17,108 @@ mount filesystem [data] path
  * /home
    * /user
 
-となっている予定
+It is scheduled to be
 
 # API
 
 ## NewFileSystem NAME$ OUT FS,ERR
-NAME$に紐づけてファイルシステムを作成する
-既にNAME$がある場合FS_ERROR_DUPFS
-メモリ不足の際FS_ERROR_OUTOFMEM
+Create a file system based on NAME$
+If NAME$ already exists FS_ERROR_DUPFS
+When memory is insufficient FS_ERROR_OUTOFMEM
 
 ## FindFileSystem(NAME$)
-NAME$からFileSystemを検索  
-存在しない場合はCALL "FS_INIT_"+NAME$する
+Search FileSystem for NAME$
+If it does not exist, CALL "FS_INIT_"+NAME$
 
 ## FSSetFileListHandler(FS,FUNC$)
 
-### 関数の書式
+### Function format
 >  DEF FUNC FS,DATA$,PATH$,FILELIST$[] OUT ERR
 
-ファイル一覧が取得される際に呼ばれる
-FILELIST$[]にファイルをPUSHする
+Called when file list is acquired
+PUSH the file to FILELIST$[]
 
-## 戻り値
-FSが不正な時FS_ERROR_INVALIDFS
-FUNC$が不正な時FS_ERROR_INVALIDFUNC
+## Return value
+When FS is invalid FS_ERROR_INVALIDFS
+When FUNC$ is invalid FS_ERROR_INVALIDFUNC
 
 ## FSSetOpenFileHandler(FS,FUNC$)
 
-### 書式
+### Format
 > DEF FUNC FS,DATA$,PATH$,OPTION$ OUT FILE,ERR
 
-PATH$のファイルが開かれる際に呼ばれる
-FILEにファイルERRにエラーを格納する
+Called when a PATH$ file is opened
+Store error in file ERR in FILE
 
-## 戻り値
-FSが不正な時FS_ERROR_INVALIDFS
-FUNC$が不正な時FS_ERROR_INVALIDFUNC
+## Return value
+When FS is invalid FS_ERROR_INVALIDFS
+When FUNC $ is invalid FS_ERROR_INVALIDFUNC
 
 ## FSSetMountHandler(FS,FUNC$)
-Mountされる際に呼ばれる
+Called to be Mount
 
-### 書式
+### Format
 > DEF FUNC FS,DATA$,PATH$,MOUNTFS$,MOUNTDATA$ OUT ERR
 
-未設定時のデフォルト挙動はERRにFS_ERROR_NOTSUPPORTEDを設定する
+Default behavior when not set is FS_ERROR_NOTSUPPORTED in ERR
 
-### 戻り値
-FSが不正な時FS_ERROR_INVALIDFS
-FUNC$が不正な時FS_ERROR_INVALIDFUNC
+### Return value
+When FS is invalid FS_ERROR_INVALIDFS
+When FUNC $ is invalid FS_ERROR_INVALIDFUNC
 
 ## FSSetGetFileSystemHandler(FS,FUNC$)
 
-### 書式
+### Format
 > DEF FUNC FS,DATA$,PATH$ OUT OUTFS,OUTDATA$,OUTPATH$,ERR
 
-未設定時の挙動はPATH$が存在すればERRを0にし、しなければERRに値を設定する  
-OUTFSをFSにしてOUTDATA$をDATA$にしてOUTPATH$をPATH$にする
+Behavior at the time of unsetting sets ERR to 0 if PATH$ exists, and sets a value in ERR if not
+Let OUTFS be FS and set OUTDATA$ to DATA$ and set OUTPATH$ to PATH$
 
 ## FSSetNewDirHandler(FS,FUNC$)
-1階層のみのディレクトリ作成のハンドラを設定
+Set handler for directory creation for only one hierarchy
 
-### 書式
+### Format
 > DEF FUNC FS,DATA$,PATH$ OUT ERR
 
 ## FSSetDeleteHandler(FS,FUNC$)
-ファイル削除のハンドラを設定
+Set handler for file deletion
 
-### 書式
+### Format
 > DEF FUNC FS,DATA$,PATH$ OUT ERR
 
 ## FSSetRenameHandler(FS,FUNC$)
-名前変更ハンドラを設定
+Set name change handler
 
-### 書式
+### Format
 > DEF FUNC FS,DATA$,PATH$,NEWNAME$ OUT ERR
 
 ## FSSetGetTypeHandler(FS,FUNC$)
-ファイルタイプ取得ハンドラを設定  
+Set file type acquisition handler
 
-### 書式
+### Format
 > DEF FUNC FS,DATA$,PATH$ OUT TYPE$,ERR
 
 ## FSSetGetSBFileHandler(FS,FUNC$)
-プチコンでのファイル名を取得
+Get filename in PetitCon
 
-### 書式
+### Format
 > DEF FUNC FS,DATA$,PATH$ OUT FILE$,ERR
 
-FILE$にはプチコンで有効なファイル名(DAT:HOGE.GRP,TXT:HOGE.PRG)
+FILE$ is a valid filename for PetitCon(DAT:HOGE.GRP,TXT:HOGE.PRG)
 
 ## FSSetSaveDATAFileHandler(FS,FUNC$)
-DATAファイルを保存するハンドラを設定
+Set handler to save DATA file
 
-### 書式
+### Format
 > DEF FUNC FS,DATA$,PATH$,ARRAY OUT ERR
 
 ## Mount(PATH$,FILESYSTEM$,DATA$)
-FILESYSTEM$をPATH$にマウント
+Mount FILESYSTEM$ at PATH$
 
-## 戻り値
+## Return value
 FS_ERROR_NOTFOUND FS_ERROR_NOTSUPPORTED FS_ERROR_ACCESS FS_ERROR_NOSPACE FS_ERROR_CANCEL
 
-# エラー
+# Error
 
 ## FS_ERROR_NOTFOUND
 0x6001
