@@ -3,58 +3,58 @@ layout: default
 title: Misc
 ---
 ## FindArray(ARY[],V)
-ARYからVを検索し、場所を返す。
-見つからなかった際は-1
+Search V from ARY and return the place.
+If not found, -1
 
 ## ShortToRGB(IN)
-プチコン物理色をRGB値に変換する。
+Convert Petit-con physical color to RGB value.
 
 ## RGBToShort(IN)
-RGB値をプチコン物理色に変換する。
+Converts the RGB value to the pettico physical color.
 
 ## SplitInt IN OUT X,Y
-INの上位16bitをYに、下位16bitをXに入れる。
+Insert the upper 16 bits of IN in Y and the lower 16 bits in X.
 
 ## _BIN$(IN)
-INを二進数文字列にする。
+Make IN a binary string.
 
 ## InsertStr$(BASE$,POS,INS$)
-BASE$に対してPOSにINS$を挿入する。
+Insert INS$ into POS for BASE$.
 
 ## InsertStrB BASE$,POS,IN$
-InsertStr$(BASE$,POS,INS$)の破壊的操作版。
+A destructive operation version of InsertStr$(BASE$,POS,INS$).
 
 ## RemoveStr$(THIS$,POS,LEN)
-THIS$に対してPOSからLEN文字削除する。
+Delete LEN characters from POS for THIS$.
 
 ## RemoveStrB THIS$,POS,LEN
-RemoveStr$(THIS$,POS,LEN)の破壊的操作版。
+Destructive operation version of RemoveStr$(THIS$,POS,LEN).
 
 ## ReplaceStr$(THIS$,STR$,TO$)
-THIS$にあるSTR$をTO$に置換する。
+Replace STR$ in TOIS$ with TO$.
 
 ## GetFileExtension(FILE$)
-FILE$の拡張子を取得する。
-何も拡張子がない場合空文字を返す。
+Get the extension of FILE$.
+If there is no extension, it returns an empty string.
 
 ## ArrayFill ARY[],V,OFF,LEN
-FILLがないプチコンのバージョンにおいてはFORループより効率的にOFFからLEN文字分ARYをVにする。
+In the version of Petit-Com without FILL, turn OFF from LEN character ARY to V more efficiently than FOR loop.
 
 ## Split(STR$,SP$)
-STR$をSP$によって分割し配列にして返す。
+Split STR$ by SP$ and return it as an array.
 
 ## ToUpper$(STR$)
-STR$をASCII文字の範囲で大文字にする。
+Capitalize STR$ in ASCII character range.
 
 ## ToUpper STR$
-ToUpper$(STR$)の破壊的操作版。
+A destructive operation version of ToUpper$(STR$).
 
 ## ToLower$(STR$)
-STR$をASCII文字の範囲で小文字にする。
+Make STR$ lowercase in the range of ASCII characters.
 
 ## ToLower STR$
-ToLower$(STR$)の破壊的操作版。
+A destructive operation version of ToLower$(STR$).
 
 ## LASTINSTR(S1$,S2$)
-S1$に対してS2$を逆方向から探査する。
-見つからない場合は-1を返す。
+Search S2$ against S1$ from the reverse direction.
+If not found, it returns -1.
