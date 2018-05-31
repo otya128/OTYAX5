@@ -92,7 +92,7 @@ A1がtype
 |関数|説明|
 |---|---|
 |GetRootWindow()|ルートウィンドウを取得|
-|CheckWindow(WND)|ウィンドウが正常化を確認|
+|CheckWindow(WND)|ウィンドウが正常ならTRUE|
 |WindowBackFlag()|NewWindowで指定するフラグ, ウィンドウを後ろに配置する|
 |WindowFrontFlag()|NewWindowで指定するフラグ, ウィンドウを前に配置する|
 |WindowHideFlag()|NewWindowで指定するフラグ, ウィンドウを非表示にする|
@@ -595,4 +595,34 @@ ROW行COL列の表を作成
 
 ### SetMouseMode MODE
 MODEがTRUEなら絶対座標でのマウス移動
+
+## Sound
+BGMPLAYをBEEPのように自由に鳴らせるようにするAPI
+
+## IsValidMML(MML$)
+MML$が正常なMMLならTRUE
+
+### PlayMML MML$ OUT MUSIC,ERR
+MML$を再生してMUSICを返す
+
+### IsMusicPlaying(MUSIC)
+MUSICを再生する
+
+### PauseMusic MUSIC
+MUSICの再生を一時停止する
+
+### ContMusic MUSIC
+MUSICの再生を再開する
+
+### SetMusicVar MUSIC,NO,V
+MMLの内部変数への書き込み
+
+### GetMusicVar(MUSIC,NO)
+MMLの内部変数の読み出し
+
+### SetMusicVolume MUSIC,VOL
+MUSICの音量を設定する(0~127)
+
+### StopMusic MUSIC
+MUSICの再生を止める
 

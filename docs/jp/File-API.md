@@ -33,6 +33,7 @@ DIR$のファイル一覧を取得(FILES互換)
 
 ## NewDir DIR$ OUT ERR
 DIR$を作成(一階層のみ)
+ディレクトリが既にある場合ERROR_ALREADYFILEを返す
 
 ## Mount DIR$,FS$,DATA$ OUT ERR
 DIR$にファイルシステムをマウントする

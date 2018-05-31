@@ -10,6 +10,10 @@ title: OTW version
 * SaveImage(IMG,PATH$)
 * DisableWindowClipping(WND)
 * EnableWindowClipping(WND)
+* TXTEDとPRGEDで上書き保存ができたりするようになった
+* NumUpDownControlでTimer対応
+* RIMでローマ字入力中に非ローマ字モードに切り替えた場合そのまま入力されるように
+* RIMで変換結果の文字列を全部消した場合おかしくなる問題を修正
 
 # OTW5.0-2F
 

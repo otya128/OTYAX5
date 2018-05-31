@@ -19,7 +19,35 @@ mount filesystem [data] path
 
 となっている予定
 
+## FileSystem一覧
+
+### DEVFS
+/devライクなファイルシステム
+
+#### DATA$
+無視される
+
+### OFS
+階層型ファイルシステム
+
+#### DATA$
+"PROJECT/"などと指定すると指定プロジェクトを利用できる(SMILETOOLのみ)
+
+### SBFS
+プチコンファイルシステム
+
+#### DATA$
+"TXT:"でカレントプロジェクトのTXT
+"DAT:"でカレントプロジェクトのDAT
+"TXT:SYS/"でSYSプロジェクトのTXT(読み込みのみ)
+"DAT:SYS/"でSYSプロジェクトのDAT(読み込みのみ)
+"//"でプロジェクト一覧(SMILETOOL以外ではプロジェクトとそのファイル一覧のみしか取得できない)
+
 # API
+
+## IsSmileTool()
+SMILETOOL用のプログラム(COMMON除去版)ならTRUEが返る
+それ以外ならFALSE
 
 ## NewFileSystem NAME$ OUT FS,ERR
 NAME$に紐づけてファイルシステムを作成する
