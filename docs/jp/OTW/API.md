@@ -150,7 +150,7 @@ A1がtype
 |MinimizeWindow(WND)|ウィンドウを最小化|
 |GetWindowStyle(WND)|ウィンドウスタイルを取得|
 |GetWindowFrameSize WND OUT W1,H1,W2,H2,ERR|ウィンドウフレームサイズを取得|
-|FindWindowByControl(WND,CTL,EXTEND)|WNDの子ウィンドウからCTLコントロールに一致するウィンドウを取得、EXTEND=TRUEの時IsControlExtendで判定|
+|FindWindowByControl(WND,CTL,EXTEND)|WNDの子ウィンドウからCTLコントロールに一致するウィンドウを取得、EXTEND=TRUEの時IsControlExtendで判定(再帰的に探索しない)|
 |GetWindowMouseX(WND)|WNDからのマウスの相対座標を取得|
 |GetWindowMouseY(WND)|WNDからのマウスの相対座標を取得|
 |GetOwnerWindow(WND)|WindowGroupOwnerがあればそれを、無ければParentWindowを返す|
@@ -179,8 +179,9 @@ TIMERが正常ならTRUE
 |関数|説明|
 |---|---|
 |GBeginWindow(WND)|描画開始を明示的に宣言する|
-|GEndWindow(WND)|描画終了を明示的に宣言する|
-|SetWindowDrawPos WND,X,Y|描画の始点を変更(デフォルトで(0,0)|
+|GEndWindow(WND)|描画終了を明示的に宣言する(GEndWindow2(WND,TRUE)と等価)|
+|GEndWindowEx(WND,CWCF)|描画終了を明示的に宣言する(CWCF=TRUEの時子ウィンドウのクリッピング処理を実行)|
+|SetWindowDrawPos WND,X,Y|描画の始点を変更(デフォルトで左上(0,0))|
 |GPSETWindow WND,X,Y,COL|ウィンドウに点を書く|
 |GFILLWindow WND,X,Y,X2,Y2,COL||
 |GBOXWindow WND,X,Y,X2,Y2,COL||
@@ -194,12 +195,13 @@ TIMERが正常ならTRUE
 |GPUTCHRSize1Window WND,X,Y,A,SX,COL|サイズ(S:S)を指定してGPUTCHR|
 |GPUTCHRBWindow WND,X,Y,A,COL,BC|背景色を指定してGPUTCHR|
 |GLOADWindow WND,X,Y,W,H,IMG[],FLG,MODE||
-|GCOPYWindow WND...|廃止予定|
+|~GCOPYWindow WND...~|廃止予定|
 |GTRIWindow WND,X,Y,X2,Y2,X3,Y3,COL||
 |GCIRCLEWindow WND,X,Y,R,COL||
 |GCIRCLE2Window WND,X,Y,R,S,E,F,COL||
 |GLOADImageWindow WND,X,Y,IMG,F|画像をウィンドウに描画|
 |GLOADImagePaletteWindow WND,X,Y,IMG,F|画像をパレットPALを用いてウィンドウに描画|
+|GCLSWindow WND,COL||
 
 ## 標準GUI部品
 
