@@ -179,7 +179,7 @@ TIMERが正常ならTRUE
 |関数|説明|
 |---|---|
 |GBeginWindow(WND)|描画開始を明示的に宣言する|
-|GEndWindow(WND)|描画終了を明示的に宣言する(GEndWindow2(WND,TRUE)と等価)|
+|GEndWindow(WND)|描画終了を明示的に宣言する(GEndWindowEx(WND,TRUE)と等価)|
 |GEndWindowEx(WND,CWCF)|描画終了を明示的に宣言する(CWCF=TRUEの時子ウィンドウのクリッピング処理を実行)|
 |SetWindowDrawPos WND,X,Y|描画の始点を変更(デフォルトで左上(0,0))|
 |GPSETWindow WND,X,Y,COL|ウィンドウに点を書く|
@@ -195,7 +195,7 @@ TIMERが正常ならTRUE
 |GPUTCHRSize1Window WND,X,Y,A,SX,COL|サイズ(S:S)を指定してGPUTCHR|
 |GPUTCHRBWindow WND,X,Y,A,COL,BC|背景色を指定してGPUTCHR|
 |GLOADWindow WND,X,Y,W,H,IMG[],FLG,MODE||
-|~GCOPYWindow WND...~|廃止予定|
+|~~GCOPYWindow WND...~~|廃止予定|
 |GTRIWindow WND,X,Y,X2,Y2,X3,Y3,COL||
 |GCIRCLEWindow WND,X,Y,R,COL||
 |GCIRCLE2Window WND,X,Y,R,S,E,F,COL||
