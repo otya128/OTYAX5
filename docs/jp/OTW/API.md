@@ -142,7 +142,7 @@ A1がtype
 |SetCapture(WND)|WNDに対してマウスキャプチャを開始,MouseMoveイベントが全てWNDに対して送られるようになる。但しマウスをクリックすると解除.返り値は前にキャプチャされたウィンドウ|
 |GetCapture()|現在マウスキャプチャされているウィンドウを取得|
 |ReleaseCapture(WND)|WNDに対してのマウスキャプチャを終了,失敗すると0、成功すると1が返る|
-|SetWindowProperty WND,PNAME$,VAL OUT ERR|実装依存のプロパティ設定、OTW5.0-28では"SHADOW"を指定すると影の有無を切り替えられる|
+|SetSysWindowProperty WND,PNAME$,VAL OUT ERR|実装依存のプロパティ設定、OTW5.0-28では"SHADOW"を指定すると影の有無を切り替えられる|
 |CalcWindowX(BASEWND,WND)|BASEWNDに対するWNDの位置を取得|
 |CalcWindowY(BASEWND,WND)|BASEWNDに対するWNDの位置を取得|
 |GetActiveWindow()|現在のアクティブウィンドウを取得|
@@ -156,6 +156,67 @@ A1がtype
 |GetOwnerWindow(WND)|WindowGroupOwnerがあればそれを、無ければParentWindowを返す|
 |DisableWindowClipping(WND)|ウィンドウをクリッピングしない、ウィンドウが重ならない時にこれを指定すると効率化する|
 |EnableWindowClipping(WND)|ウィンドウをクリッピングさせる|
+|GetWindowVar(WND,I)|SPVARのようなWND固有の記憶域(0<=I<=7)|
+|SetWindowVar WND,I,V|SPVARのようなWND固有の記憶域|
+
+## Window Property
+WindowVarは軽量だがキーと値が整数のみで利用しづらい場面がある
+
+### SetProp WND,NAME$,V
+ウィンドウプロパティに値を設定(文字列をキーとして整数実数文字列を格納できる)
+
+### SetProp2(WND,NAME$,V)
+ウィンドウプロパティに値を設定(前の値が返る)
+
+### GetProp(WND,NAME$)
+ウィンドウプロパティの値を取得(SetPropされていないNAME$であった場合暗黙的に(0,"",0.0)がSetPropされる)
+
+### SetProp$ WND,NAME$,V
+文字列版
+
+### SetProp2$(WND,NAME$,V)
+文字列版
+
+### GetProp$(WND,NAME$)
+文字列版
+
+### SetProp# WND,NAME$,V
+実数版
+
+### SetProp2#(WND,NAME$,V)
+実数版
+
+### GetProp#(WND,NAME$)
+実数版
+
+### HasProp(WND,NAME$)
+WNDがNAME$のプロパティを持っていればTRUE
+
+### RemoveProp WND,NAME$
+ウィンドウプロパティを削除
+
+### APIから設定されるプロパティ
+
+#### SetWorkArea(WND,X,Y,W,H)
+作業領域(画面からタスクバーなどが除かれた領域)を設定
+
+#### GetWorkArea WND OUT X,Y,W,H,ERR
+作業領域(画面からタスクバーなどが除かれた領域)を取得
+特に設定されていなければX=0,Y=0,W=GetWindowWidth(WND),H=GetWindowHeight(WND)を返す
+
+##### `"WRKAREAXY"`
+上位ワードにX下位ワードにY
+
+##### `"WRKAREAWH"`
+上位ワードにwidth下位ワードにheight
+
+#### WindowDefPosFlag()
+NewWindowに指定
+
+##### `"NEWWINXY"`
+ウィンドウのX座標Y座標を指定せずにNewWindowしたときに指定される座標
+
+上位ワードにX下位ワードにY
 
 ## Timer
 
