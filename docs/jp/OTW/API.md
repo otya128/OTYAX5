@@ -177,6 +177,9 @@ WindowVarは軽量だがキーと値が整数のみで利用しづらい場面�
 ### GetProp(WND,NAME$)
 ウィンドウプロパティの値を取得(SetPropされていないNAME$であった場合暗黙的に(0,"",0.0)がSetPropされる)
 
+### TryGetProp WND,NAME$ OUT V,F
+ウィンドウプロパティの値を取得(SetPropされていないNAME$であった場合SetPropされずV=0 F=FALSE)
+
 ### SetProp$ WND,NAME$,V
 文字列版
 
@@ -186,6 +189,9 @@ WindowVarは軽量だがキーと値が整数のみで利用しづらい場面�
 ### GetProp$(WND,NAME$)
 文字列版
 
+### TryGetProp$ WND,NAME$ OUT V$,F
+文字列版
+
 ### SetProp# WND,NAME$,V
 実数版
 
@@ -193,6 +199,9 @@ WindowVarは軽量だがキーと値が整数のみで利用しづらい場面�
 実数版
 
 ### GetProp#(WND,NAME$)
+実数版
+
+### TryGetProp# WND,NAME$ OUT V#,F
 実数版
 
 ### HasProp(WND,NAME$)
