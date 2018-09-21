@@ -54,17 +54,22 @@ COMMONは付ける
 A1がtype
 
 #### type:WindowMaximizeEvent()
-ウィンドウが最大化されようとしたときに送られる  
+ウィンドウが最大化されようとしたときに送られる(OTW30からWND自身の最大化イベントが送られてくるようになった)  
 
 argに対象ウィンドウ  
 rootウィンドウ
 
 #### type:WindowMinimizevent()
-ウィンドウが最小化されようとしたときに送られる  
+ウィンドウが最小化されようとしたときに送られる(OTW30からWND自身の最大化イベントも送られてくるようになった)  
 argに対象ウィンドウ
 
 #### type:WindowActiveEvent()
 ウィンドウがアクティブになったときに贈られる
+argに対象ウィンドウ
+
+#### type:WindowRestoreEvent()
+ウィンドウが最小化最大化から戻されようとしたときに送られる(OTW30からWND自身の最大化イベントが送られてくるようになった)  
+
 argに対象ウィンドウ
 
 ### ControlParentWindowHandler
@@ -148,6 +153,7 @@ A1がtype
 |GetActiveWindow()|現在のアクティブウィンドウを取得|
 |MaximizeWindow(WND)|ウィンドウを最大化|
 |MinimizeWindow(WND)|ウィンドウを最小化|
+|RestoreWindow(WND)|ウィンドウを最大最小化から復元|
 |GetWindowStyle(WND)|ウィンドウスタイルを取得|
 |GetWindowFrameSize WND OUT W1,H1,W2,H2,ERR|ウィンドウフレームサイズを取得|
 |FindWindowByControl(WND,CTL,EXTEND)|WNDの子ウィンドウからCTLコントロールに一致するウィンドウを取得、EXTEND=TRUEの時IsControlExtendで判定(再帰的に探索しない)|
@@ -306,11 +312,15 @@ TIMERが正常ならTRUE
  END
 ```
 ## flag memo
+
 - CTL_FRMBTNHANDLER
-- CTL_LBTNFLG
-- CTL_RBTNFLG
-- CTL_BTNDWNFLG
-- CTL_BTNUPFLG
+- CTL_LBTNFLG=4
+- CTL_RBTNFLG=8
+- CTL_BTNDWNFLG=1
+- CTL_BTNUPFLG=2
+- CTL_LEAVEFLG=64
+- CTL_DBLFLG=128
+
 
 文字列は"123"[0]みたいな使い方が可能
 
