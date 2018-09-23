@@ -112,6 +112,7 @@ A1がtype
 |WindowResizableStyle()|リサイズ可能にさせるフラグ|
 |WindowHideStyle()|非表示にさせるフラグ|
 |WindowNarrowStyle()|タイトルバーの幅を小さくさせるフラグ|
+|WindowTopMostStyle()|常に最前面に表示させるフラグ|
 |FrontWindow(WND)|ウィンドウを手前に持ってくる|
 |MoveWindow(WND,X,Y)|ウィンドウを指定座標に持っていく|
 |ResizeWindow(WND,W,H)|ウィンドウをリサイズ|
@@ -329,23 +330,6 @@ TIMERが正常ならTRUE
 - CTL_BTNUPFLG=2
 - CTL_LEAVEFLG=64
 - CTL_DBLFLG=128
-
-
-文字列は"123"[0]みたいな使い方が可能
-
-## これから実装したいもの
-
-|関数|
-|---|
-|GetScreenWidth()|
-|GetScreenHeight()|
-
-### message
-
-||
-|---|
-|MouseLeave|
-|MouseDoubleClick|
 
 ## 標準コントロール
 これらのコントロールを継承する際は親コントロールのHandlerを呼び出す必要がある
