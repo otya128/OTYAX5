@@ -279,6 +279,7 @@ TIMERが正常ならTRUE
 |GLOADImageWindow WND,X,Y,IMG,F|画像をウィンドウに描画|
 |GLOADImagePaletteWindow WND,X,Y,IMG,F|画像をパレットPALを用いてウィンドウに描画|
 |GCLSWindow WND,COL||
+|GCLIPWindow WND,X1,Y1,X2,Y2||
 
 ## 標準GUI部品
 
