@@ -421,6 +421,8 @@ IVARで識別する
 |NewMenu OUT MENU,E|MENUを作成|
 |SetMenuBar WND,MENU|未実装|
 |ShowMenu MENU,WND|未実装,引数の順番が定まっていない|
+|ShowMenuXY MENU,WND,X,Y|MENUをWNDからの相対座標X,Yに表示|
+|ShowMenuXY2 MENU,WND,X,Y|ShowMenuXYと違いMENUの下部Yの座標を指定する|
 |GetWindowMenu(WND)|WNDのMENUを取得|
 |AddMenuItem MENU,STR$,IVAR|MENUにSTR$を追加,IVARはWindowNotifEventの時にARG2に指定される|
 |AddMenuItemSeparator MENU|MENUにSeparatorを追加|
