@@ -2,6 +2,11 @@
 layout: default
 title: OTW version
 ---
+# OTW5.0-31
+
+## 変更点
+
+
 # OTW5.0-30
 
 ## 変更点
@@ -14,6 +19,27 @@ title: OTW version
 * NumUpDownControlでTimer対応
 * RIMでローマ字入力中に非ローマ字モードに切り替えた場合そのまま入力されるように
 * RIMで変換結果の文字列を全部消した場合おかしくなる問題を修正
+* GEndWindowEx
+* Window Property APIを追加
+* SetWorkArea
+* GetWorkArea
+* WindowDefPosFlag() NewTopLevelWindowと同等のことをするフラグ
+* WindowRestoreEvent()
+* RestoreWindow
+* window controlの改良(最大化のまともな対応、復元の対応、ダブルクリックで最大化/復元)
+* WindowTopMostStyle()
+* TSKBARのメニューに時間を表示させた
+* TSKBARがページ送り対応
+* TSKBARが最小化対応
+* TSKBARが常に最前面に表示されるように
+* GCLIPWindow
+* SetMenuItem
+* TOPMOSTを追加(ただの試験用)
+* DLGEDを追加(まだボタンの大きさ変更と移動が出来るだけ)
+
+## 破壊的変更
+* SetWindowProperty->SetSysWindowProperty
+* WindowMinimizevent() WindowMaximizeEvent()がwindow自身にも送られるように
 
 # OTW5.0-2F
 
