@@ -281,6 +281,12 @@ TIMERが正常ならTRUE
 |GCLSWindow WND,COL||
 |GCLIPWindow WND,X1,Y1,X2,Y2||
 
+### Graphic(その他)
+
+#### DrawButton WND,X,Y,W,H,PUSHF
+ボタンの枠を描画(PUSHF=TRUEの時押下状態)
+中身の部分にGCLIPWindowとSetWindowDrawPosされる
+
 ## 標準GUI部品
 
 |関数|説明|
@@ -427,6 +433,7 @@ IVARで識別する
 |GetWindowMenu(WND)|WNDのMENUを取得|
 |AddMenuItem MENU,STR$,IVAR|MENUにSTR$を追加,IVARはWindowNotifEventの時にARG2に指定される|
 |AddMenuItemSeparator MENU|MENUにSeparatorを追加|
+|SetMenuItem MENU,STR$,IVAR|IVARのメニュー項目のSTR$を変更|
 |CheckMenu(MENU)|MENUが存在すればTRUE|
 |NewTopLevelMenuWindow CTL,NAME$,WIDTH,HEIGHT OUT WND,ERR||
 |ShowContextMenu MENU,WND|コンテキストメニューを表示|
