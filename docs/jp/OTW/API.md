@@ -62,6 +62,24 @@ COMMONは付ける
 |SetControlFramePainter(CTL,HANDLER$)|ウィンドウフレームの描画|||
 |SetControlChildWindowHandler(CTL,HANDLER$)|子ウィンドウから送られてくるイベントを受信|type|arg|
 |SetControlParentWindowHandler(CTL,HANDLER$)|親ウィンドウから送られてくるイベントを受信|type|arg|
+|SetControlQueryFrameHandler(CTL,HANDLER$)|ウィンドウのフレームの大きさを返す|STYLE|0|
+
+### 特殊Event Handler
+#### ControlStrNotifHandler
+A2$が文字列
+```
+COMMON DEF XXX WND,CTL,TYPE,A1,A2$
+END
+```
+
+#### ControlQueryFrameHandler
+
+WNDは0の場合があるので注意
+
+```
+COMMON DEF XXX WND,CTL,TYPE,STYLE,ZERO OUT W1,H1,W2,H2
+END
+```
 
 ### ControlChildWindowHandler
 子ウィンドウに何か起こった時に呼ばれる
