@@ -5,7 +5,30 @@ title: OTW version
 # OTW5.0-31
 
 ## 変更点
+* メニューでマウスが離れたときに選択が解除されるように
+* SetMenuItem MENU,STR$,IVARを追加
+* DisableMenuItem MENU,IVARを追加
+* EnableMenuItem MENU,STR$,IVARを追加
+* NewWindow周りのリファクタリングの実施
+* SetControlQueryFrameHandler(CTL,HANDLER$)を追加
+* AddSubMenuItemID MENU,STR$,SUBMENU,IVARを追加
+* GetSubMenuByPos MENU,POS OUT SUBを追加
+* GetSubMenuByID MENU,ID OUT SUBを追加
+* GPRINTPWindowでエラーが出た問題を修正
+* windowを作成したプロセスが死んだときにwindowを削除するように修正
+* GetWorkspaceColor()を追加
+* TSKBARでwindowが削除されたときに再描画するように
+* TSKBARでOwnerWindowが親windowでないとき表示させないように
+* TSKBARでWorkAreaが1ピクセル大きく設定されていた問題を修正
+* ODEとTSKBARで影を非表示に(見た目に影響はない)
+* OTYMINEで十字キーでマウスを移動できるように
+* OTWTERMで若干高速化
+* FREEMEMで視覚的に
+* DLGEDでいろいろ追加削除できるように
 
+## 破壊的変更
+* WindowMaxmizeEvent()->WindowMaximizeEvent()
+* WindowHideFlag()を削除(WindowHideStyle()で代替可能)
 
 # OTW5.0-30
 

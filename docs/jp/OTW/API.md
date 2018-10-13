@@ -267,6 +267,9 @@ NewWindowで指定するフラグ, ウィンドウを常にOwner windowより前
 ### GetSelectionTextColor()
 選択時のテキスト色を取得
 
+### GetWorkspaceColor()
+作業領域背景色を取得
+
 ### GetWindowMinSize WND OUT W,H
 ウィンドウの最小サイズを取得(リサイズ用)
 
@@ -750,6 +753,23 @@ IVARが属するラジオボタングループでチェックされているIVAR
 ### IsCheckedMenuItem(MENU,IVAR)
 IVARがチェックされていればTRUE
 
+### AddSubMenuItemID MENU,STR$,SUBMENU,IVAR
+サブメニューをID付きで追加
+
+### SetMenuItem MENU,STR$,IVAR
+メニューの項目の文字列を変更
+
+### DisableMenuItem MENU,IVAR
+メニューの項目を無効化
+
+### EnableMenuItem MENU,STR$,IVAR
+メニューの項目を有効化
+
+### GetSubMenuByPos MENU,POS OUT SUB
+サブメニューを位置POS(zero-based)から検索して取得(存在しなければ0)
+
+### GetSubMenuByID MENU,ID OUT SUB
+サブメニューをIDから検索して取得(存在しなければ0)
 
 ## Window Group
 ウィンドウグループ、これに入れると親子関係にないウィンドウもまとめて扱うことができるようになる
