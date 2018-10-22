@@ -1,0 +1,165 @@
+diff -u OTW.TXT OTW16
+--- OTW.TXT
++++ OTW16
+@@ -182,6 +182,7 @@
+ VAR CTL_BUTTONCTL
+ VAR CTL_TGLBTNCTL
+ VAR CTL_TXTBOXCTL
++VAR CTL_LABELCTL
+ DEF OTW_CTL_INITARRAY
+  CTL_MAX=64
+  CTL_HANDLER_MAX=16
+@@ -202,6 +203,7 @@
+  NewControl "WINDOW" OUT CTL_WINDOWCTL,E
+  NewControl "BUTTON" OUT CTL_BUTTONCTL,E
+  NewControl "TXTBOX" OUT CTL_TXTBOXCTL,E
++ NewControl "LABEL" OUT CTL_LABELCTL,E
+  CTL_PAINTHANDLER=0
+  CTL_NDHNDLR[CTL_PAINTHANDLER]=TRUE
+  CTL_LBTNDWNHANDLER=1
+@@ -233,6 +235,8 @@
+  E=SetControlKeyHandler(CTL_TXTBOXCTL,"TextBoxKey")
+  E=SetControlButtonHandler(CTL_TXTBOXCTL,"TextBoxButton")
+  E=SetControlChFocusHandler(CTL_TXTBOXCTL,"TextBoxChFocus")
++ E=SetControlPainter(CTL_LABELCTL,"LabelPainter")
++
+  ExtendControl "ToggleButton",CTL_BUTTONCTL OUT CTL_TGLBTNCTL,E
+  E=SetControlLMouseUpHandler(CTL_TGLBTNCTL,"ToggleButtonLMouseUP")
+  E=SetControlLMouseDownHandler(CTL_TGLBTNCTL,"ToggleButtonLMouseDown")
+@@ -268,6 +272,9 @@
+ COMMON DEF GetTextBoxControl()
+  RETURN CTL_TXTBOXCTL
+ END
++COMMON DEF GetLabelControl()
++ RETURN CTL_LABELCTL
++END
+ 'CONTROL
+ COMMON DEF NewControl NAME$ OUT CTL,ERR
+  IF!CTL_FREE THEN
+@@ -1295,6 +1302,7 @@
+  VAR L=LEN(STR$)-1,A,I
+  FOR I=0TO L
+   A=ASC(STR$[I])
++  IF A==10THEN Y=Y+8:X=0:CONTINUE
+   GPUTCHRWindow WND,X,Y,A,COL
+   INC X,8
+  NEXT
+@@ -1468,6 +1476,49 @@
+  
+ ' BEEP
+ END
++COMMON DEF SetLabelAlignLeft WND
++ SetWindowVar WND,1,0
++ VAR E=RepaintWindow(WND)
++END
++COMMON DEF SetLabelAlignRight WND
++ SetWindowVar WND,1,1
++ VAR E=RepaintWindow(WND)
++END
++COMMON DEF SetLabelAlignCenter WND
++ SetWindowVar WND,1,2
++ VAR E=RepaintWindow(WND)
++END
++DEF LabelPainter W,CT,T,A1,A2
++ VAR E=GBeginWindow(W)
++ IF E THEN RETURN
++ VAR NA$=GetWindowName$(W)
++ VAR HE=GetWindowHeight(W)
++ VAR WI=GetWindowWidth(W)
++ VAR A=GetWindowVar(W,1)
++ GCLSWindow W,RGB(224,224,224)
++ VAR X,Y,C,I,L=LEN(NA$),HB=WI/8
++ IF!HB THEN RETURN
++ IF L<HB THEN
++  IF A==1THEN X=WI-L*8
++  IF A==2THEN X=(WI-L*8)/2
++ ENDIF
++ DEC L
++ FOR I=0TO L
++  C=ASC(NA$[I])
++  IF C==10THEN INC Y,8:X=0CONTINUE
++  IF X>=WI THEN
++   INC Y,8:X=0
++   IF L-I<HB THEN
++    IF A==1THEN X=WI-(L-I+1)*8
++    IF A==2THEN X=(WI-(L-I+1)*8)/2
++   ENDIF
++  ENDIF
++  IF Y>=HE THEN BREAK
++  GPUTCHRWindow W,X,Y,C,RGB(0,0,0)
++  INC X,8
++ NEXT
++ E=GEndWindow(W)
++END
+ VAR OTW_MOUSESIZE
+ DEF OTW_INITSP
+  GPSET 408,0,-1
+@@ -1785,7 +1836,12 @@
+  IF E THEN BEEP:ExitProcess 1
+  SetProcessVar WND
+  E=SetControlPainter(ABOUTCTL,"AboutPainter")
++ E=SetControlNotificationHandler(ABOUTCTL,"ABOUTNotif")
++ NewWindow GetButtonControl(),"OK",54,16,20,12,WND,0 OUT E,E
+ END
++COMMON DEF AboutNotif WND,CTL,TYPE,A1,A2
++ VOID Deletewindow(WND)
++END
+ COMMON DEF AboutPainter WND,CTL,TYPE,A1,A2
+  VAR E=CallBaseControlHandler(WND,CTL,TYPE,A1,A2)
+ ' E=GBeginWindow(WND)
+@@ -1839,7 +1895,7 @@
+   LAUNCHERITEM$[4]="PAINT"
+   LAUNCHERITEM$[5]="TXTED"
+   LAUNCHERITEM$[6]="PRGED"
+-  LAUNCHERITEM$[7]="OTYDOC"
++  LAUNCHERITEM$[7]="OTYFIL"
+   ExtendControl "LAUNCHER",GetWindowControl() OUT LAUNCHERCTL,E
+   I_LAUNCHER
+  ENDIF
+@@ -2795,6 +2851,18 @@
+  COPY OTYFILICODAT,ICONS,16*16,16*16
+ END
+ VAR OTYFILCTL
++VAR OTYFILES$[0]
++VAR OTYFILICONCTL
++COMMON DEF OTYFILICONCTLPainter W,C,T,_,__
++ IF GBeginWindow(W)THEN RETURN
++ GCLSWindow W,RGB(224,224,224)
++ IF GetWindowVar(W,1)THEN
++  GLOADWindow W,0,0,16,16,OTYFILICODAT,1,0
++ ELSE
++  GLOADWindow W,0,0,16,16,OTYFILICOTXT,1,0
++ ENDIF
++ IF GEndWindow(W)THEN RETURN
++END
+ COMMON DEF I_OTYFIL
+  IF!CHKCALL("IsWinRunning")||!IsWinRunning()THEN
+   PrintConsole "Require window system"+LF$()
+@@ -2804,9 +2872,25 @@
+  VAR WND,E
+  IF!OTYFILCTL THEN
+   ExtendControl "Files",GetWindowControl() OUT OTYFILCTL,E
++  NewControl "ICON" OUT OTYFILICONCTL,E
++  E=SetControlPainter(OTYFILICONCTL,"OTYFILICONCTLPainter")
++  RC_OTYFIL
+  ENDIF
+- NewTopLevelWindow OTYFILCTL,"Files",128,128 OUT WND,E
+-SetProcessVar WND
++ VAR W=36*4+8,H=64,LBL
++ NewTopLevelWindow OTYFILCTL,"Files SYS/",W,H OUT WND,E
++ VAR X=8,Y,I
++ OTYFILES$=NewArray$(0)
++ GetFiles OTYFILES$,"SYS"
++ FOR I=0TO LEN(OTYFILES$)-1
++  IF X+32+4>W THEN INC Y,40:X=8
++  IF Y+16>=H THEN BREAK
++  NewWindow OTYFILICONCTL,"",X,Y,15,15,WND,0 OUT LBL,E
++  IF OTYFILES$[I][0]==" "THEN SetWindowVar LBL,1,1
++  NewWindow GetLabelControl(),RIGHT$(OTYFILES$[I],LEN(OTYFILES$[I])-1),X-8,Y+16,32,24,WND,0 OUT LBL,E
++  SetLabelAlignCenter LBL
++  INC X,32+4
++ NEXT
++ SetProcessVar WND
+ END
+ COMMON DEF L_OTYFIL
+  IF UpdateWindow(GetProcessVar())THEN ExitProcess 1

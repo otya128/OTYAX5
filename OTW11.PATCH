@@ -1,0 +1,430 @@
+diff -u OTW.TXT OTW11
+--- OTW.TXT
++++ OTW11
+@@ -1124,6 +1124,7 @@
+  IF!CheckWindow(WND)THEN RETURN WIN_INVALIDID
+  VAR NUWID=WND AND NUWIDMASK
+  IF WIN_BEGIN[NUWID]==1THEN RETURN WIN_EVENTERR
++ IF WIN_BEGIN[NUWID]==2THEN RETURN 0
+  WIN_BEGIN[NUWID]=TRUE
+  VAR AX=WIN_RFX[NUWID]'WIN_FW1[NUWID]
+  VAR AY=WIN_RFY[NUWID]'WIN_FH1[NUWID]
+@@ -1212,6 +1213,9 @@
+  VAR AY=WIN_FY[WND AND NUWIDMASK]
+  GPSET X+AX,Y+AY,COL
+ END
++COMMON DEF GCLSWindow WND,COL
++ GCLS COL
++END
+ COMMON DEF GFILLWindow WND,X,Y,X2,Y2,COL
+  VAR AX=WIN_FX[WND AND NUWIDMASK]
+  VAR AY=WIN_FY[WND AND NUWIDMASK]
+@@ -1275,6 +1279,7 @@
+  FOR I=0TO L
+   C$=MID$(STR$,I,1)
+   A=ASC(C$)
++  IF A>=00&&A<&H20THEN INC X,8:CONTINUE
+   IF A<=&H7F&&A>=&H20THEN
+    A=A-&H20
+    VAR F=OTW_FNT1[A,1],B=1
+@@ -1297,6 +1302,33 @@
+   X=X+8
+  NEXT
+ END
++COMMON DEF GCHARWindow WND,X,Y,A,COL
++ IF!(COL AND&HFF000000)THEN RETURN
++ VAR AX=WIN_FX[WND AND NUWIDMASK]
++ VAR AY=WIN_FY[WND AND NUWIDMASK]
++ X=X+AX:Y=Y+AY
++ VAR BX,BY
++ IF A>=00&&A<&H20THEN RETURN
++ IF A<=&H7F&&A>=&H20THEN
++  A=A-&H20
++  VAR F=OTW_FNT1[A,1],B=1
++  FOR BY=Y+7 TO Y+4 STEP -1
++    FOR BX=X+7 TO X STEP -1
++     IF F AND B THEN GPSET BX,BY,COL
++     B=B<<1
++    NEXT
++   NEXT
++   F=OTW_FNT1[A,0]:B=1
++   FOR BY=Y+3 TO Y STEP -1
++    FOR BX=X+7 TO X STEP -1
++     IF F AND B THEN GPSET BX,BY,COL
++     B=B<<1
++    NEXT
++   NEXT
++  ELSE
++  GFILL X,Y,X+6,Y+6,COL
++ ENDIF
++END
+ DEF DesktopPainter WND,CTL,TYPE,A1,A2
+ RETURN
+  VAR E=GBEGINWindow(WND)
+@@ -1615,6 +1647,7 @@
+ VAR OTW_OLDRMOUSE
+ VAR OTW_FDIFF
+ VAR OTW_OLDBTN
++VAR OTW_OLDBTNF
+ COMMON DEF L_OTW
+  VAR MOVEMOUSE
+  UpdateMouse
+@@ -1692,10 +1725,11 @@
+   INC OTW_FPSCNT
+  ENDIF
+  BTN=BUTTON()AND OTW_USEBTN
+- IF BTN THEN
+-  IF MAINCNT-OTW_OLDBTN THEN
++ IF BTN||OTW_OLDBTN THEN
++  IF MAINCNT-OTW_OLDBTNF||OTW_OLDBTN THEN
+    E=SendButtonWindow(NUWIDToWND(WIN_ACTIVENUWID),BTN)
+-   OTW_OLDBTN=MAINCNT
++   OTW_OLDBTNF=MAINCNT
++   OTW_OLDBTN=BTN
+   ENDIF
+  ENDIF
+ ' ExitProcess 1
+@@ -1764,12 +1798,17 @@
+ COMMON DEF LauncherLMouseUP WND,CTL,T,X,Y
+  VAR E=CallBaseControlHandler(WND,CTL,T,X,Y)
+  VAR ITEM=Y/8
+- IF ITEM>=LAUNCHERLEN THEN
++ IF ITEM>=LAUNCHERLEN||ITEM<0THEN
+   RETURN
+  ENDIF
+  NewProcess LAUNCHERITEM$[ITEM],"" OUT E,E,E
+ END
+ COMMON DEF I_LAUNCHER
++ IF!CHKCALL("IsWinRunning")||!IsWinRunning()THEN
++  PrintConsole "Require window system"+LF$()
++  ExitProcess 1
++  RETURN
++ ENDIF
+  IF LAUNCHERCTL THEN
+   VAR WND,E
+   NewTopLevelWindow LAUNCHERCTL,"LAUNCHER",80,LAUNCHERLEN*8 OUT WND,E
+@@ -1777,13 +1816,14 @@
+   E=SetControlPainter(LAUNCHERCTL,"LauncherPainter")
+   E=SetControlLMouseUpHandler(LAUNCHERCTL,"LauncherLMouseUP")
+  ELSE
+-  LAUNCHERLEN=5
++  LAUNCHERLEN=6
+   LAUNCHERITEM$=NewArray$(LAUNCHERLEN)
+   LAUNCHERITEM$[0]="WCLOCK"
+   LAUNCHERITEM$[1]="RUN"
+   LAUNCHERITEM$[2]="ABOUT"
+   LAUNCHERITEM$[3]="LAUNCHER"
+   LAUNCHERITEM$[4]="PAINT"
++  LAUNCHERITEM$[5]="TXTED"
+   ExtendControl "LAUNCHER",GetWindowControl() OUT LAUNCHERCTL,E
+   I_LAUNCHER
+  ENDIF
+@@ -2077,11 +2117,17 @@
+  VAR K$
+  INC K$,"VAR _1CTL"+LF$()
+  INC K$,"COMMON DEF I__1"+LF$()
++ INC K$, "IF!CHKCALL(_QIsWinRunning_Q)||!IsWinRunning()THEN"+LF$()
++ INC K$,"  PrintConsole _QRequire window system_Q+LF$()"+LF$()
++ INC K$,"  ExitProcess 1"+LF$()
++ INC K$,"  RETURN"+LF$()
++ INC K$," ENDIF"+LF$()
+  INC K$," VAR WND,E"+LF$()
+  INC K$," IF!_1CTL THEN"+LF$()
+  INC K$,"  ExtendControl _Q_2_Q,GetWindowControl() OUT _1CTL,E"+LF$()
+  INC K$," ENDIF"+LF$()
+- INC K$," NewTopLevelWindow _1CTL,_Q_2_Q,_W,_H OUT WND,E  SetProcessVar WND"+LF$()
++ INC K$," NewTopLevelWindow _1CTL,_Q_2_Q,_W,_H OUT WND,E"+LF$()
++ INC K$,"SetProcessVar WND"+LF$()
+  INC K$,"END"+LF$()
+  INC K$,"COMMON DEF L__1"+LF$()
+  INC K$,"IF UpdateWindow(GetProcessVar())THEN ExitProcess 1"+LF$()
+@@ -2140,6 +2186,11 @@
+  SetWindowVar WND,1,Y
+ END
+ COMMON DEF I_PAINT
++ IF!CHKCALL("IsWinRunning")||!IsWinRunning()THEN
++  PrintConsole "Require window system"+LF$()
++  ExitProcess 1
++  RETURN
++ ENDIF
+  VAR PTR=malloc(64*64)
+  IF!PTR THEN BEEP:ExitProcess 1
+  VAR WND,E
+@@ -2157,4 +2208,277 @@
+ COMMON DEF L_PAINT
+ IF UpdateWindow(GetProcessVar())THEN ExitProcess 1
+ END
++VAR TXTEDCTL
++VAR TXTBOXEXCTL
++VAR TXTBOXEX_LINESIZ
++VAR TXTBOXEX_FREE
++DIM TXTBOXEX_VAL$[0]
++DIM TXTBOXEX_LINE[0]
++DIM TXTBOXEX_NEXT[0]
++DIM TXTBOXEX_PREV[0]
++COMMON DEF I_TXTED
++IF!CHKCALL("IsWinRunning")||!IsWinRunning()THEN
++  PrintConsole "Require window system"+LF$()
++  ExitProcess 1
++  RETURN
++ ENDIF
++ VAR WND,E
++ IF!TXTEDCTL THEN
++  ExtendControl "TXTED",GetWindowControl() OUT TXTEDCTL,E
++  NewControl "TextBoxEx" OUT TXTBOXEXCTL,E
++  E=SetControlPainter(TXTBOXEXCTL,"TextBoxExPainter")
++  E=SetControlKeyHandler(TXTBOXEXCTL,"TextBoxExKey")
++  E=SetControlButtonHandler(TXTBOXEXCTL,"TextBoxExButton")
++  TXTBOXEX_LINESIZ=1024
++  TXTBOXEX_VAL$=NewArray$(TXTBOXEX_LINESIZ)
++  TXTBOXEX_LINE=NewArray(TXTBOXEX_LINESIZ)
++  TXTBOXEX_NEXT=NewArray(TXTBOXEX_LINESIZ)
++  TXTBOXEX_PREV=NewArray(TXTBOXEX_LINESIZ)
++  TXTBOXEX_FREE=1
++  VAR I
++  FOR I=1TO TXTBOXEX_LINESIZ-2
++   TXTBOXEX_NEXT[I]=I+1
++  NEXT
++ ENDIF
++ NewTopLevelWindow TXTEDCTL,"TXTED",128,64 OUT WND,E
++ SetProcessVar WND
++ NewWindow TXTBOXEXCTL,"",0,0,128,64,WND,0 OUT WND,E
++ VAR L=TXTED_NewLINE("",0)
++ SetWindowVar WND,1,L
++ SetWindowVar WND,2,L
++ SetWindowVar WND,7,1
++END
++COMMON DEF TXTED_NewLINE(V$,P)
++ VAR R=TXTBOXEX_FREE
++ TXTBOXEX_FREE=TXTBOXEX_NEXT[TXTBOXEX_FREE]
++ IF P THEN
++  TXTBOXEX_LINE[R]=TXTBOXEX_LINE[P]+1
++ ELSE
++  TXTBOXEX_LINE[R]=1
++ ENDIF
++ VAR N
++ IF P THEN
++  N=TXTBOXEX_NEXT[P]
++  TXTBOXEX_NEXT[P]=R
++ ENDIF
++ TXTBOXEX_VAL$[R]=V$
++ TXTBOXEX_NEXT[R]=N
++ TXTBOXEX_PREV[R]=P
++ IF N THEN
++  TXTBOXEX_PREV[N]=R
++ ENDIF
++ RETURN R
++END
++COMMON DEF L_TXTED
++ IF UpdateWindow(GetProcessVar())THEN ExitProcess 1
++END
+ 
++COMMON DEF TextBoxExPainter WND,CTL,T,_,__
++ TextBoxExRepaint WND
++END
++COMMON DEF TextBoxExRepaint WND
++ VAR E=GBeginWindow(WND)
++ GCLSWindow WND,RGB(255,255,255)
++ VAR W=GetWindowWidth(WND)
++ VAR H=GetWindowHeight(WND)
++ GBOXWindow WND,0,0,W,H,RGB(0,0,0)
++ VAR L=GetWindowVar(WND,1)
++ VAR C=GetWindowVar(WND,2)
++ VAR V$=TXTBOXEX_VAL$[C]
++ VAR CX=GetWindowVar(WND,3)
++ VAR L$=LF$()
++ IF LEN(V$)<=CX THEN
++  CX=LEN(V$)
++  IF LEN(V$)&&V$[LEN(V$)-1]==L$THEN DEC CX
++  SetWindowVar WND,3,CX
++ ENDIF
++ VAR TC=RGB(0,0,0)
++ VAR Y=1,X=1,PL,LC
++ WHILE 1
++  V$=TXTBOXEX_VAL$[L]
++  IF GetWindowVar(WND,7)THEN
++   TXTED_PRGPRINT WND,X,Y,V$
++  ELSE
++   GPRINTWindow WND,X,Y,V$,TC
++  ENDIF
++  PL=L
++  IF L==C THEN
++   GFILLWindow WND,X+CX*8,Y+7,X+8+CX*8,Y+6,TC
++  ENDIF
++  L=TXTBOXEX_NEXT[L]
++  INC Y,8
++  IF Y>=H THEN BREAK
++  IF!L THEN
++   IF!LEN(V$)||V$[LEN(V$)-1]!=L$THEN
++    GPRINTWindow WND,LEN(V$)*8,Y-8,"[EOF]",RGB(80,208,255)
++    IF PL==C THEN
++     GFILLWindow WND,CX*8,Y-1,8+CX*8,Y-2,TC
++    ENDIF
++   ELSE
++    GPRINTWindow WND,X,Y,"[EOF]",RGB(80,208,255)
++    IF PL==C THEN
++     GFILLWindow WND,CX*8,Y+7,8+CX*8,Y+6,TC
++    ENDIF
++   ENDIF
++   PL=0
++   BREAK
++  ENDIF
++ WEND
++ E=GEndWindow(WND)
++ SetWindowVar WND,6,PL
++END
++
++COMMON DEF TextBoxExButton WND,CTL,T,BTN,_
++ VAR F=GetWindowVar(WND,4),U,R=GetWindowVar(WND,5)
++ IF!BTN THEN SetWindowVar WND,5,0RETURN
++ IF MAINCNT-F<R THEN RETURN
++
++ IF BTN AND 1 THEN
++  VAR C=GetWindowVar(WND,2)
++  IF TXTBOXEX_PREV[C]THEN
++   VAR L=TXTBOXEX_PREV[GetWindowVar(WND,1)]
++   C=TXTBOXEX_PREV[C]
++   IF L==C THEN
++     SetWindowVar WND,1,L
++   ENDIF
++   SetWindowVar WND,2,C
++   TextBoxExRepaint WND
++  ENDIF
++  U=1
++ ENDIF
++ IF BTN AND 2 THEN
++  C=GetWindowVar(WND,2)
++  IF TXTBOXEX_NEXT[C]THEN
++   IF GetWindowVar(WND,6)==C THEN
++    L=TXTBOXEX_NEXT[GetWindowVar(WND,1)]
++    IF L THEN
++     SetWindowVar WND,1,L
++    ENDIF
++   ENDIF
++   C=TXTBOXEX_NEXT[C]
++   SetWindowVar WND,2,C
++   TextBoxExRepaint WND
++  ENDIF
++  U=1
++ ENDIF
++ IF BTN AND 4THEN
++  VAR CX=GetWindowVar(WND,3)
++  IF CX THEN SetWindowVar WND,3,CX-1
++   TextBoxExRepaint WND
++  U=1
++ ENDIF
++ IF BTN AND 8THEN
++  CX=GetWindowVar(WND,3)
++  C=GetWindowVar(WND,2)
++  SetWindowVar WND,3,CX+1
++  TextBoxExRepaint WND
++  U=1
++ ENDIF
++ IF U THEN
++  IF R==0 THEN
++   SetWindowVar WND,5,20
++  ELSE
++   SetWindowVar WND,5,3
++  ENDIF
++  SetWindowVar WND,4,MAINCNT
++ ENDIF
++END
++COMMON DEF TextBoxExKey WND,CTL,T,KEY,_
++ VAR C=GetWindowVar(WND,2)
++ VAR X=GetWindowVar(WND,3)
++ VAR K$=CHR$(KEY)
++ IF K$==CR$()THEN K$=LF$()
++ IF K$==BS$()THEN
++  IF X>0THEN
++   TXTBOXEX_VAL$[C]=RemoveStr$(TXTBOXEX_VAL$[C],X-1,1)
++   SetWindowVar WND,3,X-1
++  ENDIF
++ ELSE
++  IF K$==LF$()THEN
++   SetWindowVar WND,2,TXTED_NewLine(MID$(TXTBOXEX_VAL$[C],X,LEN(TXTBOXEX_VAL$[C])-X),C)
++   SetWindowVar WND,3,0
++   TXTBOXEX_VAL$[C]=MID$(TXTBOXEX_VAL$[C],0,X)+K$
++   IF GetWindowVar(WND,6)==C THEN
++    VAR L=TXTBOXEX_NEXT[GetWindowVar(WND,1)]
++    IF L THEN
++     SetWindowVar WND,1,L
++    ENDIF
++   ENDIF
++  ELSE
++   TXTBOXEX_VAL$[C]=InsertStr$(TXTBOXEX_VAL$[C],X,K$)
++   SetWindowVar WND,3,X+1
++  ENDIF
++ ENDIF
++ TextBoxExRepaint WND
++END
++VAR RTXTEDVAR
++VAR RTXTEDDIM
++VAR RTXTEDFOR
++VAR RTXTEDNEXT
++VAR RTXTEDBREAK
++VAR RTXTEDCONTINUE
++VAR RTXTEDREPEAT
++VAR RTXTEDDATA
++VAR RTXTEDREAD
++VAR RTXTEDCOMMON
++VAR RTXTEDDEF
++VAR RTXTEDEND
++VAR RTXTEDIF
++VAR RTXTEDENDIF
++VAR RTXTEDPRINT
++VAR RTXTEDREM
++COMMON DEF TXTED_PRGPRINT WND,X,Y,P$
++ VAR L=LEN(P$)-1,I,A
++ VAR _0=ASC("0"),_9=ASC("9"),_Q=34
++ VAR _S=ASC("'"),_A=ASC("A"),_Z=ASC("Z")
++ VAR _LA=ASC("a"),_LZ=ASC("z"),__=ASC("_")
++ VAR S
++ FOR I=0TO L
++  A=ASC(P$[I])
++  IF A>=_A&&A<=_Z||A>=_LA&&A<=_LZ||A==__ THEN 
++   S=I
++   FOR I=I+1 TO L
++    A=ASC(P$[I])
++    IF A>=_A&&A<=_Z||A>=_LA&&A<=_LZ||A==__ THEN CONTINUE
++    IF A>=_0&&A<=_9 THEN CONTINUE
++    BREAK
++   NEXT
++   VAR I$=MID$(P$,S,I-S)
++   IF CHKVAR("RTXTED"+I$)THEN
++    GPRINTWindow WND,X,Y,I$,RGB(0,198,247)
++   ELSE
++    GPRINTWindow WND,X,Y,I$,RGB(0,0,0)
++   ENDIF
++   INC X,LEN(I$)*8
++   DEC I
++   CONTINUE
++  ENDIF
++  IF A==_Q THEN
++   GCHARWindow WND,X,Y,A,RGB(99,132,247)
++   INC X,8
++   FOR I=I+1 TO L
++    A=ASC(P$[I])
++    GCHARWindow WND,X,Y,A,RGB(99,132,247)
++    INC X,8
++    IF A==_Q THEN BREAK
++   NEXT
++   IF A!=_Q THEN BREAK
++   IF I==L THEN BREAK
++   CONTINUE
++  ENDIF
++  IF A==_S THEN
++   FOR I=I TO L
++    A=ASC(P$[I])
++    GCHARWindow WND,X,Y,A,RGB(33,247,16)
++    INC X,8
++   NEXT
++   BREAK
++  ENDIF
++  IF A>=_0&&A<=_9 THEN
++   GCHARWindow WND,X,Y,A,RGB(247,69,149)
++  ELSE
++   GCHARWindow WND,X,Y,A,RGB(0,0,0)
++  ENDIF
++  INC X,8
++ NEXT
++END

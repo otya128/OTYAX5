@@ -1,0 +1,366 @@
+diff -u OTW.TXT OTW15
+--- OTW.TXT
++++ OTW15
+@@ -180,6 +180,7 @@
+ VAR CTL_BTNUPFLG
+ VAR CTL_WINDOWCTL
+ VAR CTL_BUTTONCTL
++VAR CTL_TGLBTNCTL
+ VAR CTL_TXTBOXCTL
+ DEF OTW_CTL_INITARRAY
+  CTL_MAX=64
+@@ -226,11 +227,15 @@
+  E=SetControlClickFrameHandler(CTL_WINDOWCTL,"WindowClickFrame")
+  E=SetControlPainter(CTL_BUTTONCTL,"ButtonPainter")
+  E=SetControlLMouseUpHandler(CTL_BUTTONCTL,"ButtonLMouseUP")
++ E=SetControlLMouseDownHandler(CTL_BUTTONCTL,"ToggleButtonLMouseDown")
+  E=SetControlPainter(CTL_TXTBOXCTL,"TextBoxPainter")
+  E=SetControlLMouseDownHandler(CTL_TXTBOXCTL,"TextBoxLMouseDown")
+  E=SetControlKeyHandler(CTL_TXTBOXCTL,"TextBoxKey")
+  E=SetControlButtonHandler(CTL_TXTBOXCTL,"TextBoxButton")
+  E=SetControlChFocusHandler(CTL_TXTBOXCTL,"TextBoxChFocus")
++ ExtendControl "ToggleButton",CTL_BUTTONCTL OUT CTL_TGLBTNCTL,E
++ E=SetControlLMouseUpHandler(CTL_TGLBTNCTL,"ToggleButtonLMouseUP")
++ E=SetControlLMouseDownHandler(CTL_TGLBTNCTL,"ToggleButtonLMouseDown")
+  INIT_TXTBOXEX
+ END
+ DEF OTW_INITLIST ARY[]
+@@ -257,6 +262,9 @@
+ COMMON DEF GetButtonControl()
+  RETURN CTL_BUTTONCTL
+ END
++COMMON DEF GetToggleButtonControl()
++ RETURN CTL_TGLBTNCTL
++END
+ COMMON DEF GetTextBoxControl()
+  RETURN CTL_TXTBOXCTL
+ END
+@@ -1371,17 +1379,39 @@
+ DEF ButtonPainter W,C,T,A1,A2
+  VAR E=GBeginWindow(W)
+  IF E THEN RETURN
++ VAR TG=GetWindowVar(W,1)
+  VAR HE=GetWindowHeight(W)
+  VAR WI=GetWindowWidth(W)
+  VAR NA$=GetWindowName$(W)
++ VAR B1=RGB(0,0,0)
++ VAR B2=-1
++ IF TG THEN SWAP B1,B2
+  GFILLWindow W,0,0,WI,HE,RGB(192,192,192)
+- GBOXWindow W,0,0,WI,HE,RGB(0,0,0)
+- GPRINTWindow W,(WI-GetTextWidth(NA$))/2,(HE-6)/2,NA$,RGB(0,0,0)
++ GPRINTWindow W,(WI-GetTextWidth(NA$)-2)/2+TG+1,(HE-6)/2+TG,NA$,RGB(0,0,0)
++ GBOXWindow W,0,0,WI,HE,B1
++ GLINEWindow W,0,0,0,HE-1,B2
++ GLINEWindow W,0,0,WI-1,0,B2
+  E=GEndWindow(W)
+ END
+ DEF ButtonLMouseUP W,C,T,X,Y
+  VAR E=SendNotificationWindow(GetParentWindow(W),W,GetWindowVar(W,0))
++ SetWindowVar W,1,FALSE
++ ButtonPainter W,C,T,0,0
+ END
++DEF ButtonLMouseDown W,C,T,X,Y
++ SetWindowVar W,1,TRUE
++ ButtonPainter W,C,T,0,0
++END
++DEF ToggleButtonLMouseUP W,C,T,X,Y
++ VAR E=SendNotificationWindow(GetParentWindow(W),W,GetWindowVar(W,0))
++'SetWindowVar W,1,FALSE
++ ButtonPainter W,C,T,0,0
++END
++DEF ToggleButtonLMouseDown W,C,T,X,Y
++ VAR F=GetWindowVar(W,1)
++ SetWindowVar W,1,!F
++ ButtonPainter W,C,T,0,0
++END
+ 'PlainTextBox
+ DEF TextBoxPainter W,C,T,A1,A2
+  VAR E=GBeginWindow(W)
+@@ -1607,7 +1637,7 @@
+   LOCATE 0,29
+   NewProcess"LAUNCHER","" OUT E,E,E
+   DEC FM,FREEMEM
+-  PrintConsole FORMAT$("UsingMemory8192KB/%DKB",FM/1024)+LF$()
++'  PrintConsole FORMAT$("UsingMemory8192KB/%DKB",FM/1024)+LF$()
+  ENDIF
+ RETURN
+ END
+@@ -1800,7 +1830,7 @@
+   E=SetControlPainter(LAUNCHERCTL,"LauncherPainter")
+   E=SetControlLMouseUpHandler(LAUNCHERCTL,"LauncherLMouseUP")
+  ELSE
+-  LAUNCHERLEN=7
++  LAUNCHERLEN=8
+   LAUNCHERITEM$=NewArray$(LAUNCHERLEN)
+   LAUNCHERITEM$[0]="WCLOCK"
+   LAUNCHERITEM$[1]="RUN"
+@@ -1809,6 +1839,7 @@
+   LAUNCHERITEM$[4]="PAINT"
+   LAUNCHERITEM$[5]="TXTED"
+   LAUNCHERITEM$[6]="PRGED"
++  LAUNCHERITEM$[7]="OTYDOC"
+   ExtendControl "LAUNCHER",GetWindowControl() OUT LAUNCHERCTL,E
+   I_LAUNCHER
+  ENDIF
+@@ -2530,7 +2561,209 @@
+  IF UpdateWindow(GetProcessVar())THEN ExitProcess 1
+ END
+ '===OTYA DOCUMENT EDITOR===
++COMMON DEF RichTextBold()
++ RETURN 1
++END
++COMMON DEF RichTextItalic()
++ RETURN 2
++END
++COMMON DEF RichTextStrike()
++ RETURN 4
++END
++COMMON DEF RichTextUnderLine()
++ RETURN 8
++END
++COMMON DEF RICHTEXTWindow WND,X,Y,C,STYLE,SIZE,COL
++ VAR I
++ IF SIZE==8&&!(STYLE AND 3)THEN
++  GPUTCHRWindow WND,X,Y,C,COL
++ ELSE
++  GPUTCHRWindow WND,X,Y,C,COL
++ ENDIF
++ IF STYLE AND 4THEN
++  GLINEWindow WND,X,Y+SIZE/2,X+SIZE,Y+SIZE/2,COL
++ ENDIF
++ IF STYLE AND 8THEN
++  GLINEWindow WND,X,Y+SIZE,X+SIZE,Y+SIZE,COL
++ ENDIF
++END
+ VAR OTYDOCCTL
++VAR OTYDOC_WNDCTL
++VAR OTYDOC_FREE
++DIM OTYDOC_LINE[0]
++DIM OTYDOC_NEXT[0]
++DIM OTYDOC_PREV[0]
++DIM OTYDOC_VAL$[0]
++'LINE SIZE
++DIM OTYDOC_SIZE[0]
++VAR OTYDOC_LINESIZ
++
++VAR OTYDOC_WFREE
++VAR OTYDOC_WSIZ
++DIM OTYDOC_WNEXT[0]
++DIM OTYDOC_WPREV[0]
++DIM OTYDOC_ShowLine[0]
++DIM OTYDOC_CurLine[0]
++DIM OTYDOC_WSIZE[0]
++DIM OTYDOC_STYLE[0]
++DIM OTYDOC_COL[0]
++DIM OTYDOC_CX[0]
++COMMON DEF INIT_OTYDOC
++ VAR E
++ IF!OTYDOCCTL THEN
++  NewControl "OTYDoc" OUT OTYDOCCTL,E
++  E=SetControlPainter(OTYDOCCTL,"OTYDocPainter")
++  E=SetControlKeyHandler(OTYDOCCTL,"OTYDocKey")
++  E=SetControlButtonHandler(OTYDOCCTL,"OTYDocButton")
++  E=SetControlChFocusHandler(OTYDOCCTL,"OTYDocChFocus")
++  OTYDOC_LINESIZ=1024
++  OTYDOC_VAL$=NewArray$(OTYDOC_LINESIZ)
++  OTYDOC_LINE=NewArray(OTYDOC_LINESIZ)
++  OTYDOC_NEXT=NewArray(OTYDOC_LINESIZ)
++  OTYDOC_PREV=NewArray(OTYDOC_LINESIZ)
++  OTYDOC_SIZE=NewArray(OTYDOC_LINESIZ)
++  OTYDOC_FREE=1
++  VAR I
++  FOR I=1TO OTYDOC_LINESIZ-2
++   OTYDOC_NEXT[I]=I+1
++  NEXT
++  OTYDOC_WSIZ=16
++  OTYDOC_WNEXT=NewArray(OTYDOC_WSIZ)
++  OTYDOC_WPREV=NewArray(OTYDOC_WSIZ)
++  OTYDOC_ShowLine=NewArray(OTYDOC_WSIZ)
++  OTYDOC_CurLine=NewArray(OTYDOC_WSIZ)
++  OTYDOC_WSIZE=NewArray(OTYDOC_WSIZ)
++  OTYDOC_STYLE=NewArray(OTYDOC_WSIZ)
++  OTYDOC_COL=NewArray(OTYDOC_WSIZ)
++  OTYDOC_CX=NewArray(OTYDOC_WSIZ)
++  OTYDOC_WFREE=1
++  FOR I=1TO OTYDOC_WSIZ-2
++   OTYDOC_WNEXT[I]=I+1
++  NEXT
++ ENDIF
++END
++DEF OTYDOC_NewLINE(V$,P)
++ VAR R=OTYDOC_FREE
++ OTYDOC_FREE=OTYDOC_NEXT[OTYDOC_FREE]
++ IF P THEN
++  OTYDOC_LINE[R]=OTYDOC_LINE[P]+1
++ ELSE
++  OTYDOC_LINE[R]=1
++ ENDIF
++ VAR N
++ IF P THEN
++  N=OTYDOC_NEXT[P]
++  OTYDOC_NEXT[P]=R
++ ENDIF
++ OTYDOC_VAL$[R]=V$
++ OTYDOC_NEXT[R]=N
++ OTYDOC_PREV[R]=P
++ IF N THEN
++  OTYDOC_PREV[N]=R
++ ENDIF
++ OTYDOC_SIZE[R]=8
++ RETURN R
++END
++DEF OTYDOC_DeleteLine(L)
++ IF!L THEN RETURN 0
++ VAR N=OTYDOC_NEXT[L]
++ VAR P=OTYDOC_PREV[L]
++ IF N THEN
++  OTYDOC_PREV[N]=P
++ ENDIF
++ IF P THEN
++  OTYDOC_NEXT[P]=N
++ ENDIF
++ OTYDOC_NEXT[L]=OTYDOC_FREE
++ OTYDOC_FREE=L
++ IF P THEN RETURN P
++ IF N THEN RETURN N
++ RETURN 0
++END
++DEF OTYDOC_NewCTL WND
++ VAR R=OTYDOC_WFREE
++ OTYDOC_WFREE=OTYDOC_WNEXT[OTYDOC_WFREE]
++ OTYDOC_SetData WND,R
++END
++DEF OTYDOC_DeleteCTL WND
++ VAR L=OTYDOC_GetData(WND)
++ IF!L THEN RETURN
++ OTYDOC_SetData WND,0
++ OTYDOC_WNEXT[L]=OTYDOC_WFREE
++ OTYDOC_WFREE=L
++ RETURN
++END
++'
++DEF OTYDOC_GetData(WND)
++ RETURN GetWindowVar(WND,0)
++END
++DEF OTYDOC_SetData WND,L
++ SetWindowVar WND,0,L
++END
++'====EVENT HANDLER====
++COMMON DEF OTYDocCreate WND,CTL,TYPE,A1,A2
++END
++COMMON DEF OTYDocPainter WND,CTL,TYPE,A1,A2
++ OTYDOCRepaint WND
++END
++DEF OTYDOCRepaint WND
++ IF GBeginWindow(WND)THEN RETURN
++ GCLSWindow WND,RGB(255,255,255)
++ VAR W=GetWindowWidth(WND)
++ VAR H=GetWindowHeight(WND)
++ GBOXWindow WND,0,0,W,H,RGB(0,0,0)
++ IF!OTYDOC_GetData(WND)THEN OTYDOC_NewCTL WND
++ VAR D=OTYDOC_GetData(WND)
++ VAR I=OTYDOC_ShowLine[D]
++ VAR Y=2,X=2
++ VAR ST=0
++ VAR SZ=8
++ VAR COL=RGB(0,0,0)
++ WHILE I
++  VAR YSZ=OTYDOC_SIZE[I]
++  VAR V$=OTYDOC_VAL$[I]
++  VAR A
++  VAR L=LEN(V$)-1,J,C
++  X=1
++  FOR J=0TO L
++   C=ASC(V$[J])
++   IF C==&Hb10bTHEN
++    INC J
++    C=ASC(V$[J])
++    INC J
++    A=ASC(V$[J])
++    ON C GOTO@FNT,@COL
++    CONTINUE
++    @FNT
++    SZ=A
++    CONTINUE
++    @COL
++    COL=ShortToRGB(A)
++    CONTINUE
++   ENDIF
++   RICHTEXTWindow WND,X,Y+YSZ-SZ,C,ST,SZ,COL
++   ?HEX$(COL)
++   INC X,SZ
++  NEXT
++  INC Y,YSZ
++  I=OTYDOC_NEXT[I]
++ WEND
++ VAR E=GEndWindow(WND)
++END
++COMMON DEF OTYDocChFocus WND,CTL,TYPE,A1,A2
++END
++COMMON DEF OTYDocKey WND,CTL,TYPE,KEY,A2
++ VAR D=OTYDOC_GetData(WND)
++ VAR S=OTYDOC_ShowLine[D]
++ VAR C=OTYDOC_CurLine[D]
++ IF!S THEN
++  S=OTYDOC_NewLine("This is Test",0)
++  OTYDOC_ShowLine[D]=S
++  OTYDOC_CurLine[D]=S
++ ENDIF
++ OTYDOCRepaint WND
++END
++'====EVENT HANDLER====
+ COMMON DEF I_OTYDOC
+  IF!CHKCALL("IsWinRunning")||!IsWinRunning()THEN
+   PrintConsole "Require window system"+LF$()
+@@ -2538,17 +2771,46 @@
+   RETURN
+  ENDIF
+  VAR WND,E
+- IF!OTYDOCCTL THEN
+-  ExtendControl "OTYDOC",GetWindowControl() OUT OTYDOCCTL,E
++ IF!OTYDOC_WNDCTL THEN
++  INIT_OTYDOC
++  ExtendControl "OTYDOC",GetWindowControl() OUT OTYDOC_WNDCTL,E
+  ENDIF
+- NewTopLevelWindow OTYDOCCTL,"OTYDOC",128,128 OUT WND,E
++ NewTopLevelWindow OTYDOC_WNDCTL,"OTYDOC",256,128 OUT WND,E
+  SetProcessVar WND
++ NewWindow OTYDOCCTL,"OTYDOC",0,12,256,120,WND,0 OUT E,E
++ NewWindow GetToggleButtonControl(),"B",0,0,11,11,WND,0 OUT E,E
+ END
+ COMMON DEF L_OTYDOC
+  IF UpdateWindow(GetProcessVar())THEN ExitProcess 1
+ END
+ '===OTYA DOCUMENT EDITOR===
+-
++DIM OTYFILICOTXT[0]
++DIM OTYFILICODAT[0]
++COMMON DEF RC_OTYFIL
++ DIM ICONS[512]
++ LOAD"DAT:OTYFILRC",ICONS,0
++ OTYFILICOTXT=NewArray(16*16)
++ OTYFILICODAT=NewArray(16*16)
++ COPY OTYFILICOTXT,ICONS,0,16*16
++ COPY OTYFILICODAT,ICONS,16*16,16*16
++END
++VAR OTYFILCTL
++COMMON DEF I_OTYFIL
++ IF!CHKCALL("IsWinRunning")||!IsWinRunning()THEN
++  PrintConsole "Require window system"+LF$()
++  ExitProcess 1
++  RETURN
++ ENDIF
++ VAR WND,E
++ IF!OTYFILCTL THEN
++  ExtendControl "Files",GetWindowControl() OUT OTYFILCTL,E
++ ENDIF
++ NewTopLevelWindow OTYFILCTL,"Files",128,128 OUT WND,E
++SetProcessVar WND
++END
++COMMON DEF L_OTYFIL
++ IF UpdateWindow(GetProcessVar())THEN ExitProcess 1
++END
+ DEF OTW_LOADFONT
+  'LOAD FONT-1
+  VAR C$
