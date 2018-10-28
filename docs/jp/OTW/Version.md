@@ -409,6 +409,77 @@ TODO:
 SetWindowVisible WND,FLG
 GetWindowVisible(WND)
 
+# OTW5.0-1D
++ ClearClipboard
++ ClipboardContainsText()
++ ClipboardGetText()
++ ClipboardSetText V$
++ SetWindowBackColor WND,RGB
++ GetWindowBackColor(WND)
++ windowのクリッピング処理を結構修正
++ WindowResizableStyle()で枠を太く
++ カーソル追加(暫定)
++ マウスに影を追加
++ SetControlDeleteHandler(CTL,HANDLER$)
++ SetControlLDoubleClickHandler(CTL,HANDLER$)
++ SetControlMouseLeaveHandler(CTL,HANDLER$)
++ window frameでマウスが離れたときにCTL_LEAVEFLGがセットされる
++ ODSK追加
+
+# OTW5.0-1C
+プチコン3.1対応版
+
++ 余分に1ピクセルマウスをクリッピングしていた問題を修正
++ GCIRCLE2Window WND,X,Y,R,S,E,F,COL
++ GTRIWindow WND,X,Y,X2,Y2,X3,Y3,COL
++ GPRINTWindow GPRINTBWindow GPUTCHRWindow GPUTCHRBWindowでGPUTCHRを使うように
++ window描画を若干修正
++ OTYFILの更新
++ TRIAN追加(GTRIのテスト)
+
+# OTW5.0-1B
++ OTWの起動時に初期化メッセージを表示するように
++ IMAGE APIを追加
++ NewImage WIDTH,HEIGHT OUT IMG,E
++ CheckImage(IMG)
++ DeleteImage(IMG)
++ FindControl(NAME$)
++ GCLIPを戻す処理で1ピクセル縦に余分にクリッピングしていた問題を修正
++ GetWindowName$をSetWindowNameでウィンドウの確認をするように
++ GSAVEImage IMG,WND,X,Y,W,H,IX,IY
++ GLINEArrayMemoryで色を物理色に変換するように
++ 起動音追加
++ LAUNCHERに項目を追加
++ OTYDOCの色々
++ MPLAYを追加
+
+## 破壊的変更
++ NewOpenFileDialog(OWNER)からOpenFileDialog(OWNER,TYPE$)
+
+# OTW5.0-1A
+
+## 変更点
++ SetControlStrNotifHandler
++ SendStrNotifWindow(WND,A1,STR$)
++ ListBoxコントロールを追加
++ GetListBoxControl()
++ WindowMenuStyle()
++ WindowResizableStyle()
++ DeleteControl(CTL)でエラーが出る問題を修正
++ windowでLMouseDown/LMouseUpではなくChFocusイベント時にFrontWindowを呼ぶように
++ NewTopLevelStyleWindow
++ TextBoxExのsyntaxhighlightに予約語を追加
++ TextBoxExSetText WND,TXT$
++ TXTED/PRGEDにメニューを追加
++ NewModalDialogBox(CTL,NAME$,WIDTH,HEIGHT,OWNER)を追加
++ NewModelessDialogBox(CTL,NAME$,WIDTH,HEIGHT,OWNER)を追加
++ ActiveWindow(WND)
++ IsFocusWindow(WND)を追加
++ IsActiveWindow(WND)の挙動が親ウィンドウがアクティブになっていてもTRUEを返すように
++ AddListBoxItem WND,ITEM$
++ IncScrollBarSize W
++ NewOpenFileDialog(OWNDER)を追加
+
 # OTW5.0-19
 
 ## 追加
@@ -490,3 +561,6 @@ OTYFILにスクロールバーを追加
 + スクロールバーの移動をボタン以外で出来るように
 + MOUSEMOVEでの移動が範囲外でもクリックしている場合は取得出来るように
 + メニューの実装
+
+# OTW5.0-17
+有史以前の記録はcommit差分を見よ
