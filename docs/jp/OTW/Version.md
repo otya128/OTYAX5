@@ -2,6 +2,61 @@
 layout: default
 title: OTW version
 ---
+
+# OTW5.0-35
+* Window frame描画の書き直し#4(大体完了)
+ * メニューがくぼむように
+ * メニューの選択処理を修正
+ * windowが移動中にメニューなどが選択されないように
+ * 非アクティブになったときウィンドウの色を暗くするように
+* IsMenuShown(MENU)を追加
+* メニューが表示されているときに新たにメニューが表示されようとしたとき正常に表示されるように修正
+* ContainsSubMenu(MENU,MENUC)を追加
+* GetMenuFromWindow(WND)を追加
+* GetMenuOwner(MENU)を追加
+* HasActiveWindow(WND)を追加
+* DeleteWindowでアクティブウィンドウを削除するとき親ウィンドウにフォーカスが当たるように修正
+* WindowInactiveEvent()を追加
+* FocusWindowでフォーカスが当たる先が同じウィンドウに属する場合WindowActiveEventとWindowInactiveEventが送られないように
+* window移動枠描画で枠が残ることがあった問題を修正
+
+# OTW5.0-34
+* Window frame描画の書き直し#3
+ * window captionをクリッピングするように
+ * 最大化対応
+ * ボタンがくぼむように
+ * メニューを選択し表示できるように
+ * window移動枠描画処理をCALL命令で実装
+* ShowMenu MENU,WND,X,Yを追加
+* IsMenuWindow(WND)を追加
+* QueryWindowFrameSize WND OUT W1,H1,W2,H2,Eを追加
+* GetCaptureEx OUT WND,FRMを追加
+* SetCaptureEx(WND,FRM)を追加
+* GCLIPWindowがGBeginFrameWindowに対応
+* RIMで変換候補ウィンドウの高さが微妙だったのを修正
+
+## 破壊的変更
+* EnumerateMenu MENU,C OUT STR$,C2,EからEnumerateMenu MENU,C OUT STR$,C2,CHILD,E
+
+# OTW5.0-33
+## 変更点
+* Window frame描画の書き直し#2(当たり判定処理を追加)
+* EYESの描画処理を差分だけにしたらヌルヌル動いて気持ちが悪い
+* CheckMenu(MENU)でMENUが0の時必ずFALSEを返す
+* EnumerateMenu MENU,C OUT STR$,C2,Eを追加
+* GetWindowSize WND,FRM OUT W,H,Eを追加
+* NewWindowMoveFrame(WND,X,Y,WIDTH,HEIGHT,MODE,CALLBACK$)を追加
+* window移動枠描画処理をスプライトとXOR描画選択可能に
+* SetWindowStyle WND,STYLEを追加
+
+# OTW5.0-32
+## 変更点
+* Window frame描画の書き直し#1
+ * borderを1pixel太く
+ * 拡張性を上げた
+* WindowMaximizedStyle()を追加
+* WindowMinimizedStyle()を追加
+
 # OTW5.0-31
 
 ## 変更点
