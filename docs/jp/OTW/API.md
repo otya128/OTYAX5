@@ -96,7 +96,11 @@ rootウィンドウ
 argに対象ウィンドウ
 
 #### type:WindowActiveEvent()
-ウィンドウがアクティブになったときに贈られる
+ウィンドウがアクティブになったときに送られる
+argに対象ウィンドウ
+
+#### type:WindowInactiveEvent()
+ウィンドウが非アクティブになったときに送られる
 argに対象ウィンドウ
 
 #### type:WindowRestoreEvent()
@@ -216,6 +220,10 @@ NewWindowで指定するフラグ, ウィンドウを常にOwner windowより前
 ### GetWindowHeight(WND)
 ウィンドウの高さを取得
 
+### GetWindowSize WND,FRM OUT W,H,E
+ウィンドウの大きさを取得
+FRM=TRUEの時フレームの大きさを含んでいる
+
 ### GetWinVer$()
 バージョンを取得("5.0"など)
 
@@ -285,6 +293,12 @@ WNDに対してマウスキャプチャを開始,MouseMoveイベントが全てW
 ### ReleaseCapture(WND)
 WNDに対してのマウスキャプチャを終了,失敗すると0、成功すると1が返る
 
+### SetCaptureEx(WND,FRM)
+FRM=TRUEの時ウィンドウフレームに対してキャプチャ
+
+### GetCaptureEx OUT WND,FRM
+FRM=TRUEの時ウィンドウフレームに対してキャプチャ
+
 ### SetSysWindowProperty WND,PNAME$,VAL OUT ERR
 実装依存のプロパティ設定、OTW5.0-28では"SHADOW"を指定すると影の有無を切り替えられる
 
@@ -296,6 +310,9 @@ BASEWNDに対するWNDの位置を取得
 
 ### GetActiveWindow()
 現在のアクティブウィンドウを取得
+
+### HasActiveWindow(WND)
+子ウィンドウ孫ウィンドウがアクティブならばTRUE
 
 ### MaximizeWindow(WND)
 ウィンドウを最大化
@@ -311,6 +328,10 @@ BASEWNDに対するWNDの位置を取得
 
 ### GetWindowFrameSize WND OUT W1,H1,W2,H2,ERR
 ウィンドウフレームサイズを取得
+
+### QueryWindowFrameSize WND OUT W1,H1,W2,H2,E
+ウィンドウフレームサイズを計算
+GetWindowFrameSizeは実際の大きさを返すのに対しこの関数は計算をする
 
 ### FindWindowByControl(WND,CTL,EXTEND)
 WNDの子ウィンドウからCTLコントロールに一致するウィンドウを取得、EXTEND=TRUEの時IsControlExtendで判定(再帰的に探索しない)
@@ -708,11 +729,11 @@ MENUを作成
 ### SetMenuBar WND,MENU
 未実装
 
-### ShowMenu MENU,WND
-未実装,引数の順番が定まっていない
+### ShowMenu MENU,WND,X,Y
+MENUをWNDからの相対座標X,Yに表示
 
 ### ShowMenuXY MENU,WND,X,Y
-MENUをWNDからの相対座標X,Yに表示
+MENUを絶対座標X,Yに表示
 
 ### ShowMenuXY2 MENU,WND,X,Y
 ShowMenuXYと違いMENUの下部Yの座標を指定する
@@ -770,6 +791,32 @@ IVARがチェックされていればTRUE
 
 ### GetSubMenuByID MENU,ID OUT SUB
 サブメニューをIDから検索して取得(存在しなければ0)
+
+### EnumerateMenu MENU,C OUT STR$,C2,CHILD,E
+メニューの項目を列挙していく
+列挙中に項目を追加してはならない
+C2が0であれば列挙が終了したことを示す
+
+```
+WHILE C
+ EnumerateMenu MENU,C OUT STR$,C,CHILD,E
+WEND
+```
+
+### IsMenuWindow(WND)
+WNDがメニューそのもののウィンドウであればTRUE
+
+### GetMenuOwner(MENU)
+MENUを表示しているWNDを返す、MENUが表示されていなければ0を返す
+
+### GetMenuFromWindow(WND)
+メニューそのもののウィンドウからMENUを返す
+
+### ContainsSubMenu(MENU,MENUC)
+MENUがサブメニューをMENUCを含んでいればTRUE(再帰的に探索しない)
+
+### IsMenuShown(MENU)
+MENUが表示されていればTRUE
 
 ## Window Group
 ウィンドウグループ、これに入れると親子関係にないウィンドウもまとめて扱うことができるようになる
@@ -1135,3 +1182,27 @@ MUSICの音量を設定する(0~127)
 ### StopMusic MUSIC
 MUSICの再生を止める
 
+## その他
+### NewWindowMoveFrame(WND,X,Y,WIDTH,HEIGHT,MODE,CALLBACK$)
+XとYはマウスからの距離
+WIDTHとHEIGHTは未使用
+CALLBACK$は移動終了時にOTWのプロセスから呼び出される
+
+```
+COMMON DEF CALLBACK WND,X,Y,W,H
+```
+
+
+MODE=1の時移動
+MODE>=2の時下図方向に大きさを変更
+
+```
+ 2      3      4
+  +-----------+
+  |           |
+ 5|           |6
+  |           |
+  +-----------+
+ 7      8      9
+
+```

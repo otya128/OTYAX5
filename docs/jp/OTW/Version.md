@@ -19,6 +19,7 @@ title: OTW version
 * WindowInactiveEvent()を追加
 * FocusWindowでフォーカスが当たる先が同じウィンドウに属する場合WindowActiveEventとWindowInactiveEventが送られないように
 * window移動枠描画で枠が残ることがあった問題を修正
+* SetPropで無限ループに陥るバグを修正
 
 # OTW5.0-34
 * Window frame描画の書き直し#3
@@ -48,6 +49,7 @@ title: OTW version
 * NewWindowMoveFrame(WND,X,Y,WIDTH,HEIGHT,MODE,CALLBACK$)を追加
 * window移動枠描画処理をスプライトとXOR描画選択可能に
 * SetWindowStyle WND,STYLEを追加
+* メニューでエラーを返す処理を修正
 
 # OTW5.0-32
 ## 変更点
