@@ -472,6 +472,9 @@ TIMERが正常ならTRUE
 ### GBeginWindow(WND)
 描画開始を明示的に宣言する
 
+### GBeginFrameWindow(WND)
+描画開始を明示的に宣言する(ウィンドウの枠に対しても負座標で描画可能)
+
 ### GEndWindow(WND)
 描画終了を明示的に宣言する(GEndWindowEx(WND,TRUE)と等価)
 
@@ -520,9 +523,6 @@ TIMERが正常ならTRUE
 ### GLOADWindow WND,X,Y,W,H,IMG[],FLG,MODE
 
 
-### ~~GCOPYWindow WND...~~
-廃止予定
-
 ### GTRIWindow WND,X,Y,X2,Y2,X3,Y3,COL
 
 
@@ -542,6 +542,13 @@ TIMERが正常ならTRUE
 
 
 ### GCLIPWindow WND,X1,Y1,X2,Y2
+
+### ClearGCLIPWindow WND
+WNDのGCLIP指定を初期化する
+
+### CheckGBegin(WND)
+WNDがGBeginしていなければFALSEが返る
+(GBeginFrameWindowしたとき2、GBeginWindowしたとき1が返る)
 
 ### Graphic(その他)
 
@@ -1305,7 +1312,7 @@ DEF HOGE
 
  RESTORE @DATA
  IF 0 THEN DIM A[0]
- A=NewImageArrayFromDATA(1)
+ NewImageArrayFromDATA 1,1 OUT A,,
 END
 ```
 
