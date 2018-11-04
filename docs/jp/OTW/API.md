@@ -63,6 +63,7 @@ COMMONは付ける
 |SetControlChildWindowHandler(CTL,HANDLER$)|子ウィンドウから送られてくるイベントを受信|type|arg|
 |SetControlParentWindowHandler(CTL,HANDLER$)|親ウィンドウから送られてくるイベントを受信|type|arg|
 |SetControlQueryFrameHandler(CTL,HANDLER$)|ウィンドウのフレームの大きさを返す|STYLE|0|
+|SetControlContextMenuHandler(CTL,HANDLER$)|コンテキストメニューを表示する必要があるとき|表示すべきX|Y|
 
 ### 特殊Event Handler
 #### ControlStrNotifHandler
@@ -114,6 +115,12 @@ A1がtype
 
 #### type:ParentWindowResizeEvent()
 ウィンドウがリサイズされたときに呼ばれる
+
+#### type:WindowGroupActiveEvent()
+???
+
+#### type:WindowGroupInactiveEvent()
+???
 
 ### マウスの状態
 ```
@@ -180,6 +187,12 @@ NewWindowで指定するフラグ, ウィンドウを常にOwner windowより前
 
 ### WindowTopMostStyle()
 常に最前面に表示させるフラグ
+
+### WindowMaximizedStyle()
+最大化状態であることを表すフラグ
+
+### WindowMinimizedStyle()
+最小化状態であることを表すフラグ
 
 ### FrontWindow(WND)
 ウィンドウを手前に持ってくる
@@ -357,6 +370,11 @@ SPVARのようなWND固有の記憶域(0<=I<=7)
 ### SetWindowVar WND,I,V
 SPVARのようなWND固有の記憶域
 
+### IsParentWindow(PARENT,CHILD)
+CHILDの親ウィンドウにPARENTがあればTRUE(親ウィンドウが辿れなくなるまで調べる)
+
+### IsChildWindow(PARENT,CHILD)
+PARENTの子ウィンドウにCHILDウィンドウが含まれていればTRUE(再帰的に探索する)
 
 ## Window Property
 WindowVarは軽量だがキーと値が整数のみで利用しづらい場面がある
@@ -1155,7 +1173,7 @@ MODEがTRUEなら絶対座標でのマウス移動
 ## Sound
 BGMPLAYをBEEPのように自由に鳴らせるようにするAPI
 
-## IsValidMML(MML$)
+### IsValidMML(MML$)
 MML$が正常なMMLならTRUE
 
 ### PlayMML MML$ OUT MUSIC,ERR
@@ -1183,10 +1201,9 @@ MUSICの音量を設定する(0~127)
 MUSICの再生を止める
 
 ## その他
-### NewWindowMoveFrame(WND,X,Y,WIDTH,HEIGHT,MODE,CALLBACK$)
+### NewWindowMoveFrame(WND,X,Y,MODE,CALLBACK$)
 XとYはマウスからの距離
-WIDTHとHEIGHTは未使用
-CALLBACK$は移動終了時にOTWのプロセスから呼び出される
+CALLBACK$は移動終了時あるいは移動の度にOTWのプロセスから呼び出される
 
 ```
 COMMON DEF CALLBACK WND,X,Y,W,H

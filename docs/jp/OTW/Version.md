@@ -3,6 +3,23 @@ layout: default
 title: OTW version
 ---
 
+# OTW5.0-36
+* TextBoxでスクロール、選択、メニューなど出来るように
+* SetControlContextMenuHandlerを追加
+* メニューの諸々を修正
+* NewDialogBoxWithArgでCreateイベントが二回呼び出されていた問題を修正
+* IsParentWindowを追加
+* IsChildWindowを追加
+* WindowGroupActiveEvent()を追加
+* WindowGroupInactiveEvent()を追加
+* window controlの移動処理を修正
+* ウィンドウ移動枠の描画処理を修正
+* OTW_SMOOTH_MOVE_WINDOWに移動処理を対応
+* TextBoxEx RichTextEditorがコンテキストメニューイベントに対応
+* TSKBARでメニュー項目が何もないとき<NONE>が表示されるように
+* OTYMINEの描画を高速化
+* Eyesで幅高さが0の時エラーが出る問題を修正
+
 # OTW5.0-35
 * Window frame描画の書き直し#4(大体完了)
  * メニューがくぼむように
