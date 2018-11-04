@@ -17,8 +17,8 @@ title: OTW Input Method API
 
 |Function|Description|
 |---|---|
-|SetWindowCursor(WND,X,Y)|カーソル位置を設定(コンポジションウィンドウの位置)|
-|GetWindowCursor WND OUT X,Y,ERR|カーソル位置を取得、設定されていない場合はERRが0以外の値になる|
+|SetWindowIMCursor(WND,X,Y)|カーソル位置を設定(コンポジションウィンドウの位置)|
+|GetWindowIMCursor WND OUT X,Y,ERR|カーソル位置を取得、設定されていない場合はERRが0以外の値になる|
 |CheckIM(IM)|IMが正常かどうか|
 |SetIMKeyHandler(IM,FUNC$)|キーハンドラを設定|
 |SetIMDeleteHandler(IM,FUNC$)|削除ハンドラを設定|

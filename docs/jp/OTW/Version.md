@@ -2,8 +2,36 @@
 layout: default
 title: OTW version
 ---
+# OTW 5.0-37
+## 変更点
+* カーソル変更処理を実装
+* SetCursor(IMG)を追加
+* SetWindowCursor(WND,IMG)を追加
+* GetWindowCursor(WND)を追加
+* メニューの諸々を修正
+* ウィンドウの枠でカーソルが変化するように
+* ValidateMML MML$ OUT CHR,ERRを実装
+* DeleteImageのエラーコードを修正
+* TextBox TextBoxEx RichTextEditorでBeamのカーソルを表示させるように
+* NewImageArrayFromDATA D,PHYSICAL OUT ARY,W,Hを追加
+* NewImageFromDATA OUT IMG,ERRを追加
+* OTYMINEとマウスカーソルで上のAPIを使って画像を生成するように
+* RotateImage IMG,FLG OUT NEW_IMG,ERRを追加
+* SetImageAttr IMG,ATTR OUT ERRを追加
+* GetImageAttr IMG OUT ATTR,ERRを追加
+* GetImageFormat IMG OUT DIMEN,PHY,ERRを追加
+* SetImageHotspot IMG,X,Y OUT ERRを追加
+* GetImageHotspot IMG OUT X,Y,ERRを追加
+* GetImageSize IMG OUT W,H,ERRを追加
+* ImageAttr2Dim() ImageAttr1Dim() ImageAttrLogColor() ImageAttrPhysicalColor() ImageAttrPhy1Dim() ImageAttrHideShadow()を追加
+
+## 破壊的変更
+* NewImage ARRAY,WIDTH,HEIGHT OUT IMG,EからNewImage ATTR,ARRAY,WIDTH,HEIGHT OUT IMG,E
+* (旧)SetWindowCursorからSetWindowIMCursor
+* (旧)GetWindowCursorからGetWindowIMCursor
 
 # OTW5.0-36
+## 変更点
 * TextBoxでスクロール、選択、メニューなど出来るように
 * SetControlContextMenuHandlerを追加
 * メニューの諸々を修正
@@ -21,6 +49,7 @@ title: OTW version
 * Eyesで幅高さが0の時エラーが出る問題を修正
 
 # OTW5.0-35
+## 変更点
 * Window frame描画の書き直し#4(大体完了)
  * メニューがくぼむように
  * メニューの選択処理を修正
@@ -39,6 +68,7 @@ title: OTW version
 * SetPropで無限ループに陥るバグを修正
 
 # OTW5.0-34
+## 変更点
 * Window frame描画の書き直し#3
  * window captionをクリッピングするように
  * 最大化対応

@@ -376,6 +376,12 @@ CHILDの親ウィンドウにPARENTがあればTRUE(親ウィンドウが辿れ�
 ### IsChildWindow(PARENT,CHILD)
 PARENTの子ウィンドウにCHILDウィンドウが含まれていればTRUE(再帰的に探索する)
 
+### SetWindowCursor(WND,IMG)
+マウスの下にWNDがあるときに表示するマウスカーソル画像を設定
+
+### GetWindowCursor(WND)
+マウスの下にWNDがあるときに表示するマウスカーソル画像を取得
+
 ## Window Property
 WindowVarは軽量だがキーと値が整数のみで利用しづらい場面がある
 
@@ -1090,8 +1096,26 @@ MessageBoxが閉じられたときにWNDへ送信されるNotifID
 
 ## Image
 
-### NewImage ARRAY,WIDTH,HEIGHT OUT IMG,E
+### NewImage ATTR,ARRAY,WIDTH,HEIGHT OUT IMG,E
 画像を作成
+
+### ImageAttr2Dim()
+画像が二次元配列であることを示す
+
+### ImageAttr1Dim()
+画像が一次元配列であることを示す
+
+### ImageAttrLogColor()
+画像が論理色であることを示す
+
+### ImageAttrPhysicalColor()
+画像が物理色であることを示す
+
+### ImageAttrPhy1Dim()
+画像が物理色で一次元配列であることを示す
+
+### ImageAttrHideShadow()
+画像で影を表示させないことを示す(マウスカーソル用)
 
 ### LoadImage FILE$,W,H OUT IMG,E
 画像を二次元配列DATファイルから読み込み
@@ -1122,6 +1146,33 @@ MessageBoxが閉じられたときにWNDへ送信されるNotifID
 
 ### SaveImage(IMG,PATH$)
 IMGをGRP形式でPATH$に保存
+
+### GetImageSize IMG OUT W,H,ERR
+画像の大きさを取得
+
+### GetImageHotspot IMG OUT X,Y,ERR
+画像を表示する際基準となる位置を取得
+
+### SetImageHotspot IMG,X,Y OUT ERR
+画像を表示する際基準となる位置を設定
+
+### GetImageFormat IMG OUT DIMEN,PHY,ERR
+画像の内部形式を取得
+PHY=1の時物理色
+DIMENは配列の次元数
+
+### GetImageAttr IMG OUT ATTR,ERR
+画像の属性を取得
+
+### SetImageAttr IMG,ATTR OUT ERR
+画像の属性を設定
+
+### RotateImage IMG,FLG OUT NEW_IMG,ERR
+画像を回転して新しい画像を生成
+FLGにはスプライトの90,180,270,縦反転,横反転フラグを指定する
+
+### NewImageFromDATA OUT IMG,ERR
+DATAから画像を生成(NewImageArrayFromDATA D,PHYSICAL OUT ARY,W,H参照)
 
 ## 関連付け
 
@@ -1223,3 +1274,80 @@ MODE>=2の時下図方向に大きさを変更
  7      8      9
 
 ```
+
+### NewImageArrayFromDATA D,PHYSICAL OUT ARY,W,H
+事前にRESTOREされたDATAから画像配列を生成する
+(SmileBASICのDATAは関数内と関数外の区別が無い)
+D次元配列で生成する
+PHYSICAL=0の時論理色になりそれ以外の場合物理色
+正常に生成できなかった場合要素長0(D!=2)または0,0(D=2)の配列を返す
+
+
+```
+DEF HOGE
+ @DATA
+ DATA "A",&HFF00FF00
+ DATA "B",&HFF0000FF
+ DATA ""
+ DATA 12,12
+ DATA "ABABABABABAB"
+ DATA "BABABABABABA"
+ DATA "ABABABABABAB"
+ DATA "BABABABABABA"
+ DATA "ABABABABABAB"
+ DATA "BABABABABABA"
+ DATA "ABABABABABAB"
+ DATA "BABABABABABA"
+ DATA "ABABABABABAB"
+ DATA "BABABABABABA"
+ DATA "ABABABABABAB"
+ DATA "BABABABABABA"
+
+ RESTORE @DATA
+ IF 0 THEN DIM A[0]
+ A=NewImageArrayFromDATA(1)
+END
+```
+
+```
+DATA "color-name",color
+DATA "color-name",color
+...
+DATA ""
+DATA width,height
+DATA "..."
+DATA "..."
+DATA "..."
+...
+```
+
+## Cursor
+
+### GetArrowCursor()
+極めて一般的な形状のマウスカーソル
+
+### GetSizeNSCursor()
+⬍
+
+### GetSizeWECursor()
+⬌
+
+### GetSizeNWSECursor()
+⤡
+
+### GetSizeNESWCursor()
+⤢
+
+### GetWaitCursor()
+⌛
+
+### GetBeamCursor()
+⌶
+
+### ResetCursor(IMG)
+現在のカーソルを設定(すでに同じ画像が設定されている場合も更新する)
+
+### SetCursor(IMG)
+現在のカーソルを設定(すでに同じ画像が設定されている場合更新しない)
+IMGを書き換えた場合でない限り通常こちらの関数を使ってマウスカーソルを設定すべき
+IMG=0の時ArrowCursor
