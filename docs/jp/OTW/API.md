@@ -143,18 +143,6 @@ A1がtype
 ### CheckWindow(WND)
 ウィンドウが正常ならTRUE
 
-### WindowBackFlag()
-NewWindowで指定するフラグ, ウィンドウを後ろに配置する
-
-### WindowFrontFlag()
-NewWindowで指定するフラグ, ウィンドウを前に配置する
-
-### WindowHideFlag()
-NewWindowで指定するフラグ, ウィンドウを非表示にする
-
-### WindowToolFlag()
-NewWindowで指定するフラグ, ウィンドウを常にOwner windowより前に表示にする
-
 ### NewWindow CTL,NAME$,X,Y,WIDTH,HEIGHT,PARENT,FLG OUT WND,ERR
 コントロールと名前と座標とサイズと親ウィンドウとフラグを使ってウィンドウを作成
 
@@ -172,27 +160,6 @@ NewWindowで指定するフラグ, ウィンドウを常にOwner windowより前
 
 ### NewTopLevelStyleWindow CTL,NAME$,WIDTH,HEIGHT,FLG,STYLE
 スタイル指定されたトップレベルウィンドウ作成
-
-### WindowMenuStyle()
-メニュー付きにさせるフラグ
-
-### WindowResizableStyle()
-リサイズ可能にさせるフラグ
-
-### WindowHideStyle()
-非表示にさせるフラグ
-
-### WindowNarrowStyle()
-タイトルバーの幅を小さくさせるフラグ
-
-### WindowTopMostStyle()
-常に最前面に表示させるフラグ
-
-### WindowMaximizedStyle()
-最大化状態であることを表すフラグ
-
-### WindowMinimizedStyle()
-最小化状態であることを表すフラグ
 
 ### FrontWindow(WND)
 ウィンドウを手前に持ってくる
@@ -217,6 +184,12 @@ NewWindowで指定するフラグ, ウィンドウを常にOwner windowより前
 
 ### CallBaseControlHandler(WND,CTL,TYPE,A1,A2)
 (イベントのハンドラーで)親ハンドラを呼び出し
+TYPEでイベントの種類を識別する
+```
+COMMON DEF EventHandler WND,CTL,TYPE,A1,A2
+  VAR ERROR=CallBaseControlHandler(WND,CTL,TYPE,A1,A2)
+END
+```
 
 ### PeekWindowEvent(WND)->OUT CTL,TYPE,A1,A2
 ウィンドウのイベントキューの先頭を削除せずに帰す
@@ -271,25 +244,7 @@ FRM=TRUEの時フレームの大きさを含んでいる
 非表示ウィンドウを表示させる
 
 ### HideWindow(WND)
-ウィンドウを非表示にする(bug?)
-
-### SetWindowBackColor WND,RGB
-ウィンドウの背景色を設定
-
-### SetWindowBackColor(WND)
-ウィンドウの背景色を取得
-
-### GetBackColor()
-ウィンドウのデフォルト背景色を取得
-
-### GetSelectionColor()
-選択時の背景色を取得
-
-### GetSelectionTextColor()
-選択時のテキスト色を取得
-
-### GetWorkspaceColor()
-作業領域背景色を取得
+ウィンドウを非表示にする
 
 ### GetWindowMinSize WND OUT W,H
 ウィンドウの最小サイズを取得(リサイズ用)
@@ -382,6 +337,47 @@ PARENTの子ウィンドウにCHILDウィンドウが含まれていればTRUE(�
 ### GetWindowCursor(WND)
 マウスの下にWNDがあるときに表示するマウスカーソル画像を取得
 
+## Window Flag
+
+### WindowBackFlag()
+NewWindowで指定するフラグ, ウィンドウを後ろに配置する
+
+### WindowFrontFlag()
+NewWindowで指定するフラグ, ウィンドウを前に配置する
+
+### WindowHideFlag()
+NewWindowで指定するフラグ, ウィンドウを非表示にする
+
+### WindowToolFlag()
+NewWindowで指定するフラグ, ウィンドウを常にOwner windowより前に表示にする
+
+### WindowDefPosFlag()
+Windowの位置をお任せにする
+
+## Window Style
+Window Flagは作成時の状態を表すのに対しWindow Styleは恒久的な状態を表す(WindowToolFlag()WindowHideFlag()は非推奨)
+
+### WindowMenuStyle()
+メニュー付きにさせるフラグ
+
+### WindowResizableStyle()
+リサイズ可能にさせるフラグ
+
+### WindowHideStyle()
+非表示にさせるフラグ
+
+### WindowNarrowStyle()
+タイトルバーの幅を小さくさせるフラグ
+
+### WindowTopMostStyle()
+常に最前面に表示させるフラグ
+
+### WindowMaximizedStyle()
+最大化状態であることを表すフラグ
+
+### WindowMinimizedStyle()
+最小化状態であることを表すフラグ
+
 ## Window Property
 WindowVarは軽量だがキーと値が整数のみで利用しづらい場面がある
 
@@ -442,13 +438,30 @@ WNDがNAME$のプロパティを持っていればTRUE
 ##### `"WRKAREAWH"`
 上位ワードにwidth下位ワードにheight
 
-#### WindowDefPosFlag()
-NewWindowに指定
-
 ##### `"NEWWINXY"`
 ウィンドウのX座標Y座標を指定せずにNewWindowしたときに指定される座標
 
 上位ワードにX下位ワードにY
+
+## Color
+
+### SetWindowBackColor WND,RGB
+ウィンドウの背景色を設定
+
+### SetWindowBackColor(WND)
+ウィンドウの背景色を取得
+
+### GetBackColor()
+ウィンドウのデフォルト背景色を取得
+
+### GetSelectionColor()
+選択時の背景色を取得
+
+### GetSelectionTextColor()
+選択時のテキスト色を取得
+
+### GetWorkspaceColor()
+作業領域背景色を取得
 
 ## Timer
 
@@ -550,11 +563,15 @@ WNDのGCLIP指定を初期化する
 WNDがGBeginしていなければFALSEが返る
 (GBeginFrameWindowしたとき2、GBeginWindowしたとき1が返る)
 
-### Graphic(その他)
+## Graphic(その他)
 
-#### DrawButton WND,X,Y,W,H,PUSHF
+### DrawButton WND,X,Y,W,H,PUSHF
 ボタンの枠を描画(PUSHF=TRUEの時押下状態)
 中身の部分にGCLIPWindowとSetWindowDrawPosされる
+```
+DrawButton WND,0,0,20,10,FALSE
+GPRINTWindow WND,1,1,"HOGE",#BLACK
+```
 
 ## 標準GUI部品
 
@@ -814,7 +831,7 @@ IVARがチェックされていればTRUE
 ### DisableMenuItem MENU,IVAR
 メニューの項目を無効化
 
-### EnableMenuItem MENU,STR$,IVAR
+### EnableMenuItem MENU,IVAR
 メニューの項目を有効化
 
 ### GetSubMenuByPos MENU,POS OUT SUB
@@ -1194,8 +1211,17 @@ PATH$に関連付けられたプログラムをPATH$を引数に設定して起�
 
 ## 直接描画
 
+```
+IF GBeginDirect(WND) THEN @ERR
+GCLS #BLACK
+GLINE 0,0,100,100,#RED
+IF GCopyDirect(WND,0,0,GetWindowWidth(WND),GetWindowHeight(WND) THEN @ERR
+IF GEndDirect(WND) THEN @ERR
+```
+
 ### GBeginDirect(WND)
 直接描画を可能にする(GPSETなどが使える)
+自分でGCLS,GFILLなどを実行してグラフィック面を初期化する必要がある
 
 ### GCopyDirect(WND,X,Y,W,H,X3,Y3,MODE)
 直接描画を終了し、GBeginWindow(WND)をして転送
