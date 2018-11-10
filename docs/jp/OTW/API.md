@@ -49,28 +49,28 @@ COMMONは付ける
 
 |関数|説明|引数1|引数2|
 |---|---|---|---|
-|SetControlPainter(CTL,HANDLER$)|コントロールの描画イベントを処理する関数の登録|描画範囲XY|描画範囲WH(XY=0&&WH=0のとき全体)|
-|SetControlLMouseUpHandler(CTL,HANDLER$)|左クリック(ボタンから離されたとき)のイベントを処理する関数の登録|X|Y|
-|SetControlLMouseDownHandler(CTL,HANDLER$)|左クリック(ボタンが押されたとき)のイベントを処理する関数の登録|X|Y|
-|SetControlMouseMoveHandler(CTL,HANDLER$)|マウスが移動したときのイベントを処理する関数の登録|XY|マウスの状態|
-|SetControlNotificationHandler(CTL,HANDLER$)|通知(ボタンがクリックされた、Enterが押された)など|~~そのウィンドウのVar0~~そのウィンドウのWND||
-|SetControlNotifHandler(CTL,HANDLER$)|=SetControlNotificationHandler|||
-|SetControlKeyHandler(CTL,HANDLER$)|キーが押されたとき|BUTTON()から特殊キーを覗いた値||
-|SetControlChFocusHandler(CTL,HANDLER$)|フォーカスが変わった時|フォーカスが移ったらTRUE|WND|
-|SetControlButtonHandler(CTL,HANDLER$)|ボタンが押されたとき|||
-|SetControlCreateHandler(CTL,HANDLER$)|ウィンドウが作られたとき|||
-|SetControlStrNotifHandler(CTL,HANDLER$)|文字列の通知(FileDialog等)|||
-|SetControlDeleteHandler(CTL,HANDLER$)|ウィンドウが削除されたとき|||
-|SetControlLDoubleClickHandler(CTL,HANDLER$)|左ダブルクリックをされたとき|||
-|SetControlMouseLeaveHandler(CTL,HANDLER$)|マウスが離れた時|||
-|SetControlResizeHandler(CTL,HANDLER$)|ウィンドウがリサイズされたとき||WH|
-|SetControlFrameHandler(CTL,HANDLER$)|ウィンドウフレーム周りのなんか|||
-|SetControlFramePainter(CTL,HANDLER$)|ウィンドウフレームの描画|||
-|SetControlChildWindowHandler(CTL,HANDLER$)|子ウィンドウから送られてくるイベントを受信|type|arg|
-|SetControlParentWindowHandler(CTL,HANDLER$)|親ウィンドウから送られてくるイベントを受信|type|arg|
-|SetControlQueryFrameHandler(CTL,HANDLER$)|ウィンドウのフレームの大きさを返す|STYLE|0|
-|SetControlContextMenuHandler(CTL,HANDLER$)|コンテキストメニューを表示する必要があるとき|表示すべきX|Y|
-|SetControlChInputHandler(CTL,HANDLER$)|入力ウィンドウが変わったとき|入力が移ったらTRUE|WND|
+|`SetControlPainter(CTL,HANDLER$)`|コントロールの描画イベントを処理する関数の登録|描画範囲XY|描画範囲WH(XY=0&&WH=0のとき全体)|
+|`SetControlLMouseUpHandler(CTL,HANDLER$)`|左クリック(ボタンから離されたとき)のイベントを処理する関数の登録|X|Y|
+|`SetControlLMouseDownHandler(CTL,HANDLER$)`|左クリック(ボタンが押されたとき)のイベントを処理する関数の登録|X|Y|
+|`SetControlMouseMoveHandler(CTL,HANDLER$)`|マウスが移動したときのイベントを処理する関数の登録|XY|マウスの状態|
+|`SetControlNotificationHandler(CTL,HANDLER$)`|通知(ボタンがクリックされた、Enterが押された)など|~~そのウィンドウのVar0~~そのウィンドウのWND||
+|`SetControlNotifHandler(CTL,HANDLER$)`|=SetControlNotificationHandler|||
+|`SetControlKeyHandler(CTL,HANDLER$)`|キーが押されたとき|BUTTON()から特殊キーを覗いた値||
+|`SetControlChFocusHandler(CTL,HANDLER$)`|フォーカスが変わった時|フォーカスが移ったらTRUE|WND|
+|`SetControlButtonHandler(CTL,HANDLER$)`|ボタンが押されたとき|||
+|`SetControlCreateHandler(CTL,HANDLER$)`|ウィンドウが作られたとき|||
+|`SetControlStrNotifHandler(CTL,HANDLER$)`|文字列の通知(FileDialog等)|||
+|`SetControlDeleteHandler(CTL,HANDLER$)`|ウィンドウが削除されたとき|||
+|`SetControlLDoubleClickHandler(CTL,HANDLER$)`|左ダブルクリックをされたとき|||
+|`SetControlMouseLeaveHandler(CTL,HANDLER$)`|マウスが離れた時|||
+|`SetControlResizeHandler(CTL,HANDLER$)`|ウィンドウがリサイズされたとき||WH|
+|`SetControlFrameHandler(CTL,HANDLER$)`|ウィンドウフレーム周りのなんか|||
+|`SetControlFramePainter(CTL,HANDLER$)`|ウィンドウフレームの描画|||
+|`SetControlChildWindowHandler(CTL,HANDLER$)`|子ウィンドウから送られてくるイベントを受信|type|arg|
+|`SetControlParentWindowHandler(CTL,HANDLER$)`|親ウィンドウから送られてくるイベントを受信|type|arg|
+|`SetControlQueryFrameHandler(CTL,HANDLER$)`|ウィンドウのフレームの大きさを返す|STYLE|0|
+|`SetControlContextMenuHandler(CTL,HANDLER$)`|コンテキストメニューを表示する必要があるとき|表示すべきX|Y|
+|`SetControlChInputHandler(CTL,HANDLER$)`|入力ウィンドウが変わったとき|入力が移ったらTRUE|WND|
 
 ### 特殊Event Handler
 #### ControlStrNotifHandler
@@ -1266,7 +1266,7 @@ DATAから画像を生成(NewImageArrayFromDATA D,PHYSICAL OUT ARY,W,H参照)
 TYP$とEXT$に関連付けられたものを取得
 
 ### AssociateFile(TYP$,EXT$,NAME$)
-拡張子をNAME$に関連付けるTYP$に" "/"*"/"/",EXT$に拡張子(e.g.TXT)成功するとFALSE
+拡張子をNAME$に関連付けるTYP$に" "/"\*"/"/",EXT$に拡張子(e.g.TXT)成功するとFALSE
 
 ### ExecFile(PATH$)
 PATH$に関連付けられたプログラムをPATH$を引数に設定して起動
