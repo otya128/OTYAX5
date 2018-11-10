@@ -18,6 +18,7 @@ Windowのコントロールを取得
 
 ### ExtendControl NAME$,PARENT OUT CTL,ERR
 既存のコントロール(Windowなど)を継承
+ExtendControlされた後親コントロールのイベントハンドラや暗黙ハンドラ状態の変更をしてもすでに作成された子コントロールには及ばない
 
 ### CheckControl(CTL)
 コントロールが正常かを確認
@@ -34,6 +35,11 @@ CTLコントロールとPARENTコントロールが継承関係にあるかど�
 ### GetControlName$(CTL)
 コントロールの名前を取得
 
+### SetControlHandlerImplicit(CTL,TYPE,IMPLI)
+暗黙ハンドラ状態の設定
+IMPLI=TRUEの時にCTLが継承された場合TYPEのイベントハンドラはCallBaseControlHandlerを呼ばなくても勝手に呼ばれるようになる
+その場合CallBaseControlHandlerを呼んでも親イベントハンドラは呼ばれない
+IMPLI=FALSEの時既定の挙動
 
 ### Handler
 Handlerの書式
@@ -336,6 +342,10 @@ PARENTの子ウィンドウにCHILDウィンドウが含まれていればTRUE(�
 
 ### GetWindowCursor(WND)
 マウスの下にWNDがあるときに表示するマウスカーソル画像を取得
+
+### ShowSystemMenu WND,X,Y
+WNDに属するシステムメニューをWNDの相対座標X,Yに表示
+システムメニューとは最大最小化復元閉じるなどの操作をするメニュー
 
 ## Window Flag
 
@@ -865,6 +875,12 @@ MENUがサブメニューをMENUCを含んでいればTRUE(再帰的に探索し
 
 ### IsMenuShown(MENU)
 MENUが表示されていればTRUE
+
+### SetMenuType MENU,TYPE
+MENUの種類を設定する
+これは子メニューを表示したときに伝搬する
+TYPE=1の時メニューバーから表示されたメニューであることを示す
+それ以外は規定なし
 
 ## Window Group
 ウィンドウグループ、これに入れると親子関係にないウィンドウもまとめて扱うことができるようになる

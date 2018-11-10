@@ -2,6 +2,28 @@
 layout: default
 title: OTW version
 ---
+# OTW5.0-38
+## 変更点
+* システムメニューの追加
+* SetControlHandlerImplicit(CTL,TYPE,IMPLICIT)を追加
+* SetMenuType MENU,TYPEを追加
+* メニューを表示において画面内に収まりきらない時の座標計算の修正
+* SendContextMenuEventでウィンドウ枠の位置がずれていた問題を修正
+* WindowGroupActiveEventがChildWindowEventとして送信されていた問題を修正
+* WindowGroupActiveEventが余分に送られていた問題を修正
+* ShowSystemMenu WND,X,Yを追加
+* ClearGCLIPWindowとGCLIPWindowでエラーが出ることがある問題を修正
+* ウィンドウメニューの色々を修正
+* ウィンドウの左上をクリックするとシステムメニューが出るように
+* 親ウィンドウの大きさが変更されたとき子ウィンドウが最大化状態になっていなくてもリサイズされる問題を修正
+* OTW_MOVWIN_HNDLR_XORのバッファリング処理の実装(未使用)
+* TSKBARで左クリックでシステムメニューを表示させるように
+* TSKBARでニコチャンボタンの当たり判定を大きくした
+
+## 破壊的変更
+* EnableMenuItem MENU,STR$,IVARからEnableMenuItem MENU,IVAR
+* GCOPYWindow WND,X1,Y1,X2,Y2,X3,Y3,MODEを削除
+
 # OTW 5.0-37
 ## 変更点
 * カーソル変更処理を実装
