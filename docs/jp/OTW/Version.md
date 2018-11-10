@@ -7,6 +7,7 @@ title: OTW version
 * システムメニューの追加
 * SetControlHandlerImplicit(CTL,TYPE,IMPLICIT)を追加
 * SetMenuType MENU,TYPEを追加
+* GetMenuType MENU,TYPEを追加
 * メニューを表示において画面内に収まりきらない時の座標計算の修正
 * SendContextMenuEventでウィンドウ枠の位置がずれていた問題を修正
 * WindowGroupActiveEventがChildWindowEventとして送信されていた問題を修正
