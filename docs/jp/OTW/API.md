@@ -37,7 +37,7 @@ CTLコントロールとPARENTコントロールが継承関係にあるかど�
 
 ### SetControlHandlerImplicit(CTL,TYPE,IMPLI)
 暗黙ハンドラ状態の設定
-IMPLI=TRUEの時にCTLが継承された場合TYPEのイベントハンドラはCallBaseControlHandlerを呼ばなくても勝手に呼ばれるようになる
+IMPLI=TRUEの時にCTLが継承された場合TYPEのイベントハンドラは[CallBaseControlHandler](#callbasecontrolhandlerwndctltypea1a2)を呼ばなくても勝手に呼ばれるようになる
 その場合CallBaseControlHandlerを呼んでも親イベントハンドラは呼ばれない
 IMPLI=FALSEの時既定の挙動
 
@@ -322,7 +322,7 @@ BASEWNDに対するWNDの位置を取得
 GetWindowFrameSizeは実際の大きさを返すのに対しこの関数は計算をする
 
 ### FindWindowByControl(WND,CTL,EXTEND)
-WNDの子ウィンドウからCTLコントロールに一致するウィンドウを取得、EXTEND=TRUEの時IsControlExtendで判定(再帰的に探索しない)
+WNDの子ウィンドウからCTLコントロールに一致するウィンドウを取得、EXTEND=TRUEの時[IsControlExtend](#iscontrolextendctlparent)で判定(再帰的に探索しない)
 
 ### GetWindowMouseX(WND)
 WNDからのマウスの相対座標を取得
@@ -366,14 +366,14 @@ WNDにフォーカスを設定する
 WNDをActiveWindowに設定する
 これで設定したウィンドウには[GetActiveWindow()](#getactivewindow)で取得できる
 ウィンドウをクリックしたとき自動的にOTWがそのウィンドウに対しFocusWindowを呼び出す
-内部ではSetInputWindow(WND)も呼ばれる
-もしWindowNeverActiveStyle()が設定されている場合SetInputWindow(WND)と等価
-ChFocusイベント、ParentWindowイベント(WindowGroupActiveEvent()、WindowGroupInativeEvent())、ChildWindowイベント(WindowActiveEvent()、WindowInactiveEvent())が呼ばれる
+内部では[SetInputWindow(WND)](#setinputwindow)も呼ばれる
+もしWindowNeverActiveStyle()が設定されている場合[SetInputWindow(WND)](#setinputwindow)と等価
+ChFocusイベント、ParentWindowイベント([WindowGroupActiveEvent()](#typewindowgroupactiveevent)、[WindowGroupInactiveEvent()](#typewindowgroupinactiveevent))、ChildWindowイベント([WindowActiveEvent()](#typewindowactiveevent]、[WindowInactiveEvent()](#typewindowinactiveevent))が呼ばれる
 
 ### SetInputWindow(WND)
 WNDをInputWindowに設定する
 これで設定したウィンドウには[GetInputWindow()](#getinputwindow)で取得できる
-ChInputイベント、ChildWindowイベント(WindowInputEvent()、WindowLostInputEvent())が呼ばれる
+ChInputイベント、ChildWindowイベント([WindowInputEvent()](#typewindowinputevent)、[WindowLostInputEvent()](#typewindowlostinputevent))が呼ばれる
 
 ### GetInputWindow()
 入力ウィンドウを取得する
@@ -381,8 +381,8 @@ ChInputイベント、ChildWindowイベント(WindowInputEvent()、WindowLostInp
 #### InputWindowとActiveWindow
 InputWindowはキー入力などを受け付けるウィンドウ
 ActiveWindowはアクティブであるという状態を示す
-WindowNeverActiveStyle()を使わない限り区別は無い
-WindowNeverActiveStyle()が使われている例としてはPopupMenu、DropDownListBoxがあり、ウィンドウのフォーカスを失うことなくメニューやリストボックスを表示させている
+[WindowNeverActiveStyle()](#windowneveractivestyle)を使わない限り区別は無い
+[WindowNeverActiveStyle()](#windowneveractivestyle)が使われている例としてはPopupMenu、DropDownListBoxがあり、ウィンドウのフォーカスを失うことなくメニューやリストボックスを表示させている
 
 ## Window Flag
 
@@ -439,10 +439,10 @@ WindowVarは軽量だがキーと値が整数のみで利用しづらい場面�
 ウィンドウプロパティに値を設定(前の値が返る)
 
 ### GetProp(WND,NAME$)
-ウィンドウプロパティの値を取得(SetPropされていないNAME$であった場合暗黙的に(0,"",0.0)がSetPropされる)
+ウィンドウプロパティの値を取得([SetProp](#setprop-wndnamev)されていないNAME$であった場合暗黙的に(0,"",0.0)が[#SetProp](setprop-wndnamev)される)
 
 ### TryGetProp WND,NAME$ OUT V,F
-ウィンドウプロパティの値を取得(SetPropされていないNAME$であった場合SetPropされずV=0 F=FALSE)
+ウィンドウプロパティの値を取得([SetProp](#setprop-wndnamev)されていないNAME$であった場合SetPropされずV=0 F=FALSE)
 
 ### SetProp$ WND,NAME$,V
 文字列版
@@ -481,7 +481,7 @@ WNDがNAME$のプロパティを持っていればTRUE
 
 #### GetWorkArea WND OUT X,Y,W,H,ERR
 作業領域(画面からタスクバーなどが除かれた領域)を取得
-特に設定されていなければX=0,Y=0,W=GetWindowWidth(WND),H=GetWindowHeight(WND)を返す
+特に設定されていなければX=0,Y=0,W=[GetWindowWidth(WND)](#getwindowwidthwnd),H=[GetWindowHeight(WND)](#getwindowheightwnd)を返す
 
 ##### `"WRKAREAXY"`
 上位ワードにX下位ワードにY
@@ -612,13 +612,13 @@ WNDのGCLIP指定を初期化する
 
 ### CheckGBegin(WND)
 WNDがGBeginしていなければFALSEが返る
-(GBeginFrameWindowしたとき2、GBeginWindowしたとき1が返る)
+([GBeginFrameWindow](#gbeginframewindowwnd)したとき2、[GBeginWindow](#gbeginwindow)したとき1が返る)
 
 ## Graphic(その他)
 
 ### DrawButton WND,X,Y,W,H,PUSHF
 ボタンの枠を描画(PUSHF=TRUEの時押下状態)
-中身の部分にGCLIPWindowとSetWindowDrawPosされる
+中身の部分に[GCLIPWindow](#gclipwindow-wndx1y1x2y2)と[SetWindowDrawPos](#setwindowdrawpos-wndxy)される
 ```
 DrawButton WND,0,0,20,10,FALSE
 GPRINTWindow WND,1,1,"HOGE",#BLACK
@@ -1286,7 +1286,7 @@ IF GEndDirect(WND) THEN @ERR
 自分でGCLS,GFILLなどを実行してグラフィック面を初期化する必要がある
 
 ### GCopyDirect(WND,X,Y,W,H,X3,Y3,MODE)
-直接描画を終了し、GBeginWindow(WND)をして転送
+直接描画を終了し、[GBeginWindow(WND)](#gbeginwindowwnd)をして転送
 
 ### GetDirectGPAGE WND OUT PAGE1,PAGE2,ERR
 直接描画に使っている表示ページ、描画ページを取得
