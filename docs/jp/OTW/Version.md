@@ -2,6 +2,19 @@
 layout: default
 title: OTW version
 ---
+# OTW5.0-39
+## 変更点
+* WindowNeverActiveStyle()をいい感じに実装
+* メニューの種別がメニューが非表示になったとき0に設定され直されるように
+* メニューとドロップダウンリストボックスがWindowNeverActiveStyle()を使うように
+* ウィンドウ枠描画を若干単純化
+* SetInputWindow(WND)を追加
+* GetInputWindow()を追加
+* WindowInputEvent()を追加
+* WindowLostInputEvent()を追加
+* WindowGroupActiveEvent()とWindowGroupInactiveEvent()の値を変更
+* ドロップダウンリストボックスが残ったりウィンドウのフォーカスが失われたりする問題を修正
+
 # OTW5.0-38
 ## 変更点
 * システムメニューの追加

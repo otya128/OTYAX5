@@ -56,7 +56,7 @@ COMMONは付ける
 |SetControlNotificationHandler(CTL,HANDLER$)|通知(ボタンがクリックされた、Enterが押された)など|~~そのウィンドウのVar0~~そのウィンドウのWND||
 |SetControlNotifHandler(CTL,HANDLER$)|=SetControlNotificationHandler|||
 |SetControlKeyHandler(CTL,HANDLER$)|キーが押されたとき|BUTTON()から特殊キーを覗いた値||
-|SetControlChFocusHandler(CTL,HANDLER$)|フォーカスが変わった時|フォーカスが移ったらTRUE||
+|SetControlChFocusHandler(CTL,HANDLER$)|フォーカスが変わった時|フォーカスが移ったらTRUE|WND|
 |SetControlButtonHandler(CTL,HANDLER$)|ボタンが押されたとき|||
 |SetControlCreateHandler(CTL,HANDLER$)|ウィンドウが作られたとき|||
 |SetControlStrNotifHandler(CTL,HANDLER$)|文字列の通知(FileDialog等)|||
@@ -70,6 +70,7 @@ COMMONは付ける
 |SetControlParentWindowHandler(CTL,HANDLER$)|親ウィンドウから送られてくるイベントを受信|type|arg|
 |SetControlQueryFrameHandler(CTL,HANDLER$)|ウィンドウのフレームの大きさを返す|STYLE|0|
 |SetControlContextMenuHandler(CTL,HANDLER$)|コンテキストメニューを表示する必要があるとき|表示すべきX|Y|
+|SetControlChInputHandler(CTL,HANDLER$)|入力ウィンドウが変わったとき|入力が移ったらTRUE|WND|
 
 ### 特殊Event Handler
 #### ControlStrNotifHandler
@@ -115,6 +116,14 @@ argに対象ウィンドウ
 
 argに対象ウィンドウ
 
+#### type:WindowInputEvent()
+入力ウィンドウになった時に送られる
+argに対象ウィンドウ
+
+#### type:WindowLostInputEvent()
+入力ウィンドウではなくなった時に送られる
+argに対象ウィンドウ
+
 ### ControlParentWindowHandler
 親ウィンドウに何か起こったときに呼ばれる
 A1がtype
@@ -148,6 +157,11 @@ A1がtype
 
 ### CheckWindow(WND)
 ウィンドウが正常ならTRUE
+
+### NewWindowEx CTL,NAME$,X,Y,WIDTH,HEIGHT,PARENT,FLG,STYLE,A1,A2 OUT WND,ERR
+ウィンドウを作成する
+内部では[FocusWindow(WND)](#focuswindowwnd)が呼ばれる
+もし[WindowNeverActiveStyle()](#windowneveractivestyle)が親ウィンドウに設定されている場合STYLE引数に関わらず[WindowNeverActiveStyle()](#windowneveractivestyle)が設定される
 
 ### NewWindow CTL,NAME$,X,Y,WIDTH,HEIGHT,PARENT,FLG OUT WND,ERR
 コントロールと名前と座標とサイズと親ウィンドウとフラグを使ってウィンドウを作成
@@ -347,6 +361,29 @@ PARENTの子ウィンドウにCHILDウィンドウが含まれていればTRUE(�
 WNDに属するシステムメニューをWNDの相対座標X,Yに表示
 システムメニューとは最大最小化復元閉じるなどの操作をするメニュー
 
+### FocusWindow(WND)
+WNDにフォーカスを設定する
+WNDをActiveWindowに設定する
+これで設定したウィンドウには[GetActiveWindow()](#getactivewindow)で取得できる
+ウィンドウをクリックしたとき自動的にOTWがそのウィンドウに対しFocusWindowを呼び出す
+内部ではSetInputWindow(WND)も呼ばれる
+もしWindowNeverActiveStyle()が設定されている場合SetInputWindow(WND)と等価
+ChFocusイベント、ParentWindowイベント(WindowGroupActiveEvent()、WindowGroupInativeEvent())、ChildWindowイベント(WindowActiveEvent()、WindowInactiveEvent())が呼ばれる
+
+### SetInputWindow(WND)
+WNDをInputWindowに設定する
+これで設定したウィンドウには[GetInputWindow()](#getinputwindow)で取得できる
+ChInputイベント、ChildWindowイベント(WindowInputEvent()、WindowLostInputEvent())が呼ばれる
+
+### GetInputWindow()
+入力ウィンドウを取得する
+
+#### InputWindowとActiveWindow
+InputWindowはキー入力などを受け付けるウィンドウ
+ActiveWindowはアクティブであるという状態を示す
+WindowNeverActiveStyle()を使わない限り区別は無い
+WindowNeverActiveStyle()が使われている例としてはPopupMenu、DropDownListBoxがあり、ウィンドウのフォーカスを失うことなくメニューやリストボックスを表示させている
+
 ## Window Flag
 
 ### WindowBackFlag()
@@ -381,6 +418,10 @@ Window Flagは作成時の状態を表すのに対しWindow Styleは恒久的な
 
 ### WindowTopMostStyle()
 常に最前面に表示させるフラグ
+
+### WindowNeverActiveStyle()
+ウィンドウがアクティブになることがないフラグ
+ただしInputWindowには設定される
 
 ### WindowMaximizedStyle()
 最大化状態であることを表すフラグ
@@ -881,6 +922,7 @@ MENUの種類を設定する
 これは子メニューを表示したときに伝搬する
 TYPE=1の時メニューバーから表示されたメニューであることを示す
 それ以外は規定なし
+メニューが消えたとき0に設定され直される
 
 ### GetMenuType(MENU)
 MENUの種類を取得する
