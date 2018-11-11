@@ -2,6 +2,34 @@
 layout: default
 title: OTW version
 ---
+# OTW5.0-3A
+## 変更点
+* OTYMINEをリファクタリング
+* OTYMINEで初めに開いた所とその周囲のマスに地雷が埋められないようになった
+* 最大化されたウィンドウを最小化し復元すると枠描画がおかしくなる問題を修正
+* ShowMenuEx MENU,WND,X,Y,X_2,Y_2を追加
+* ShowMenuXYEx MENU,WND,X,Y,X_2,Y_2を追加
+* メニューが消えたときにInputWindowを戻すように
+* WindowDisableCloseStyle()を追加
+* WindowDisableMaxStyle()を追加
+* WindowDisableMinStyle()を追加
+* WindowDisabledStyle()を追加
+* 暗黙イベントハンドラ呼び出しを修正
+* モーダルダイアログボックスで中途半端に入力が渡っていた挙動を修正
+* メニューバーのメニューが画面に収まりきらない時に表示する座標を修正
+* EnableWindow(WND)を追加
+* DisableWindow(WND)を追加
+* IsWindowEnabled(WND)を追加
+* ウィンドウ移動時にマウスの移動範囲を制限するように
+* スクロールバーの移動をいい感じになるように修正
+* RUN,FREEMEM,EYES,OTYMINE,MPLAYを最大化できず最小化できる状態に
+* ウィンドウのキャプションを右クリックしたときシステムメニューを表示するように
+* TextBoxで文字列を表示させる一を1ピクセル下にした
+* RUNのテキストボックスの高さを2ピクセル増やした
+* TextBoxExで改行で終わっていない文字列をTextBoxExSetTextしたときおかしくなる問題をとりあえず修正
+* TextBoxExで文字列を選択したときに選択された部分の色が変わるように(syntaxhighlight無効時のみ)
+* ShowWindowで孫ウィンドウが何故か非表示になっていた問題を修正
+
 # OTW5.0-39
 ## 変更点
 * WindowNeverActiveStyle()をいい感じに実装
@@ -13,7 +41,7 @@ title: OTW version
 * WindowInputEvent()を追加
 * WindowLostInputEvent()を追加
 * WindowGroupActiveEvent()とWindowGroupInactiveEvent()の値を変更
-* ドロップダウンリストボックスが残ったりウィンドウのフォーカスが失われたりする問題を修正
+* ドロップダウンリストボックスが残ったままになったりドロップダウンリストボックスを表示した際表示元ウィンドウのフォーカスが失われたりする問題を修正
 
 # OTW5.0-38
 ## 変更点
@@ -31,7 +59,7 @@ title: OTW version
 * ウィンドウの左上をクリックするとシステムメニューが出るように
 * 親ウィンドウの大きさが変更されたとき子ウィンドウが最大化状態になっていなくてもリサイズされる問題を修正
 * OTW_MOVWIN_HNDLR_XORのバッファリング処理の実装(未使用)
-* TSKBARで左クリックでシステムメニューを表示させるように
+* TSKBARで右クリックでシステムメニューを表示させるように
 * TSKBARでニコチャンボタンの当たり判定を大きくした
 
 ## 破壊的変更

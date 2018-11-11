@@ -178,7 +178,7 @@ A1がtype
 ### NewTopLevelStyleWindowArg CTL,NAME$,WIDTH,HEIGHT,FLG,STYLE,A1,A2
 引数を使ってスタイル指定されたトップレベルウィンドウ作成
 
-### NewTopLevelStyleWindow CTL,NAME$,WIDTH,HEIGHT,FLG,STYLE
+### NewTopLevelStyleWindow CTL,NAME$,WIDTH,HEIGHT,STYLE
 スタイル指定されたトップレベルウィンドウ作成
 
 ### FrontWindow(WND)
@@ -369,11 +369,13 @@ WNDをActiveWindowに設定する
 内部では[SetInputWindow(WND)](#setinputwindow)も呼ばれる
 もしWindowNeverActiveStyle()が設定されている場合[SetInputWindow(WND)](#setinputwindow)と等価
 ChFocusイベント、ParentWindowイベント([WindowGroupActiveEvent()](#typewindowgroupactiveevent)、[WindowGroupInactiveEvent()](#typewindowgroupinactiveevent))、ChildWindowイベント([WindowActiveEvent()](#typewindowactiveevent]、[WindowInactiveEvent()](#typewindowinactiveevent))が呼ばれる
+ウィンドウが無効な時あるいはCheckWindow(WND)がFALSEの時エラーが返る
 
 ### SetInputWindow(WND)
 WNDをInputWindowに設定する
 これで設定したウィンドウには[GetInputWindow()](#getinputwindow)で取得できる
 ChInputイベント、ChildWindowイベント([WindowInputEvent()](#typewindowinputevent)、[WindowLostInputEvent()](#typewindowlostinputevent))が呼ばれる
+ウィンドウが無効な時あるいはCheckWindow(WND)がFALSEの時エラーが返る
 
 ### GetInputWindow()
 入力ウィンドウを取得する
@@ -383,6 +385,17 @@ InputWindowはキー入力などを受け付けるウィンドウ
 ActiveWindowはアクティブであるという状態を示す
 [WindowNeverActiveStyle()](#windowneveractivestyle)を使わない限り区別は無い
 [WindowNeverActiveStyle()](#windowneveractivestyle)が使われている例としてはPopupMenu、DropDownListBoxがあり、ウィンドウのフォーカスを失うことなくメニューやリストボックスを表示させている
+
+### EnableWindow(WND)
+ウィンドウを有効にする
+
+### DisableWindow(WND)
+ウィンドウを無効にする
+アクティブにすることができなくなり入力イベントが送信されなくなる
+
+### IsWindowEnabled(WND)
+WNDが有効な時TRUEが返る
+親ウィンドウを辿っていき[WindowDisabledStyle()](#windowdisabledstyle)が設定されているウィンドウがあればFALSEが返る
 
 ## Window Flag
 
@@ -428,6 +441,19 @@ Window Flagは作成時の状態を表すのに対しWindow Styleは恒久的な
 
 ### WindowMinimizedStyle()
 最小化状態であることを表すフラグ
+
+### WindowDisableCloseStyle()
+閉じるボタンを無効化
+
+### WindowDisableMaxStyle()
+最大化ボタンを無効化
+
+### WindowDisableMinStyle()
+最小化ボタンを無効化
+
+### WindowDisabledStyle()
+ウィンドウを無効化
+[DisableWindow(WND)](#disablewindowwnd)参照
 
 ## Window Property
 WindowVarは軽量だがキーと値が整数のみで利用しづらい場面がある
@@ -831,12 +857,19 @@ MENUを作成
 ### ShowMenu MENU,WND,X,Y
 MENUをWNDからの相対座標X,Yに表示
 
+### ShowMenuEx MENU,WND,X,Y,X_2,Y_2
+ShowMenuXYExの相対座標版
+
 ### ShowMenuXY MENU,WND,X,Y
 MENUを絶対座標X,Yに表示
 
 ### ShowMenuXY2 MENU,WND,X,Y
 ShowMenuXYと違いMENUの下部Yの座標を指定する
 
+### ShowMenuXYEx MENU,WND,X,Y,X_2,Y_2
+メニューが画面内の下部方向に収まりきらない時ShowMenuXY2 MENU,WND,X_2,Y_2する
+
+MENUを絶対座標X,Yに表示
 ### GetWindowMenu(WND)
 WNDのMENUを取得
 
@@ -853,7 +886,7 @@ IVARのメニュー項目のSTR$を変更
 MENUが存在すればTRUE
 
 ### NewTopLevelMenuWindow CTL,NAME$,WIDTH,HEIGHT OUT WND,ERR
-
+非推奨
 
 ### ShowContextMenu MENU,WND
 コンテキストメニューを表示
