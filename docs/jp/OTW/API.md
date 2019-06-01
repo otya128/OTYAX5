@@ -169,16 +169,16 @@ A1がtype
 ### NewTopLevelWindow CTL,NAME$,WIDTH,HEIGHT OUT WND,ERR
 コントロールと名前とサイズを使ってウィンドウを作成
 
-### NewStyleWindowArg CTL,NAME$,X,Y,WIDTH,HEIGHT,PARENT,FLG,STYLE,A1,A2
+### NewStyleWindowArg CTL,NAME$,X,Y,WIDTH,HEIGHT,PARENT,FLG,STYLE,A1,A2 OUT WND,ERR
 引数を使ってスタイル指定されたウィンドウ作成
 
-### NewStyleWindow CTL,NAME$,X,Y,WIDTH,HEIGHT,PARENT,FLG,STYLE
+### NewStyleWindow CTL,NAME$,X,Y,WIDTH,HEIGHT,PARENT,FLG,STYLE OUT WND,ERR
 スタイル指定されたウィンドウ作成
 
-### NewTopLevelStyleWindowArg CTL,NAME$,WIDTH,HEIGHT,FLG,STYLE,A1,A2
+### NewTopLevelStyleWindowArg CTL,NAME$,WIDTH,HEIGHT,FLG,STYLE,A1,A2 OUT WND,ERR
 引数を使ってスタイル指定されたトップレベルウィンドウ作成
 
-### NewTopLevelStyleWindow CTL,NAME$,WIDTH,HEIGHT,STYLE
+### NewTopLevelStyleWindow CTL,NAME$,WIDTH,HEIGHT,STYLE OUT WND,ERR
 スタイル指定されたトップレベルウィンドウ作成
 
 ### FrontWindow(WND)
@@ -369,13 +369,13 @@ WNDをActiveWindowに設定する
 内部では[SetInputWindow(WND)](#setinputwindow)も呼ばれる
 もしWindowNeverActiveStyle()が設定されている場合[SetInputWindow(WND)](#setinputwindow)と等価
 ChFocusイベント、ParentWindowイベント([WindowGroupActiveEvent()](#typewindowgroupactiveevent)、[WindowGroupInactiveEvent()](#typewindowgroupinactiveevent))、ChildWindowイベント([WindowActiveEvent()](#typewindowactiveevent]、[WindowInactiveEvent()](#typewindowinactiveevent))が呼ばれる
-ウィンドウが無効な時あるいはCheckWindow(WND)がFALSEの時エラーが返る
+ウィンドウが入力無効な時あるいは[CheckWindow(WND)](#checkwindowwnd)がFALSEの時エラーが返る
 
 ### SetInputWindow(WND)
 WNDをInputWindowに設定する
 これで設定したウィンドウには[GetInputWindow()](#getinputwindow)で取得できる
 ChInputイベント、ChildWindowイベント([WindowInputEvent()](#typewindowinputevent)、[WindowLostInputEvent()](#typewindowlostinputevent))が呼ばれる
-ウィンドウが無効な時あるいはCheckWindow(WND)がFALSEの時エラーが返る
+ウィンドウが入力無効な時あるいは[CheckWindow(WND)](#checkwindowwnd)がFALSEの時エラーが返る
 
 ### GetInputWindow()
 入力ウィンドウを取得する
@@ -387,14 +387,14 @@ ActiveWindowはアクティブであるという状態を示す
 [WindowNeverActiveStyle()](#windowneveractivestyle)が使われている例としてはPopupMenu、DropDownListBoxがあり、ウィンドウのフォーカスを失うことなくメニューやリストボックスを表示させている
 
 ### EnableWindow(WND)
-ウィンドウを有効にする
+ウィンドウを入力有効にする
 
 ### DisableWindow(WND)
-ウィンドウを無効にする
+ウィンドウを入力無効にする
 アクティブにすることができなくなり入力イベントが送信されなくなる
 
 ### IsWindowEnabled(WND)
-WNDが有効な時TRUEが返る
+WNDが入力有効な時TRUEが返る
 親ウィンドウを辿っていき[WindowDisabledStyle()](#windowdisabledstyle)が設定されているウィンドウがあればFALSEが返る
 
 ## Window Flag
@@ -841,6 +841,12 @@ DropDownListのListBox WNDを取得(これに対して項目を追加する)
 
 #### GetDropDownListHeight()
 DropDownListのデフォルト高さを取得
+
+### ListView
+
+途中
+#### GetListViewControl()
+ListViewのコントロールを取得
 
 ## Menu
 

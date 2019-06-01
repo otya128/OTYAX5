@@ -2,6 +2,17 @@
 layout: default
 title: OTW version
 ---
+# OTW5.0-3B
+
+プチコン4が来たのでWIP  
+3号対応最終バージョン
+
+## 変更点
+* ALLOC_PROPを修正
+* OTYFILのフォルダ作成ダイアログのレイアウトを微調整
+* LISTVIEWを追加
+* GetListViewControl() (途中)
+
 # OTW5.0-3A
 ## 変更点
 * OTYMINEをリファクタリング
