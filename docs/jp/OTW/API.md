@@ -1297,7 +1297,7 @@ DIMENは配列の次元数
 FLGにはスプライトの90,180,270,縦反転,横反転フラグを指定する
 
 ### NewImageFromDATA OUT IMG,ERR
-DATAから画像を生成(NewImageArrayFromDATA D,PHYSICAL OUT ARY,W,H参照)
+DATAから画像を生成(NewImageArrayFromDATA D OUT ARY,W,H参照)
 
 ## 関連付け
 
@@ -1409,11 +1409,11 @@ MODE>=2の時下図方向に大きさを変更
 
 ```
 
-### NewImageArrayFromDATA D,PHYSICAL OUT ARY,W,H
+### NewImageArrayFromDATA D OUT ARY,W,H
 事前にRESTOREされたDATAから画像配列を生成する
 (SmileBASICのDATAは関数内と関数外の区別が無い)
 D次元配列で生成する
-PHYSICAL=0の時論理色になりそれ以外の場合物理色
+~~PHYSICAL=0の時論理色になりそれ以外の場合物理色~~ OTW5.0-3Cで廃止
 正常に生成できなかった場合要素長0(D!=2)または0,0(D=2)の配列を返す
 
 
