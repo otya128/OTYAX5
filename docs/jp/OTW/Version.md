@@ -2,6 +2,15 @@
 layout: default
 title: OTW version
 ---
+# OTW5.0-3D
+
+## 変更点
+* 解像度が変更できるように
+* さらなる4への対応
+* 物理色前提のグラフィックDATファイルをひとまず変換するように
+* GSPOIT->GPGET
+* TextBoxExのGPUTCHRを修正
+
 # OTW5.0-3C
 
 ## 変更点

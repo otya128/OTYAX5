@@ -1439,7 +1439,7 @@ DEF HOGE
 
  RESTORE @DATA
  IF 0 THEN DIM A[0]
- NewImageArrayFromDATA 1,1 OUT A,,
+ NewImageArrayFromDATA 1 OUT A,,
 END
 ```
 
