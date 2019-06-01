@@ -71,6 +71,7 @@ COMMONは付ける
 |`SetControlQueryFrameHandler(CTL,HANDLER$)`|ウィンドウのフレームの大きさを返す|STYLE|0|
 |`SetControlContextMenuHandler(CTL,HANDLER$)`|コンテキストメニューを表示する必要があるとき|表示すべきX|Y|
 |`SetControlChInputHandler(CTL,HANDLER$)`|入力ウィンドウが変わったとき|入力が移ったらTRUE|WND|
+|`SetControlWheelHandler(CTL,HANDLER$)`|マウスホイールが回されたとき|変位||
 
 ### 特殊Event Handler
 #### ControlStrNotifHandler
@@ -136,6 +137,13 @@ A1がtype
 
 #### type:WindowGroupInactiveEvent()
 ???
+### ControlWheelHandler
+A1をWheelDelta()で割ると回された回数  
+負の時下へのスクロール
+
+#### WheelDelta()
+
+常に120を返す
 
 ### マウスの状態
 ```

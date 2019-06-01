@@ -2,6 +2,28 @@
 layout: default
 title: OTW version
 ---
+# OTW5.0-3E
+
+## 変更点
+* DEFINTが無い問題対策でDIMからARRAY%を使うように
+* 画面の大きさが割り切れるとき補間なしで拡大するように
+* ProcessIMで方向キーを無視するように(暫定対応)
+* SetControlWheelHandlerを追加 A1=WHEEL A2=unused
+* RotateImageのプチコン4対応を修正
+* OTWBeepWindowのSPANIM引数をプチコン4対応
+* メモリ描画系APIで物理色に変換しないように修正
+* BACKCOLORを使用しないように
+* キーボードで十字キーが押されたイベントが発生するように
+* ボタンのプチコン4対応を修正
+* MBUTTONでクリックできるように修正
+* OTW_MOUSEXが実数になってしまう問題を修正
+* TextBoxExでマウスホイールに対応
+* TextBoxExの行数を無制限に
+* OTW_LOADFONTで3号のフォントを読み込ませてみた
+* RIMの入力状態の変更を廃止、ひらがなが送られてきたら変換モードを有効にするように変更
+* ODEで複数のアイコンを選択できるように
+* WheelDelta()を追加
+
 # OTW5.0-3D
 
 ## 変更点
