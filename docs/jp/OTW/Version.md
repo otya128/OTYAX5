@@ -2,6 +2,14 @@
 layout: default
 title: OTW version
 ---
+# OTW5.0-3F
+
+## 変更点
+* TSCREEEN 16を呼び出して高解像度の時コンソールを見やすく
+* TextBoxExで文字の大きさを変更できるように修正
+* TextBoxExSetFontSize WND,Sを追加
+* TXTEDとPRGEDにフォント大きさ変更syntaxhighlight有効無効メニューを追加
+
 # OTW5.0-3E
 
 ## 変更点

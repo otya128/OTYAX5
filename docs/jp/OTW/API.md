@@ -139,7 +139,7 @@ A1がtype
 ???
 ### ControlWheelHandler
 A1をWheelDelta()で割ると回された回数  
-負の時下へのスクロール
+負の時下へのスクロールを表す
 
 #### WheelDelta()
 
@@ -1089,6 +1089,8 @@ FLGがTRUEならばシンタックスハイライトを有効化
 #### TextBoxExPaste WND
 クリップボードから貼り付け
 
+#### TextBoxExSetFontSize WND,S
+文字の大きさを変更 8または16
 
 ### RICHTEXTEDITOR
 
