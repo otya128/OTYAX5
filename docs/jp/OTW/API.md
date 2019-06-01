@@ -405,6 +405,22 @@ ActiveWindowはアクティブであるという状態を示す
 WNDが入力有効な時TRUEが返る
 親ウィンドウを辿っていき[WindowDisabledStyle()](#windowdisabledstyle)が設定されているウィンドウがあればFALSEが返る
 
+### GFormatWindow(WND,MODE)
+ウィンドウの描画形式を変更する  
+返り値はERR
+
+### GFormatRGB()
+RGBのみで透明度は無い形式(規定)
+
+### GFormatTransRGB()
+RGBと透明かどうかのみを表せる形式  
+ウィンドウ合成が有効になっていない時にこれを指定すると#WIN_ERR_NOTSUPPORTEDが返ってくる
+
+### GFormatARGB()
+RGBと透明度がある形式  
+大きいウィンドウにこれを適用するとパフォーマンスが低下するので注意  
+ウィンドウ合成が有効になっていない時にこれを指定すると#WIN_ERR_NOTSUPPORTEDが返ってくる
+
 ## Window Flag
 
 ### WindowBackFlag()

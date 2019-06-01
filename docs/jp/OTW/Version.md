@@ -2,6 +2,18 @@
 layout: default
 title: OTW version
 ---
+# OTW5.0-40
+
+## 変更点
+* コンポジット型ウィンドウマネージャを実装
+* OTW_COMPOSITE=#TRUEの時有効
+* windowエラーをENUMにして#WIN_ERR_NOTSUPPORTEDと#WIN_ERR_INVALIDARGを追加
+* GBeginWindowを二回呼び出したときにWIN_EVENTERRを返していた挙動を成功するように変更
+* GFormatRGB() GFormatTransRGB() GFormatARGB()を追加
+* GFormatWindow(WND,MODE)を追加
+* 合成が有効になっていない時にGFormatRGB()を指定すると#WIN_ERR_NOTSUPPORTED
+* Eyesの背景を透明にさせてみた
+
 # OTW5.0-3F
 
 ## 変更点
